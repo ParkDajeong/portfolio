@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+html, body {
+	margin: 0;
+}
+
+/****** 메인 ******/
+#main {
+}
+
+section {
+	width: 70%;
+	margin: auto;
+	margin-top: 70px;
+}
+
+.community {
+	text-align: center;
+	font-size: 15px;
+}
+
+.title {
+	text-align: left;
+}
+
+/****** 검색 ******/
+.searchWrap {
+	margin: auto;
+	width: 700px;
+}
+
+.inputWrap {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.inputWrap > select {
+	width: 150px;
+	height: 30px;
+	padding: 5px 10px;
+    font-size: 13px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+.inputWrap > input {
+	width: 500px;
+	height: 31px;
+    padding: 5px 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+#searchBtn {
+	background: none;
+	background-color: #fdcfcf;
+	border: none;
+	cursor: pointer;
+	padding: 8px;
+	border-radius: 3px;
+}
+
+#searchBtn > img {
+	width: 20px;
+}

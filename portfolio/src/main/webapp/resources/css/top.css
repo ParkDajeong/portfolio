@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+/****** 헤더 부분 ******/
+header {
+	background-color: #202020;
+}
+
+.loginBar {
+	text-align: right;
+	padding: 0.8%;
+	padding-right: 1%;
+}
+
+.loginBar > span {
+	display: inline-block;
+}
+
+.loginBar a {
+	color: white;
+	text-decoration: none;
+	margin: 8px;
+	font-size: 15px;
+}
+
+.loginBar a:hover {
+	font-weight: bold;
+}
+
+.bannerWrap {
+	text-align: center;
+}
+
+.bannerWrap > img {
+	width: 15%;
+	/* width: 136px;
+	height: 136px; */
+}
+
+nav {
+	/* background-color: burlywood; */
+	text-align: center;
+}
+
+.menuWrap ul {
+	/* background-color: aliceblue; */
+	width: 50%;
+	list-style: none;
+	display: inline-block;
+	padding: 0;
+	margin: auto;
+	font-size: 12.5pt;
+}
+
+.menuWrap ul > li {
+	display: inline-block;
+	height: 60px;
+	margin: 0 5px;
+}
+
+.menuWrap ul > li > a {
+	height: 60px;
+	text-decoration: none;
+	color: white;
+}
+
+.menuWrap ul > li > a:hover {
+	font-weight: 500;
+}
+
+.menuWrap span {
+	display: inline-block;
+	width: 100px;
+	height: 60px;
+	line-height: 60px;
+}

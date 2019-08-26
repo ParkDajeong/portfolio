@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dajeong.myapp.dao.BoardDao">
+	<insert id="insertBoardContent" parameterType="java.util.HashMap">
+		INSERT INTO board(
+			subject,
+			content,
+			writer
+		) VALUES (
+			#{subject},
+			#{content},
+			#{writer}
+		)
+	</insert>
+	
+	<update id="updateBoardContent" parameterType="java.util.HashMap">
+		UPDATE
+			board
+		SET
+			subject = #{subject},
+			content = #{content}
+		WHERE
+			id = #{board_id}
+	</update>
+	
+	<select id="selectBoardContentCnt" parameterType="java.util.HashMap" resultType="int">
+		SELECT
+			count(id)
+		FROM
+			board
+	</select>
+	
+	<select id="selectBoardContentList" resultType="com.dajeong.myapp.dto.Board">
+		SELECT
+			b.*,
+			u.nickname
+		FROM
+			board AS b
+		JOIN
+			user AS u
+		ON
+			u.email = b.writer
+		ORDER BY
+			register_datetime desc
+		LIMIT
+			#{startContent}, #{contentViewCnt}
+	</select>
+	
+	<select id="selectBoardContent" parameterType="String" resultType="com.dajeong.myapp.dto.Board">
+		SELECT
+			b.*,
+			u.nickname
+		FROM
+			board AS b
+		JOIN
+			user AS u
+		ON
+			id = #{board_id} AND u.email = b.writer
+	</select>
+	
+	<delete id="deleteBoardContent">
+		DELETE FROM
+			board
+		WHERE
+			id = #{board_id}
+	</delete>
+	
+	<!-- 조회수 -->
+    <update id="updateBoardViewCnt" parameterType="String">
+    	UPDATE
+    		board
+    	SET
+    		read_count = read_count + 1
+    	WHERE
+    		id = #{board_id}
+    </update>
+	
+	<!-- 검색 -->
+	<select id="selectBoardSearchContentCnt" parameterType="java.util.HashMap" resultType="int">
+		SELECT
+			count(id)
+		FROM
+			board
+		WHERE
+			subject like CONCAT('%', #{data}, '%') OR
+			content like CONCAT('%', #{data}, '%')
+	</select>
+	
+	<select id="selectBoardSearchWriterCnt" parameterType="java.util.HashMap" resultType="int">
+		SELECT
+			count(id)
+		FROM
+			board AS b
+		JOIN
+			user AS u
+		ON
+			u.email = b.writer AND nickname like CONCAT('%', #{data}, '%')
+	</select>
+	
+	<select id="selectBoardSearchContentList" resultType="com.dajeong.myapp.dto.Board">
+		SELECT
+			b.*,
+			u.nickname
+		FROM
+			board AS b
+		JOIN
+			user AS u
+		ON
+			u.email = b.writer AND
+			(b.subject like CONCAT('%', #{data}, '%') OR
+			b.content like CONCAT('%', #{data}, '%'))
+		ORDER BY
+			register_datetime desc
+		LIMIT
+			#{startContent}, #{contentViewCnt}
+	</select>
+	
+	<select id="selectBoardSearchWriterList" resultType="com.dajeong.myapp.dto.Board">
+		SELECT
+			b.*,
+			u.nickname
+		FROM
+			board AS b
+		JOIN
+			user AS u
+		ON
+			u.email = b.writer AND nickname like CONCAT('%', #{data}, '%')
+		ORDER BY
+			register_datetime desc
+		LIMIT
+			#{startContent}, #{contentViewCnt}
+	</select>
+	
+	<!-- 게시판 댓글 -->
+	<insert id="insertBoardReply" parameterType="java.util.HashMap" useGeneratedKeys="true" keyProperty="reply_id">
+		INSERT INTO board_reply(
+			board_id,
+			reply_content,
+			reply_writer
+		) VALUES (
+			#{board_id},
+			#{reply_content},
+			#{reply_writer}
+		)
+	</insert>
+	
+	<select id="selectReplyList" parameterType="String" resultType="com.dajeong.myapp.dto.Reply">
+		SELECT
+			br.*,
+			u.nickname
+		FROM
+			board_reply AS br
+		JOIN
+			user AS u
+		ON
+			board_id = #{board_id} AND u.email = br.reply_writer
+		ORDER BY
+			regDate asc
+	</select>
+	
+	<select id="selectReplyDate" parameterType="String" resultType="String">
+		SELECT
+			regDate
+		FROM
+			board_reply
+		WHERE
+			reply_id = #{reply_id}
+	</select>
+	
+	<update id="updateBoardReply" parameterType="java.util.HashMap">
+		UPDATE
+			board_reply
+		SET
+			reply_content = #{reply_content}
+		WHERE
+			reply_id = #{reply_id}
+	</update>
+	
+	<delete id="deleteBoardReply">
+		DELETE FROM
+			board_reply
+		WHERE
+			reply_id = #{reply_id}
+	</delete>
+</mapper>

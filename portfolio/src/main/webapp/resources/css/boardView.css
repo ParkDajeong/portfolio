@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+.info {
+	float : right;
+}
+
+.commentView {
+	border-bottom: 1px solid rgb(51, 51, 51);
+}
+
+.writeComment {
+	border: 1px solid #b3b3b3;
+	padding: 15px 15px 10px;
+	border-radius: 5px;
+}
+
+.writeComment:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.c_writer {
+	padding: 0 0 5px 5px;
+}
+
+.c_inputBox, .modifyBox {
+	width: 100%;
+	height: 80px;
+	border: none;
+	border-radius: 6px;
+	resize: none;
+	padding-left: 5px;
+    font-size: 15px;
+}
+
+.modifyBox {
+	border: 1px solid #a7a7a7;
+}
+
+.insert, .reply_modifySave {
+	float: right;
+	font-size: 13px;
+    margin-top: 7px;
+}
+
+.MaincommetWrap, .SubcommetWrap {
+	margin-top: 15px;
+	padding-bottom: 15px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.commentContent {
+	display: block;
+	clear: both;
+	padding: 5px 3px;
+}
+
+.commentContent:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.replyWriterBtn {
+	float: right;
+}
+
+.SubcommetWrap > img {
+	vertical-align: inherit;
+	width: 15px;
+}
+
+.sub {
+	padding-left: 28px;
+}

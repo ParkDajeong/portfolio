@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dajeong.myapp.dao.UserDao">
+	<insert id="insertUser" parameterType="java.util.HashMap">
+		INSERT INTO user(
+			nickname,
+			email,
+			password
+		) VALUES (
+			#{nickname},
+			#{email},
+			#{password}
+		)
+	</insert>
+	
+	<select id="checkUser" parameterType="java.util.HashMap" resultType="int">
+		SELECT
+			CASE
+				WHEN email = #{email} AND password = #{password}
+				THEN 1
+				ELSE 0
+			END
+		FROM
+			user
+	</select>
+	
+	<select id="selectUserData" parameterType="String" resultType="com.dajeong.myapp.dto.User">
+		SELECT
+			*
+		FROM
+			user
+		WHERE
+			email = #{email}
+	</select>
+	
+	<select id="checkUserNickname" parameterType="String" resultType="int">
+		SELECT EXISTS (
+			SELECT
+				*
+			FROM
+				user
+			WHERE
+				nickname = #{nickname}
+		)
+	</select>
+	
+	<select id="checkUserEmail" parameterType="String" resultType="int">
+		SELECT EXISTS (
+			SELECT
+				*
+			FROM
+				user
+			WHERE
+				email = #{email}
+		)
+	</select>
+	
+	<update id="updateUserNickname">
+		UPDATE
+			user
+		SET
+			nickname = #{nickname}
+		WHERE
+			email = #{email}
+	</update>
+	
+	<update id="updateUserHouse">
+		UPDATE
+			user
+		SET
+			house = #{house}
+		WHERE
+			email = #{email}
+	</update>
+</mapper>

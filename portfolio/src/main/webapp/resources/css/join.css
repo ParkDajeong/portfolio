@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+html, body {
+	margin: 0;
+}
+
+section {
+	width: 100%;
+	height: 100%;
+	background-color: #202020;
+}
+
+header {
+	height: 125px;
+}
+
+#loginBox {
+	width: 366px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#loginBox > h1 {
+	color: white;
+}
+
+.joinForm {
+	margin-top: 20px;
+}
+
+.wrapper {
+	width: auto;
+	padding: 10px;
+}
+
+.wrapper > span:not(.warn) {
+	display: inherit;
+	color: white;
+	text-align: left;
+	font-size: 16px;
+}
+
+.wrapper > input {
+	background-color: hsla(0,0%,100%,.05);
+	font-size: 14px;
+    color: white;
+    margin: 8px 0;
+    padding: 16px 20px;
+    border: 1px solid hsla(0,0%,59.2%,.2);
+    border-radius: 3px;
+    width: 100%;
+}
+
+.warn {
+	display: none;
+	color: #ff6e6e;
+	font-size: 13px;
+	text-align: left;
+	font-weight: 400;
+}
+
+.pwChk {
+	padding-left: 70px;
+	position: relative;
+}
+
+.pwChk img {
+	display: none;
+	position: absolute;
+    left: 30px;
+}
+
+.overChk {
+    top: 5px;
+}
+
+.mixChk {
+    top: 35px;
+}
+
+.must {
+	display: inherit;
+	color: #ffffff70;
+	font-size: 15px;
+	padding: 5px 0;
+	text-align: left;
+	font-weight: 500;
+}
+
+.btns {
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+.submitWrap {
+	padding: 10px;
+	margin-top: 20px;
+}
+
+.join {
+	width: 100%;
+	background-color: #cec094;
+	padding: 14px 31px;
+	border-radius: 30px;
+	font-weight: bold;
+}	

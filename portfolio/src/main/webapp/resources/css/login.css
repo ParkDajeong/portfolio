@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+html, body {
+	margin: 0;
+	background-color: #202020;
+}
+
+section {
+	width: 100%;
+	height: auto;
+}
+
+header, footer {
+	height: 120px;
+}
+
+#loginBox {
+	width: 366px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#loginBox > h1 {
+	color: white;
+}
+
+.banner {
+	width: 100%;
+}
+
+.banner img {
+	width: 100%;
+}
+
+.loginForm {
+	margin-top: 20px;
+}
+
+.wrapper {
+	width: auto;
+	padding: 10px;
+	padding-bottom: 5px;
+}
+
+.wrapper > span {
+	display: inherit;
+	color: white;
+	text-align: left;
+	font-size: 16px;
+}
+
+.wrapper > input {
+	background-color: hsla(0,0%,100%,.05);
+	font-size: 14px;
+    color: white;
+    margin: 8px 0;
+    padding: 16px 20px;
+    border: 1px solid hsla(0,0%,59.2%,.2);
+    border-radius: 3px;
+    width: 100%;
+}
+
+.error {
+	display: none;
+	color : #ff6e6e;
+	font-size : 13.2px;
+	text-align: left;
+	padding: 5px 10px;
+	line-height: 1.4;
+}
+
+.findBtnWrap {
+	padding: 20px;
+}
+
+.btns {
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+.findPwd {
+    text-decoration: underline;
+    color: white;
+    font-size: 14.5px;
+}
+
+.submitWrap {
+	padding: 10px;
+}
+
+.continue {
+	width: 100%;
+	background-color: #cec094;
+	padding: 14px 31px;
+	border-radius: 30px;
+	font-weight: bold;
+}
+
+#loginBox > span {
+	color: white;
+	font-size: 14.5px;
+}
+
+#loginBox > span > a:visited {
+	color: white;
+}
