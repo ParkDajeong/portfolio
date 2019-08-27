@@ -136,10 +136,14 @@
 	<insert id="insertBoardReply" parameterType="java.util.HashMap" useGeneratedKeys="true" keyProperty="reply_id">
 		INSERT INTO board_reply(
 			board_id,
+			parent_id,
+			depth,
 			reply_content,
 			reply_writer
 		) VALUES (
 			#{board_id},
+			#{parent_id},
+			#{depth},
 			#{reply_content},
 			#{reply_writer}
 		)

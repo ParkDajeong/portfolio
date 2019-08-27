@@ -1,7 +1,12 @@
 package com.dajeong.myapp.controller;
 
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -18,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dajeong.myapp.dto.Pagination;
+import com.dajeong.myapp.dto.Reply;
 import com.dajeong.myapp.service.BoardService;
 
 @Controller
@@ -85,8 +91,12 @@ public class BoardController {
 			boardService.updateBoardViewCnt(board_id);
 		}
 		
+		List<Reply> replyView = new ArrayList<Reply>();
+		replyView = boardService.getReplyList(board_id);
+		
 		model.addAttribute("boardView", boardService.getContent(board_id));
-		model.addAttribute("replyView", boardService.getReplyList(board_id));
+		model.addAttribute("replyView", replyView);
+		model.addAttribute("replyCnt", replyView.size());
 		
 		return "boardView";
 	}

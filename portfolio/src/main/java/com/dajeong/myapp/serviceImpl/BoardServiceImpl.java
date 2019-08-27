@@ -1,5 +1,6 @@
 package com.dajeong.myapp.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -77,7 +78,29 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<Reply> getReplyList(String board_id) {
-		return boardDao.getReplyList(board_id);
+		List<Reply> replyList = boardDao.getReplyList(board_id);
+        List<Reply> replyListParent = new ArrayList<Reply>();
+        List<Reply> replyListChild = new ArrayList<Reply>();
+        List<Reply> newReplyList = new ArrayList<Reply>();
+ 
+        for(Reply reply: replyList){
+            if(reply.getDepth() == 0){
+            	replyListParent.add(reply);
+            }else{
+            	replyListChild.add(reply);
+            }
+        }
+ 
+        for(Reply replyParent: replyListParent){
+        	newReplyList.add(replyParent);
+            for(Reply replyChild: replyListChild){
+                if(replyParent.getReply_id() == replyChild.getParent_id()){
+                	newReplyList.add(replyChild);
+                }
+            }
+        }
+ 
+        return newReplyList;
 	}
 
 	@Override
