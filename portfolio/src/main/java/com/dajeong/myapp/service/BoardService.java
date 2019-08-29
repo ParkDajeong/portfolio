@@ -3,6 +3,11 @@ package com.dajeong.myapp.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.dajeong.myapp.dto.Board;
 import com.dajeong.myapp.dto.Pagination;
 import com.dajeong.myapp.dto.Reply;
@@ -10,6 +15,9 @@ import com.dajeong.myapp.dto.Reply;
 public interface BoardService {
 	//게시글 등록 및 수정
 	int setContent(Map<String, Object> paramMap);
+	
+	//이미지 서버 업로드
+	void uploadImage(MultipartFile upload, HttpServletResponse response, HttpServletRequest request) throws Exception;
 	
 	//전체 게시글 수
 	int getAllContentCnt();

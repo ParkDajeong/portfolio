@@ -1,12 +1,18 @@
 package com.dajeong.myapp.serviceImpl;
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.dajeong.myapp.dao.BoardDao;
 import com.dajeong.myapp.dto.Board;
@@ -22,10 +28,42 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public int setContent(Map<String, Object> paramMap) {
-		if(paramMap.get("id") == null || paramMap.get("id").toString() == "")
+		if(paramMap.get("board_id") == null || paramMap.get("board_id").toString() == "")
 			return boardDao.setContent(paramMap);
 		else
 			return boardDao.modifyContent(paramMap);
+	}
+	
+	@Override
+	public void uploadImage(MultipartFile upload, HttpServletResponse response, HttpServletRequest request) throws Exception {
+		
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		// 업로드할 폴더 경로
+		String realFolder = request.getSession().getServletContext().getRealPath("\\resources\\upload\\board");
+		UUID uuid = UUID.randomUUID();
+
+		// 업로드할 파일 이름
+		String org_filename = upload.getOriginalFilename();
+		String filename = uuid.toString() + org_filename;
+
+		System.out.println("원본 파일명 : " + org_filename);
+		System.out.println("저장할 파일명 : " + filename);
+
+		String filepath = realFolder + "\\" + filename;
+		System.out.println("파일경로 : " + filepath);
+
+		File f = new File(filepath);
+		if (!f.exists()) {
+			f.mkdirs();
+		}
+		
+		String fileUrl = "http://localhost:8888/board-upload/" + filename;
+        System.out.println("fileUrl :" + fileUrl);
+		
+		upload.transferTo(f);
+		out.println(fileUrl);
+		out.close();
 	}
 	
 	@Override
@@ -117,4 +155,5 @@ public class BoardServiceImpl implements BoardService {
 	public int modifyReply(Map<String, Object> paramMap) {
 		return boardDao.modifyReply(paramMap);
 	}
+	
 }

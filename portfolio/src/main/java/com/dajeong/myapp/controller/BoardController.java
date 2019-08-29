@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.dajeong.myapp.dto.Pagination;
 import com.dajeong.myapp.dto.Reply;
@@ -125,6 +126,15 @@ public class BoardController {
 		}
 		
 		return retVal;
+	}
+	
+	//이미지 서버 업로드
+	@ResponseBody
+	@RequestMapping(value="/board/image", method = RequestMethod.POST)
+	public void boardImageSave(@RequestParam(value = "file") MultipartFile upload, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		boardService.uploadImage(upload, response, request);
+		
 	}
 	
 	//게시글 삭제

@@ -78,7 +78,7 @@
 	$(document).ready(function() {
 		//게시글 수정
 		$(".modify").click(function() {
-			location.href="/board/edit?id=" + $("#board_id").val();
+			location.href="/board/edit?board_id=" + $("#board_id").val();
 		});
 		
 		//게시글 삭제
