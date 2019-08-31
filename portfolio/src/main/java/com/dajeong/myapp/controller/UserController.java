@@ -106,9 +106,13 @@ public class UserController {
 	@RequestMapping(value = "/join/join", method = RequestMethod.POST)
 	public String userJoin(@RequestParam Map<String, Object> paramMap, Model model) {
 		
-		userService.setUser(paramMap);
+		int result = userService.setUser(paramMap);
 		
-		return "login";
+		if(result > 0) {
+			return "redirect:/login";
+		} else {
+			return "redirect:/join";
+		}
 	}
 	
 	//마이페이지
@@ -147,6 +151,22 @@ public class UserController {
 				
 		Map<String, Object> retVal = new HashMap<String, Object>();
 		int result = userService.updateUserHouse(paramMap);
+		
+		if(result > 0) {
+			retVal.put("result", "success");
+		} else {
+			retVal.put("result", "fail");
+		}
+		
+		return retVal;
+	}
+	
+	//회원 탈퇴
+	@ResponseBody
+	@RequestMapping(value = "/user/delete", method = RequestMethod.POST)
+	public Object updateHouse(@RequestParam("email") String email) {
+		Map<String, Object> retVal = new HashMap<String, Object>();
+		int result = userService.deleteUser(email);
 		
 		if(result > 0) {
 			retVal.put("result", "success");

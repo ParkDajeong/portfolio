@@ -62,4 +62,9 @@ public class UserServiceImpl implements UserService {
 	public int updateUserHouse(Map<String, Object> paramMap) {
 		return userDao.updateUserHouse(paramMap);
 	}
+
+	@Override
+	public int deleteUser(String email) {
+		return userDao.deleteUser(email);
+	}
 }

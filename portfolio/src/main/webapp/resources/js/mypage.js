@@ -78,7 +78,6 @@ $(document).ready(function () {
 			success		: function(retVal) {
 	    		if(retVal.result == "success"){
 	    			alert("기숙사 선정이 완료되었습니다.");
-	    			nickChk = false;
 	    		} else{
 	    			alert("기숙사 선정에 실패하였습니다.");
 	    		}
@@ -87,5 +86,32 @@ $(document).ready(function () {
 	    		console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
 			}
 		});
+	});
+	
+	/* 회원 탈퇴 */
+	$("#delete_user").click(function() {
+		var returnValue = confirm("정말 탈퇴하시겠습니까?");
+		
+		if(returnValue){
+			$.ajax({
+				url			: "/user/delete",
+				data		: {email : $("#user_email").val()},
+				type		: "POST",
+				success		: function(retVal) {
+		    		if(retVal.result == "success"){
+		    			alert("회원 탈퇴가 완료되었습니다.");
+		    			location.replace("/logout");
+		    			location.replace("/");
+		    		} else{
+		    			alert("회원 탈퇴가 실패하였습니다.");
+		    		}
+		    	},
+		    	error		: function(request, status, error){
+		    		console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+				}
+			});
+		} else{
+			alert("우리 계속 봐요;)");
+		}
 	});
 });

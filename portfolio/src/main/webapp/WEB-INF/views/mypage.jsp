@@ -113,6 +113,13 @@
                                 	<a class="bttn-bordered bttn-sm bttn-primary" id="choice_house" name="choice_house">등록</a>
                                 </td>
                             </tr>
+                            <tr>
+                                <th scope="row">회원 탈퇴</th>
+                                <td style="padding: 20px 15px;">
+                                    <span style="color:#555555; font-size: 12px; margin-top: 5px;">탈퇴를 원하십니까?</span>
+                                    <a class="bttn-bordered bttn-sm bttn-primary" id="delete_user" name="delete_user">탈퇴하기</a>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </form>

@@ -20,4 +20,6 @@ public interface UserDao {
 
 	int updateUserHouse(Map<String, Object> paramMap);
 
+	int deleteUser(String email);
+
 }

@@ -50,4 +50,9 @@ public class UserDaoImpl implements UserDao {
 	public int updateUserHouse(Map<String, Object> paramMap) {
 		return sqlSession.update("updateUserHouse", paramMap);
 	}
+
+	@Override
+	public int deleteUser(String email) {
+		return sqlSession.delete("deleteUser", email);
+	}
 }

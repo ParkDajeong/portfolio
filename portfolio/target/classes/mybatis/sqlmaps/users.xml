@@ -4,25 +4,25 @@
 <mapper namespace="com.dajeong.myapp.dao.UserDao">
 	<insert id="insertUser" parameterType="java.util.HashMap">
 		INSERT INTO user(
-			nickname,
 			email,
+			nickname,
 			password
 		) VALUES (
-			#{nickname},
 			#{email},
+			#{nickname},
 			#{password}
 		)
 	</insert>
 	
 	<select id="checkUser" parameterType="java.util.HashMap" resultType="int">
-		SELECT
-			CASE
-				WHEN email = #{email} AND password = #{password}
-				THEN 1
-				ELSE 0
-			END
-		FROM
-			user
+		SELECT EXISTS(
+			SELECT
+				*
+			FROM
+				user
+			WHERE
+				email = #{email} AND password = #{password}
+		)
 	</select>
 	
 	<select id="selectUserData" parameterType="String" resultType="com.dajeong.myapp.dto.User">
@@ -73,4 +73,11 @@
 		WHERE
 			email = #{email}
 	</update>
+	
+	<delete id="deleteUser" parameterType="String">
+		DELETE FROM
+			user
+		WHERE
+			email = #{email}
+	</delete>
 </mapper>
