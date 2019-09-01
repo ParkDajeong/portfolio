@@ -55,9 +55,11 @@ public class UserController {
 	
 	//로그아웃
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public void logout(HttpSession session, HttpServletResponse response) throws Exception {
+	public String logout(HttpSession session, HttpServletResponse response) throws Exception {
         session.invalidate();
         userService.logOut(response);
+        
+        return "redirect:/";
     }
 	
 	//회원가입 페이지
@@ -144,6 +146,23 @@ public class UserController {
 		return retVal;
 	}
 	
+	//비밀번호 변경
+	@ResponseBody
+	@RequestMapping(value = "/update/password", method = RequestMethod.POST)
+	public Object updatePassword(@RequestParam Map<String, Object> paramMap, HttpServletRequest request) {
+			
+		Map<String, Object> retVal = new HashMap<String, Object>();
+		int result = userService.updateUserPassword(paramMap);
+		
+		if(result > 0) {
+			retVal.put("result", "success");
+		} else {
+			retVal.put("result", "fail");
+		}
+		
+		return retVal;
+	}
+	
 	//기숙사 변경
 	@ResponseBody
 	@RequestMapping(value = "/update/house", method = RequestMethod.POST)
@@ -164,9 +183,9 @@ public class UserController {
 	//회원 탈퇴
 	@ResponseBody
 	@RequestMapping(value = "/user/delete", method = RequestMethod.POST)
-	public Object updateHouse(@RequestParam("email") String email) {
+	public Object deleteUser(@RequestParam Map<String, Object> paramMap) {
 		Map<String, Object> retVal = new HashMap<String, Object>();
-		int result = userService.deleteUser(email);
+		int result = userService.deleteUser(paramMap);
 		
 		if(result > 0) {
 			retVal.put("result", "success");

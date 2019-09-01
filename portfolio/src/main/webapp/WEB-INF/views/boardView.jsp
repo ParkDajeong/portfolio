@@ -11,8 +11,8 @@
 	<input type="hidden" id="board_id" name="board_id" value="${boardView.id}" />
 	<h4 class="smaller lighter blue no-margin modal-title">${boardView.subject}</h4>
 	<div class="contnetInfo">
-		<span class="writer">${boardView.nickname}
-			<c:if test="${sessionScope.user_email == boardView.writer}">
+		<span class="writer">${boardView.writer_nickname}
+			<c:if test="${sessionScope.user_email == boardView.writer_email}">
 				<a style="color: red;" class="modify">수정</a>
 				<a style="color: blue;" class="delete">삭제</a>
 			</c:if>

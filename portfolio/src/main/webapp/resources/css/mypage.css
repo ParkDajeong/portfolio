@@ -76,7 +76,12 @@ section {
     margin-right: 35px;
 }
 
-/* 기숙사 선택 버튼 */
+/********* 비밀번호 변경 *********/
+.pwdWarn:not(.newChk) {
+	display: none;
+}
+
+/********* 기숙사 선택 버튼 *********/
 .radio-img {
 	margin-right: 15px;
 }

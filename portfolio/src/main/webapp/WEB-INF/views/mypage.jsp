@@ -90,6 +90,19 @@
                                 </td>
                             </tr>
                             <tr>
+                                <th scope="row">비밀번호 변경</th>
+                                <td style="padding: 20px 15px;">
+                                    <span style="color:#555555; font-size: 12px; margin-top: 5px;">비밀번호 변경을 원한다면 입력해주세요.</span><br>
+                                    <input type="password" id="current_pwd" name="current_pwd" class="pwd" placeholder="현재 비밀번호를 입력하세요." /><br>
+                                    <p class="pwdWarn currentChk" style="color:red">현재 비밀번호와 다릅니다.</p>
+                                    <input type="password" id="new_pwd" name="new_pwd" class="pwd" placeholder="새 비밀번호를 입력하세요." /><br>
+                                    <p class="pwdWarn newChk">비밀번호는 영문+숫자 조합의 8자 이상이어야 합니다.</p>
+                                    <input type="password" id="check_pwd" name="check_pwd" class="pwd" placeholder="비밀번호를 확인하세요." />
+                                    <a class="bttn-bordered bttn-sm bttn-primary" id="change_pwd" name="change_pwd">변경</a>
+                                    <p class="pwdWarn sameChk" style="color:red">위의 입력된 비밀번호와 다릅니다. 다시 입력해주세요.</p>
+                                </td>
+                            </tr>
+                            <tr>
                                 <th scope="row">기숙사</th>
                                 <td style="padding-bottom: 25px;">
                                 	<input type="hidden" id="user_house" value="${userData.house}">
@@ -116,7 +129,8 @@
                             <tr>
                                 <th scope="row">회원 탈퇴</th>
                                 <td style="padding: 20px 15px;">
-                                    <span style="color:#555555; font-size: 12px; margin-top: 5px;">탈퇴를 원하십니까?</span>
+                                    <span style="color:#555555; font-size: 12px; margin-top: 5px;">탈퇴를 원하신다면 비밀번호를 입력해주세요.</span><br>
+                                    <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요." />
                                     <a class="bttn-bordered bttn-sm bttn-primary" id="delete_user" name="delete_user">탈퇴하기</a>
                                 </td>
                             </tr>

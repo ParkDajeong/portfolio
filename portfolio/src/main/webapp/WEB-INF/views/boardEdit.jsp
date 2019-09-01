@@ -12,7 +12,8 @@
 			<section class="section_editor">
 				<form name="writeForm" >
 					<input type="hidden" id="board_id" name="board_id" value="${boardEdit.id}" />
-					<input type="hidden" id="writer" name="writer" value="${sessionScope.user_email}" />
+					<input type="hidden" id="writer_nickname" name="writer_nickname" value="${sessionScope.user_nickname}" />
+					<input type="hidden" id="writer_email" name="writer_email" value="${sessionScope.user_email}" />
 					<div>
 					<div class="editor_wrapper">
 						<h2>New Post</h2>
@@ -74,10 +75,11 @@
 				}
 		       	
 		       	var objParams = {
-		       		board_id	: $("#board_id").val(),
-		       		subject		: $("#subject").val(),
-		       		content		: $("#content").val(),
-		       		writer		: $("#writer").val()
+		       		board_id		: $("#board_id").val(),
+		       		subject			: $("#subject").val(),
+		       		content			: $("#content").val(),
+		       		writer_email	: $("#writer_email").val(),
+		       		writer_nickname	: $("#writer_nickname").val()
 		       	};
 		       	
 		       	$.ajax ({

@@ -6,11 +6,13 @@
 		INSERT INTO board(
 			subject,
 			content,
-			writer
+			writer_nickname,
+			writer_email
 		) VALUES (
 			#{subject},
 			#{content},
-			#{writer}
+			#{writer_nickname},
+			#{writer_email}
 		)
 	</insert>
 	
@@ -33,14 +35,9 @@
 	
 	<select id="selectBoardContentList" resultType="com.dajeong.myapp.dto.Board">
 		SELECT
-			b.*,
-			u.nickname
+			*
 		FROM
-			board AS b
-		JOIN
-			user AS u
-		ON
-			u.email = b.writer
+			board
 		ORDER BY
 			register_datetime desc
 		LIMIT
@@ -49,14 +46,11 @@
 	
 	<select id="selectBoardContent" parameterType="String" resultType="com.dajeong.myapp.dto.Board">
 		SELECT
-			b.*,
-			u.nickname
+			*
 		FROM
-			board AS b
-		JOIN
-			user AS u
-		ON
-			id = #{board_id} AND u.email = b.writer
+			board
+		WHERE
+			id = #{board_id}
 	</select>
 	
 	<delete id="deleteBoardContent">
@@ -91,25 +85,18 @@
 		SELECT
 			count(id)
 		FROM
-			board AS b
-		JOIN
-			user AS u
-		ON
-			u.email = b.writer AND nickname like CONCAT('%', #{data}, '%')
+			board
+		WHERE
+			writer_nickname like CONCAT('%', #{data}, '%')
 	</select>
 	
 	<select id="selectBoardSearchContentList" resultType="com.dajeong.myapp.dto.Board">
 		SELECT
-			b.*,
-			u.nickname
+			*
 		FROM
-			board AS b
-		JOIN
-			user AS u
-		ON
-			u.email = b.writer AND
-			(b.subject like CONCAT('%', #{data}, '%') OR
-			b.content like CONCAT('%', #{data}, '%'))
+			board
+		WHERE
+			subject like CONCAT('%', #{data}, '%') OR content like CONCAT('%', #{data}, '%')
 		ORDER BY
 			register_datetime desc
 		LIMIT
@@ -118,14 +105,11 @@
 	
 	<select id="selectBoardSearchWriterList" resultType="com.dajeong.myapp.dto.Board">
 		SELECT
-			b.*,
-			u.nickname
+			*
 		FROM
-			board AS b
-		JOIN
-			user AS u
-		ON
-			u.email = b.writer AND nickname like CONCAT('%', #{data}, '%')
+			board
+		WHERE
+			writer_nickname like CONCAT('%', #{data}, '%')
 		ORDER BY
 			register_datetime desc
 		LIMIT

@@ -63,6 +63,70 @@ $(document).ready(function () {
 		}
 	});
 	
+	/* 비밀번호 변경 */
+	$("#change_pwd").click(function() {
+		var current_pwd = $("#current_pwd").val();
+		var new_pwd = $("#new_pwd").val();
+		var check_pwd = $("#check_pwd").val();
+		var chk_num = new_pwd.search(/[0-9]/g);
+		var chk_eng = new_pwd.search(/[a-z]/ig);
+		
+		var objParam = {
+				email		: $("#user_email").val(),
+				current_pwd		: current_pwd,
+				new_pwd			: new_pwd
+		}
+		
+		if(!current_pwd || !new_pwd || !check_pwd) {
+			alert("빈 칸을 채워주세요.");
+			return;
+		}
+		
+		/* 8자 이상 확인 */
+		if (new_pwd.length < 8) {
+			$(".newChk").css("color", "red");
+			return;
+		} else {
+			$(".newChk").css("color", "black");
+		}
+
+		/* 숫자+영문 확인 */
+		if (chk_num < 0 || chk_eng < 0) {
+			$(".newChk").css("color", "red");
+			return;
+		} else {
+			$(".newChk").css("color", "black");
+		}
+		
+		if(new_pwd != check_pwd) {
+			$(".sameChk").css("display", "block");
+			return;
+		} else {
+			$(".sameChk").css("display", "none");
+		}
+		
+		$.ajax({
+			url			: "/update/password",
+			dataType	: "json",
+			data		: objParam,
+			type		: "POST",
+			success		: function(retVal) {
+	    		if(retVal.result == "success"){
+	    			alert("비밀번호 변경이 완료되었습니다.");
+	    			$("#current_pwd").val("");
+	    			$("#new_pwd").val("");
+	    			$("#check_pwd").val("");
+	    			
+	    		} else{
+	    			$(".currentChk").css("display", "block");
+	    		}
+	    	},
+	    	error		: function(request, status, error){
+	    		console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+			}
+		});
+	});
+	
 	/* 기숙사 수정 */
 	$("#choice_house").click(function() {
 		var objParam = {
@@ -91,11 +155,16 @@ $(document).ready(function () {
 	/* 회원 탈퇴 */
 	$("#delete_user").click(function() {
 		var returnValue = confirm("정말 탈퇴하시겠습니까?");
+		var objParam = {
+				email		: $("#user_email").val(),
+				password	: $("#password").val()
+		}
 		
 		if(returnValue){
 			$.ajax({
 				url			: "/user/delete",
-				data		: {email : $("#user_email").val()},
+				dataType	: "json",
+				data		: objParam,
 				type		: "POST",
 				success		: function(retVal) {
 		    		if(retVal.result == "success"){
@@ -103,7 +172,7 @@ $(document).ready(function () {
 		    			location.replace("/logout");
 		    			location.replace("/");
 		    		} else{
-		    			alert("회원 탈퇴가 실패하였습니다.");
+		    			alert("비밀번호가 다릅니다. 다시 입력해주세요.");
 		    		}
 		    	},
 		    	error		: function(request, status, error){

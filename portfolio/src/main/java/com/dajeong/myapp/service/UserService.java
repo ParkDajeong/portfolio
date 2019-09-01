@@ -30,7 +30,10 @@ public interface UserService {
 
 	//기숙사 변경
 	int updateUserHouse(Map<String, Object> paramMap);
+	
+	//비밀번호 변경
+	int updateUserPassword(Map<String, Object> paramMap);
 
 	//회원 탈퇴
-	int deleteUser(String email);
+	int deleteUser(Map<String, Object> paramMap);
 }

@@ -4,8 +4,8 @@ public class Board {
 	private int id;
 	private String subject;
 	private String content;
-	private String nickname;
-	private String writer;
+	private String writer_nickname;
+	private String writer_email;
 	private String register_datetime;
 	private int read_count;
 	
@@ -27,11 +27,17 @@ public class Board {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getWriter() {
-		return writer;
+	public String getWriter_nickname() {
+		return writer_nickname;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setWriter_nickname(String writer_nickname) {
+		this.writer_nickname = writer_nickname;
+	}
+	public String getWriter_email() {
+		return writer_email;
+	}
+	public void setWriter_email(String writer_email) {
+		this.writer_email = writer_email;
 	}
 	public String getRegister_datetime() {
 		return register_datetime;
@@ -45,10 +51,5 @@ public class Board {
 	public void setRead_count(int read_count) {
 		this.read_count = read_count;
 	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
+	
 }

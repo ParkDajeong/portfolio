@@ -78,8 +78,8 @@
 						<c:forEach var="boardList" items="${boardList}">
 							<tr>
 								<td>${boardList.id}</td>
-								<td class="title" content_id="${boardList.id}" style="cursor: pointer;"><a data-toggle="modal">${boardList.subject}</a></td>
-								<td>${boardList.nickname}</td>
+								<td class="title" content_id="${boardList.id}" style="cursor: pointer;"><a data-toggle="modal">${boardList.subject} &#40;&#41;</a></td>
+								<td>${boardList.writer_nickname}</td>
 								<td>${boardList.register_datetime}</td>
 								<td>${boardList.read_count}</td>
 							</tr>

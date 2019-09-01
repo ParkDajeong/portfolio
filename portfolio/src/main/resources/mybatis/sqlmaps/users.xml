@@ -56,7 +56,7 @@
 		)
 	</select>
 	
-	<update id="updateUserNickname">
+	<update id="updateUserNickname" parameterType="java.util.HashMap">
 		UPDATE
 			user
 		SET
@@ -65,7 +65,7 @@
 			email = #{email}
 	</update>
 	
-	<update id="updateUserHouse">
+	<update id="updateUserHouse" parameterType="java.util.HashMap">
 		UPDATE
 			user
 		SET
@@ -74,10 +74,19 @@
 			email = #{email}
 	</update>
 	
-	<delete id="deleteUser" parameterType="String">
+	<update id="updateUserPassword" parameterType="java.util.HashMap">
+		UPDATE
+			user
+		SET
+			password = #{new_pwd}
+		WHERE
+			email = #{email} AND password = #{current_pwd}
+	</update>
+	
+	<delete id="deleteUser" parameterType="java.util.HashMap">
 		DELETE FROM
 			user
 		WHERE
-			email = #{email}
+			email = #{email} AND password = #{password}
 	</delete>
 </mapper>

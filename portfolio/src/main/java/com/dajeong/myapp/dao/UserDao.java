@@ -19,7 +19,9 @@ public interface UserDao {
 	int updateUserNickname(Map<String, Object> paramMap);
 
 	int updateUserHouse(Map<String, Object> paramMap);
+	
+	int updateUserPassword(Map<String, Object> paramMap);
 
-	int deleteUser(String email);
+	int deleteUser(Map<String, Object> paramMap);
 
 }
