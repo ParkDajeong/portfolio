@@ -2,77 +2,87 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page session="true" %>
-	
-<head>
-	<link href="/resources/css/boardView.css" type="text/css" rel="stylesheet">
-</head>
-
-<div class="modal-header">
-	<input type="hidden" id="board_id" name="board_id" value="${boardView.id}" />
-	<h4 class="smaller lighter blue no-margin modal-title">${boardView.subject}</h4>
-	<div class="contnetInfo">
-		<span class="writer">${boardView.writer_nickname}
-			<c:if test="${sessionScope.user_email == boardView.writer_email}">
-				<a style="color: red;" class="modify">수정</a>
-				<a style="color: blue;" class="delete">삭제</a>
-			</c:if>
-		</span>
-		<span class="info">${boardView.register_datetime} <span class="view">조회 ${boardView.read_count}</span></span>
-	</div>
-	<!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true">×</button> -->
-</div>
-<div class="modal-body">
-	${boardView.content}
-</div>
-<!-- 댓글 -->
-<div class="modal-footer">
-	<span class="commentView">이 게시물에 달린 코멘트 <span>${replyCnt}</span>개</span>
-	<c:if test="${sessionScope.user_nickname != null}">
-		<div class="writeComment">
-			<div class="c_writer">${sessionScope.user_nickname}</div>
-			<textarea class="c_inputBox" placeholder="댓글을 달아주세요:)" cols="20"></textarea>
-			<button class="btn btn-outline-secondary insert">등록</button>
-		</div>
-	</c:if>
-	<c:forEach var="replyView" items="${replyView}">
-		<div class="replyWrapper">
-			<c:if test="${replyView.depth == 0}">
-				<div class="MaincommetWrap">
-					<input type="hidden" id="reply_id" name="reply_id" value="${replyView.reply_id}" />
-					<span class="reply_user">${replyView.nickname}</span>&nbsp;&nbsp;
-					<span><a style="color: green;" class="reply_comment">답글</a></span>
-					<span class="replyWriterBtn">
-						<c:if test="${sessionScope.user_email == replyView.reply_writer}">
-							<a style="color: red;" class="reply_modify">수정</a>
-							<a style="color: blue;" class="reply_delete">삭제</a>
+<html>
+	<head>
+		<title>포폴</title>
+		<link href="/resources/css/boardView.css" type="text/css" rel="stylesheet">
+	</head>
+	<body>
+		<jsp:include page="menu.jsp"/>
+		<section>
+			<div id="contentWrapper">
+				<div class="content-header">
+					<input type="hidden" id="board_id" name="board_id" value="${boardView.id}" />
+					<div class="board-title">
+						<h3>${boardView.subject}</h3>
+						<c:if test="${sessionScope.user_email == boardView.writer_email}">
+							<span>
+								<a style="color: red;" class="modify">수정</a>
+								<a style="color: blue;" class="delete">삭제</a>
+							</span>
 						</c:if>
-					</span>
-					<div class="commentContent">${replyView.reply_content}</div>
-					<span class="reply_date">${replyView.regDate}</span>
-				</div>
-			</c:if>
-			<c:if test="${replyView.depth > 0}">
-				<div class="commentWrap">
-					<div class="arrow">
-						<img src="/resources/img/commnet_Arrow.png">
-					</div>&nbsp;
-					<div class="SubcommetWrap">
-						<input type="hidden" id="reply_id" name="reply_id" value="${replyView.reply_id}" />
-						<span class="reply_user">${replyView.nickname}</span>&nbsp;&nbsp;
-						<span class="replyWriterBtn">
-							<c:if test="${sessionScope.user_email == replyView.reply_writer}">
-								<a style="color: red;" class="reply_modify">수정</a>
-								<a style="color: blue;" class="reply_delete">삭제</a>
-							</c:if>
-						</span>
-						<div class="commentContent">${replyView.reply_content}</div>
-						<span class="reply_date">${replyView.regDate}</span>
+					</div>
+					<div class="contentInfo">
+						<span class="writer">${boardView.writer_nickname}</span>
+						<span class="info">${boardView.register_datetime} <span class="view">조회 ${boardView.read_count}</span></span>
 					</div>
 				</div>
-			</c:if>
-		</div>
-	</c:forEach>
-</div>
+				<div class="content-body">
+					${boardView.content}
+				</div>
+				<!-- 댓글 -->
+				<div class="content-footer">
+					<span class="commentView">이 게시물에 달린 코멘트 <span>${replyCnt}</span>개</span>
+					<c:if test="${sessionScope.user_nickname != null}">
+						<div class="writeComment">
+							<div class="c_writer">${sessionScope.user_nickname}</div>
+							<textarea class="c_inputBox" placeholder="댓글을 달아주세요:)" cols="20"></textarea>
+							<button class="btn btn-outline-secondary insert">등록</button>
+						</div>
+					</c:if>
+					<c:forEach var="replyView" items="${replyView}">
+						<div class="replyWrapper">
+							<c:if test="${replyView.depth == 0}">
+								<div class="MaincommetWrap">
+									<input type="hidden" id="reply_id" name="reply_id" value="${replyView.reply_id}" />
+									<span class="reply_user">${replyView.nickname}</span>&nbsp;&nbsp;
+									<span><a style="color: green;" class="reply_comment">답글</a></span>
+									<span class="replyWriterBtn">
+										<c:if test="${sessionScope.user_email == replyView.reply_writer}">
+											<a style="color: red;" class="reply_modify">수정</a>
+											<a style="color: blue;" class="reply_delete">삭제</a>
+										</c:if>
+									</span>
+									<div class="commentContent">${replyView.reply_content}</div>
+									<span class="reply_date">${replyView.regDate}</span>
+								</div>
+							</c:if>
+							<c:if test="${replyView.depth > 0}">
+								<div class="commentWrap">
+									<div class="arrow">
+										<img src="/resources/img/commnet_Arrow.png">
+									</div>&nbsp;
+									<div class="SubcommetWrap">
+										<input type="hidden" id="reply_id" name="reply_id" value="${replyView.reply_id}" />
+										<span class="reply_user">${replyView.nickname}</span>&nbsp;&nbsp;
+										<span class="replyWriterBtn">
+											<c:if test="${sessionScope.user_email == replyView.reply_writer}">
+												<a style="color: red;" class="reply_modify">수정</a>
+												<a style="color: blue;" class="reply_delete">삭제</a>
+											</c:if>
+										</span>
+										<div class="commentContent">${replyView.reply_content}</div>
+										<span class="reply_date">${replyView.regDate}</span>
+									</div>
+								</div>
+							</c:if>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+		</section>
+	</body>
+</html>
 
 <script>
 	$(document).ready(function() {

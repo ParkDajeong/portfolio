@@ -57,7 +57,7 @@
 		</script>
 	</head>
 	<body>
-		<jsp:include page="top.jsp"/>
+		<jsp:include page="menu.jsp"/>
 		<div id="main">
 			<section>
 				<!-- 게시판 -->
@@ -87,12 +87,12 @@
 					</tbody>
 				</table>
 				<!-- 게시글 조회 모달 -->
-				<div class="modal fade" id="boardView" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+				<!-- <div class="modal fade" id="boardView" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 				  <div class="modal-dialog modal-lg">
 				    <div class="modal-content">
 				    </div>
 				  </div>
-				</div>
+				</div> -->
 				<br>
 				<!-- 페이지네이션 -->
 				<div class="paginationWrap">
@@ -143,11 +143,8 @@
 			
 			//글 상세보기
 			$(".title").click(function() {
-				var url = "/board/view?board_id=" + $(this).attr("content_id");
-				
-				$(".modal-content").load(url, function() {
-		            $("#boardView").modal("show"); 
-		        });
+				var id = $(this).attr("content_id");
+				location.href = "/board/view?board_id=" + id;
 			});
 			
 			//검색

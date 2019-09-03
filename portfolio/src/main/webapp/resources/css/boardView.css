@@ -1,4 +1,39 @@
 @charset "UTF-8";
+body {
+	margin: 0;
+}
+
+section {
+	width: 75%;
+	margin: 0 auto;
+}
+
+#contentWrapper {
+	margin-top: 40px;
+}
+
+.board-title {
+	margin: 0;
+    padding: 13px 5px;
+    border-top: 1px solid #bababa;
+    border-bottom: 1px solid #bababa;
+}
+
+.board-title > h3 {
+	display: inline-block;
+	margin: 0;
+}
+
+.board-title > span {
+	float: right;
+	font-size: 16px;
+}
+
+.contentInfo {
+	padding: 8px;
+    font-size: 15px;
+    border-bottom: 1px solid #bababa;
+}
 
 .info {
 	float : right;

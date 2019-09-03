@@ -60,7 +60,7 @@
     </style>
 </head>
 <body>
-	<jsp:include page="top.jsp"/>
+	<jsp:include page="menu.jsp"/>
     <section>
         <div class="column">
             <div class="column-group group1">

@@ -7,7 +7,7 @@
 		<link rel="stylesheet" href="/resources/summer_note/summernote.css">
 	</head>
 	<body>
-		<jsp:include page="top.jsp"/>
+		<jsp:include page="menu.jsp"/>
 		<div id="main">
 			<section class="section_editor">
 				<form name="writeForm" >
