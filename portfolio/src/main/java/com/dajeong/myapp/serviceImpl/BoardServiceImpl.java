@@ -148,7 +148,11 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int deleteReply(Map<String, Object> paramMap) {
-		return boardDao.deleteReply(paramMap);
+		int depth = boardDao.checkReplyDepth(paramMap);
+		if(depth == 0)
+			return boardDao.deleteAllConnectedReply(paramMap);
+		else
+			return boardDao.deleteOneBoardReply(paramMap);
 	}
 
 	@Override

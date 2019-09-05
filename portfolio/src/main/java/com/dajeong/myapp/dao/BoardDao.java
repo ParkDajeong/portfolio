@@ -20,7 +20,7 @@ public interface BoardDao {
 	List<Board> getContentList(Pagination pagination);
 
 	Board getContent(String board_id);
-
+	
 	int deleteContent(Map<String, Object> paramMap);
 	
 	int updateBoardViewCnt(String board_id);
@@ -39,7 +39,11 @@ public interface BoardDao {
 
 	String getReplyDate(String reply_id);
 
-	int deleteReply(Map<String, Object> paramMap);
+	int checkReplyDepth(Map<String, Object> paramMap);
+	
+	int deleteAllConnectedReply(Map<String, Object> paramMap);
+	
+	int deleteOneBoardReply(Map<String, Object> paramMap);
 
 	int modifyReply(Map<String, Object> paramMap);
 

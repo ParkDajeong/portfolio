@@ -6,6 +6,7 @@
 	<head>
 		<title>포폴</title>
 		<link href="/resources/css/boardView.css" type="text/css" rel="stylesheet">
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	</head>
 	<body>
 		<jsp:include page="menu.jsp"/>
@@ -13,6 +14,9 @@
 			<div id="contentWrapper">
 				<div class="content-header">
 					<input type="hidden" id="board_id" name="board_id" value="${boardView.id}" />
+					<input type="hidden" id="user_email" name="user_email" value="${sessionScope.user_email}" />
+					<input type="hidden" id="user_nickname" name="user_nickname" value="${sessionScope.user_nickname}" />'
+					<c:set var="post_writer" value="${boardView.writer_email}"></c:set>
 					<div class="board-title">
 						<h3>${boardView.subject}</h3>
 						<c:if test="${sessionScope.user_email == boardView.writer_email}">
@@ -32,7 +36,7 @@
 				</div>
 				<!-- 댓글 -->
 				<div class="content-footer">
-					<span class="commentView">이 게시물에 달린 코멘트 <span>${replyCnt}</span>개</span>
+					<span class="commentCnt">Comment <span>${replyCnt}</span>개</span>
 					<c:if test="${sessionScope.user_nickname != null}">
 						<div class="writeComment">
 							<div class="c_writer">${sessionScope.user_nickname}</div>
@@ -41,20 +45,26 @@
 						</div>
 					</c:if>
 					<c:forEach var="replyView" items="${replyView}">
-						<div class="replyWrapper">
 							<c:if test="${replyView.depth == 0}">
-								<div class="MaincommetWrap">
-									<input type="hidden" id="reply_id" name="reply_id" value="${replyView.reply_id}" />
-									<span class="reply_user">${replyView.nickname}</span>&nbsp;&nbsp;
-									<span><a style="color: green;" class="reply_comment">답글</a></span>
-									<span class="replyWriterBtn">
-										<c:if test="${sessionScope.user_email == replyView.reply_writer}">
-											<a style="color: red;" class="reply_modify">수정</a>
-											<a style="color: blue;" class="reply_delete">삭제</a>
-										</c:if>
-									</span>
-									<div class="commentContent">${replyView.reply_content}</div>
-									<span class="reply_date">${replyView.regDate}</span>
+								<div class="replyWrapper rv${replyView.reply_id}">
+									<div class="MaincommetWrap">
+										<div class="comment-header">
+											<input type="hidden" id="reply_id" name="reply_id" value="${replyView.reply_id}" />
+											<span class="reply_user">${replyView.nickname}</span>
+											<c:if test="${replyView.reply_writer == post_writer}">
+												<span class="post_owner">글쓴이</span>
+											</c:if>
+											&nbsp;&nbsp;<span class="reply_date">${replyView.regDate}</span>
+											<span class="replyWriterBtn">
+												<span><a style="color: green;" class="reply_comment r_edit">답글</a></span>
+												<c:if test="${sessionScope.user_email == replyView.reply_writer}">
+													<a style="color: red;" class="reply_modify r_edit">수정</a>
+													<a style="color: blue;" class="reply_delete r_edit">삭제</a>
+												</c:if>
+											</span>
+										</div>
+										<div class="commentContent">${replyView.reply_content}</div>
+									</div>
 								</div>
 							</c:if>
 							<c:if test="${replyView.depth > 0}">
@@ -63,242 +73,29 @@
 										<img src="/resources/img/commnet_Arrow.png">
 									</div>&nbsp;
 									<div class="SubcommetWrap">
-										<input type="hidden" id="reply_id" name="reply_id" value="${replyView.reply_id}" />
-										<span class="reply_user">${replyView.nickname}</span>&nbsp;&nbsp;
-										<span class="replyWriterBtn">
-											<c:if test="${sessionScope.user_email == replyView.reply_writer}">
-												<a style="color: red;" class="reply_modify">수정</a>
-												<a style="color: blue;" class="reply_delete">삭제</a>
+										<div class="comment-header">
+											<input type="hidden" id="reply_id" name="reply_id" value="${replyView.reply_id}" />
+											<span class="reply_user">${replyView.nickname}</span>
+											<c:if test="${replyView.reply_writer == post_writer}">
+												<span class="post_owner">글쓴이</span>
 											</c:if>
-										</span>
+											&nbsp;&nbsp;<span class="reply_date">${replyView.regDate}</span>
+											<span class="replyWriterBtn">
+												<c:if test="${sessionScope.user_email == replyView.reply_writer}">
+													<a style="color: red;" class="reply_modify r_edit">수정</a>
+													<a style="color: blue;" class="reply_delete r_edit">삭제</a>
+												</c:if>
+											</span>
+										</div>
 										<div class="commentContent">${replyView.reply_content}</div>
-										<span class="reply_date">${replyView.regDate}</span>
 									</div>
+									<script>$(".rv" + ${replyView.parent_id}).append($(".commentWrap:last"));</script>
 								</div>
 							</c:if>
-						</div>
 					</c:forEach>
 				</div>
 			</div>
 		</section>
 	</body>
 </html>
-
-<script>
-	$(document).ready(function() {
-		//게시글 수정
-		$(".modify").click(function() {
-			location.href="/board/edit?board_id=" + $("#board_id").val();
-		});
-		
-		//게시글 삭제
-		$(".delete").click(function() {
-			var objParam = {
-					board_id	: $("#board_id").val()
-			}
-			
-			$.ajax({
-				url			: "/board/delete",
-				dataType	: "json",
-				data		: objParam,
-				type		: "POST",
-				success		: function(retVal){
-					if(retVal.code == "success") {
-						alert("게시글을 삭제하였습니다.");
-						location.href = "/";
-					} else{
-						alert("삭제에 실패하였습니다.");
-					}
-				},
-				error		: function(request, status, error){
-        			console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-       			}
-			});
-		});
-		
-		//댓글 등록
-		$(".insert").click(function() {
-			var writer = "${sessionScope.user_email}";
-			var nickname = "${sessionScope.user_nickname}";
-			var reply_content = $(".c_inputBox").val();
-			var objParams = {
-					board_id		: $("#board_id").val(),
-					parent_id		: 0,
-					depth			: 0,
-					reply_content	: reply_content,
-					reply_writer	: writer
-			}
-			
-			$.ajax({
-				url			: "/board/reply/save",
-				dataType	: "json",
-				data		: objParams,
-				type		: "POST",
-				async		: false,
-				success		: function(retVal) {
-					if(retVal.code == "success") {
-						$(".c_inputBox").val("");
-						$(".modal-footer").append(
-								"<div class='replyWrapper'>" + 
-								"<div class='MaincommetWrap'>" +
-								"<input type='hidden' id='reply_id' name='reply_id' value='"+ retVal.reply_id +"' />" +
-								"<span class='reply_user'>" + nickname +"</span>&nbsp;&nbsp;" +
-								"<span><a style='color: green;' class='reply_comment'>답글</a></span>" +
-								"<span class='replyWriterBtn'>" + 
-								"<a style='color: red;' class='reply_modify'>수정</a>" +
-								"<a style='color: blue;' class='reply_delete'>삭제</a></span>" +
-								"<div class='commentContent'>"+ reply_content +"</div>" +
-								"<span class='reply_date'>" + retVal.regDate + "</span></div></div>"
-							);
-					} else{
-						alert(retVal.message);
-					}
-				},
-				error		: function(request, status, error){
-        			console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-       			}
-			});
-		});
-		
-		//댓글 삭제
-		$(document).on("click", ".reply_delete", function(){
-			var parent  = $(this).parent().parent().parent();
-			var objParam = {
-					reply_id	: parent.find("#reply_id").val()
-			}
-			
-			$.ajax({
-				url			: "/board/reply/delete",
-				dataType	: "json",
-				data		: objParam,
-				type		: "POST",
-				success		: function(retVal){
-					if(retVal.code == "success") {
-						alert("댓글을 삭제하였습니다.");
-						parent.remove();
-					} else{
-						alert("삭제에 실패하였습니다.");
-					}
-				},
-				error		: function(request, status, error){
-        			console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-       			}
-			});
-		});
-		
-		var content;
-		//댓글 수정
-		$(document).on("click", ".reply_modify", function(){
-			var contentDiv = $(this).parent().siblings(".commentContent");
-			content = contentDiv.text();
-			$(this).text("취소");
-			$(this).attr("class","cancel");
-			
-			contentDiv.html(
-					"<textarea class='modifyBox' cols='20'>" + content + "</textarea>" + 
-					"<input type='button' class='btn btn-outline-secondary reply_modifySave' value='수정'>"
-				);
-		});
-		
-		//댓글 수정 저장
-		$(document).on("click", ".reply_modifySave", function(){
-			var contentDiv  = $(this).parent();
-			var reply_content = $(".modifyBox").val();
-			var reply_id = $(this).parent().siblings("#reply_id").val();
-			var objParams = {
-					reply_id		: reply_id,
-					reply_content	: reply_content
-			}
-			
-			$.ajax({
-				url			: "/board/reply/modify",
-				dataType	: "json",
-				data		: objParams,
-				type		: "POST",
-				success		: function(retVal) {
-					if(retVal.code == "success") {
-						contentDiv.html(reply_content);
-						$(".cancel").text("수정");
-						$(".cancel").attr("class","reply_modify");
-					} else{
-						alert("댓글 수정에 실패하였습니다.");
-					}
-				},
-				error		: function(request, status, error){
-        			console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-       			}
-			});
-		});
-		
-		//댓글 수정 취소
-		$(document).on("click", ".cancel", function(){ 
-			var div = $(this).parent().siblings(".commentContent");
-			$(this).text("수정");
-			$(this).attr("class","reply_modify");
-			div.empty();
-			div.text(content);
-		});
-		
-		//답글 버튼 클릭
-		$(document).on("click", ".reply_comment", function(){
-			var parent = $(this).parent().parent().parent();
-			parent.find(".commentWrap").remove();
-			parent.append(
-					"<div class='commentWrap'>" +
-					"<div class='arrow'><img src='/resources/img/commnet_Arrow.png'></div>&nbsp;" +
-					"<div class='writeComment'>" +
-					"<div class='c_writer'>${sessionScope.user_nickname}</div>" + 
-					"<textarea class='c_inputBox' placeholder='내용을 입력해주세요:)' cols='20'></textarea>" +
-					"<input type='button' class='btn btn-outline-secondary commentInsert' value='등록'></div></div>"
-				);
-		});
-		
-		//답글 등록
-		$(document).on("click", ".commentInsert", function(){
-			var writer = "${sessionScope.user_email}";
-			var nickname = "${sessionScope.user_nickname}";
-			var reply_content = $(this).siblings(".c_inputBox").val();
-			var parent_id = $(this).parent().parent().siblings(".MaincommetWrap").find("#reply_id").val();
-			var parent = $(this).parent().parent();
-			var i = 0;
-			
-			var objParams = {
-					board_id		: $("#board_id").val(),
-					parent_id		: parent_id,
-					depth			: 1,
-					reply_content	: reply_content,
-					reply_writer	: writer
-			}
-			
-			$.ajax({
-				url			: "/board/reply/save",
-				dataType	: "json",
-				data		: objParams,
-				type		: "POST",
-				success		: function(retVal) {
-					if(retVal.code == "success") {
-						$(".c_inputBox").val("");
-						parent.find(".writeComment").remove();
-						alert(i++);
-						parent.append(
-								"<div class='SubcommetWrap'>" +
-								"<input type='hidden' id='reply_id' name='reply_id' value='"+ retVal.reply_id +"' />" +
-								"<span class='reply_user'>" + nickname +"</span>&nbsp;&nbsp;" +
-								"<span class='replyWriterBtn'>" + 
-								"<a style='color: red;' class='reply_modify'>수정</a>" +
-								"<a style='color: blue;' class='reply_delete'>삭제</a></span>" +
-								"<div class='commentContent'>"+ reply_content +"</div>" +
-								"<span class='reply_date'>" + retVal.regDate + "</span></div>"
-							);
-							
-					} else{
-						alert(retVal.message);
-					}
-				},
-				error		: function(request, status, error){
-        			console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-       			}
-			});
-		});
-	});
-</script>
+<script src="/resources/js/boardView.js" type="text/javascript"></script>

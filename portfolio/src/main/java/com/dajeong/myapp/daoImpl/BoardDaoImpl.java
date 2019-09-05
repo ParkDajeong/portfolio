@@ -87,10 +87,20 @@ public class BoardDaoImpl implements BoardDao {
 	public String getReplyDate(String reply_id) {
 		return sqlSession.selectOne("selectReplyDate", reply_id);
 	}
+	
+	@Override
+	public int checkReplyDepth(Map<String, Object> paramMap) {
+		return sqlSession.selectOne("checkReplyDepth", paramMap);
+	}
+	
+	@Override
+	public int deleteAllConnectedReply(Map<String, Object> paramMap) {
+		return sqlSession.delete("deleteAllConnectedReply", paramMap);
+	}
 
 	@Override
-	public int deleteReply(Map<String, Object> paramMap) {
-		return sqlSession.delete("deleteBoardReply", paramMap);
+	public int deleteOneBoardReply(Map<String, Object> paramMap) {
+		return sqlSession.delete("deleteOneBoardReply", paramMap);
 	}
 
 	@Override

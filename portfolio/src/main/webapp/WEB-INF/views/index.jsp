@@ -78,7 +78,7 @@
 						<c:forEach var="boardList" items="${boardList}">
 							<tr>
 								<td>${boardList.id}</td>
-								<td class="title" content_id="${boardList.id}" style="cursor: pointer;"><a data-toggle="modal">${boardList.subject} &#40;&#41;</a></td>
+								<td class="title" content_id="${boardList.id}" style="cursor: pointer;"><a data-toggle="modal">${boardList.subject} &#40;${boardList.reply_count}&#41;</a></td>
 								<td>${boardList.writer_nickname}</td>
 								<td>${boardList.register_datetime}</td>
 								<td>${boardList.read_count}</td>
@@ -86,13 +86,6 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<!-- 게시글 조회 모달 -->
-				<!-- <div class="modal fade" id="boardView" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-				  <div class="modal-dialog modal-lg">
-				    <div class="modal-content">
-				    </div>
-				  </div>
-				</div> -->
 				<br>
 				<!-- 페이지네이션 -->
 				<div class="paginationWrap">

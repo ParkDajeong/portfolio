@@ -8,6 +8,7 @@ public class Board {
 	private String writer_email;
 	private String register_datetime;
 	private int read_count;
+	private int reply_count;
 	
 	public int getId() {
 		return id;
@@ -50,6 +51,12 @@ public class Board {
 	}
 	public void setRead_count(int read_count) {
 		this.read_count = read_count;
+	}
+	public int getReply_count() {
+		return reply_count;
+	}
+	public void setReply_count(int reply_count) {
+		this.reply_count = reply_count;
 	}
 	
 }
