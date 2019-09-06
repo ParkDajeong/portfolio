@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.dajeong.myapp.dto.User;
 import com.dajeong.myapp.service.UserService;
 
 @Controller
@@ -55,11 +56,9 @@ public class UserController {
 	
 	//로그아웃
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(HttpSession session, HttpServletResponse response) throws Exception {
+	public void logout(HttpSession session, HttpServletResponse response) throws Exception {
         session.invalidate();
         userService.logOut(response);
-        
-        return "redirect:/";
     }
 	
 	//회원가입 페이지

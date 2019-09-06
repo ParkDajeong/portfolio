@@ -71,12 +71,6 @@ $(document).ready(function () {
 		var chk_num = new_pwd.search(/[0-9]/g);
 		var chk_eng = new_pwd.search(/[a-z]/ig);
 		
-		var objParam = {
-				email		: $("#user_email").val(),
-				current_pwd		: current_pwd,
-				new_pwd			: new_pwd
-		}
-		
 		if(!current_pwd || !new_pwd || !check_pwd) {
 			alert("빈 칸을 채워주세요.");
 			return;
@@ -103,6 +97,12 @@ $(document).ready(function () {
 			return;
 		} else {
 			$(".sameChk").css("display", "none");
+		}
+		
+		var objParam = {
+				email		: $("#user_email").val(),
+				current_pwd		: current_pwd,
+				new_pwd			: new_pwd
 		}
 		
 		$.ajax({
@@ -169,8 +169,8 @@ $(document).ready(function () {
 				success		: function(retVal) {
 		    		if(retVal.result == "success"){
 		    			alert("회원 탈퇴가 완료되었습니다.");
-		    			location.replace("/logout");
-		    			location.replace("/");
+		    			location.href("/logout");
+		    			location.href("/");
 		    		} else{
 		    			alert("비밀번호가 다릅니다. 다시 입력해주세요.");
 		    		}

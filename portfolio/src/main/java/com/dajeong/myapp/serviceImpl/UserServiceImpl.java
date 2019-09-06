@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.dajeong.myapp.dao.UserDao;
@@ -18,13 +20,26 @@ public class UserServiceImpl implements UserService {
 	@Resource(name="userDao")
 	private UserDao userDao;
 	
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
+	
 	@Override
 	public int setUser(Map<String, Object> paramMap) {
+		String encPassword = passwordEncoder.encode(paramMap.get("password").toString());
+		paramMap.put("password", encPassword);
+		
 		return userDao.setUser(paramMap);
 	}
 
 	@Override
 	public int checkUser(Map<String, Object> paramMap) {
+		User user = userDao.getUserData(paramMap.get("email").toString());
+		String pw = user.getPassword();
+		String rawPw = paramMap.get("password").toString();
+		
+		if(passwordEncoder.matches(rawPw, pw))
+			paramMap.put("password", pw);
+		
 		return userDao.checkUser(paramMap);
 	}
 
@@ -38,7 +53,9 @@ public class UserServiceImpl implements UserService {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
-		out.println("location.href=document.referrer;");
+		out.println("if(document.referrer == 'http://localhost:8888/mypage'){");
+		out.println("location.href = '/';} else {");
+		out.println("location.href = document.referrer;}");
 		out.println("</script>");
 		out.close();
 	}
@@ -65,11 +82,27 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public int updateUserPassword(Map<String, Object> paramMap) {
+		User user = userDao.getUserData(paramMap.get("email").toString());
+		String pw = user.getPassword();
+		String rawPw = paramMap.get("current_pwd").toString();
+		
+		if(passwordEncoder.matches(rawPw, pw)) {
+			paramMap.put("current_pwd", pw);
+			paramMap.put("new_pwd", passwordEncoder.encode(paramMap.get("new_pwd").toString()));
+		}
+		
 		return userDao.updateUserPassword(paramMap);
 	}
 
 	@Override
 	public int deleteUser(Map<String, Object> paramMap) {
+		User user = userDao.getUserData(paramMap.get("email").toString());
+		String pw = user.getPassword();
+		String rawPw = paramMap.get("password").toString();
+		
+		if(passwordEncoder.matches(rawPw, pw))
+			paramMap.put("password", pw);
+		
 		return userDao.deleteUser(paramMap);
 	}
 }

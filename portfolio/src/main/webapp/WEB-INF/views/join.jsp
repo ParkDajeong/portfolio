@@ -40,6 +40,7 @@
 				</form>
 			</div>
 		</section>
+		<footer></footer>
 	</body>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="/resources/js/join.js" type="text/javascript"></script>
