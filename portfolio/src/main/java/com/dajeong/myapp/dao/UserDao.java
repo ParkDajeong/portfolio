@@ -7,7 +7,11 @@ import com.dajeong.myapp.dto.User;
 public interface UserDao {
 
 	int setUser(Map<String, Object> paramMap);
+	
+	int updateUserAuthKey(Map<String, Object> paramMap);
 
+	String checkAuthKey(Map<String, Object> paramMap);
+	
 	int checkUser(Map<String, Object> paramMap);
 
 	User getUserData(String email);
@@ -23,5 +27,4 @@ public interface UserDao {
 	int updateUserPassword(Map<String, Object> paramMap);
 
 	int deleteUser(Map<String, Object> paramMap);
-
 }

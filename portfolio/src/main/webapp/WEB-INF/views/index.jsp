@@ -9,16 +9,6 @@
 		<link href="/resources/css/boardView.css" type="text/css" rel="stylesheet">
 		<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 		<style>
-			.modal-content {
-				padding: 15px 20px;
-			}
-			.modal-header, .modal-footer {
-				display: block;
-				padding: 18px 30px;
-			}
-			.modal-body {
-				padding: 18px 30px;
-			}
 			.writeComment {
 				margin: 10px 0;
 			}

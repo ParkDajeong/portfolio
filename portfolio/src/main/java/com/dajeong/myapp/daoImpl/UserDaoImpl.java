@@ -20,6 +20,16 @@ public class UserDaoImpl implements UserDao {
 	public int setUser(Map<String, Object> paramMap) {
 		return sqlSession.insert("insertUser", paramMap);
 	}
+	
+	@Override
+	public int updateUserAuthKey(Map<String, Object> paramMap) {
+		return sqlSession.update("updateUserAuthKey", paramMap);
+	}
+	
+	@Override
+	public String checkAuthKey(Map<String, Object> paramMap) {
+		return sqlSession.selectOne("checkAuthKey", paramMap);
+	}
 
 	@Override
 	public int checkUser(Map<String, Object> paramMap) {

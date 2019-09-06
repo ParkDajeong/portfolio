@@ -75,6 +75,10 @@
 						success		: function(retVal) {
 							if(retVal.code == "success") {
 								location.href = "/";
+							} else if(retVal.code == "notAuth") {
+								$("#password").val("");
+								$("#password").focus();
+								alert("로그인은 메일 인증 후에 가능합니다.");
 							} else{
 								$("#password").val("");
 								$("#password").focus();

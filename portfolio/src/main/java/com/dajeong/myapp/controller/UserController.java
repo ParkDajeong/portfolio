@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,7 +47,9 @@ public class UserController {
 			HttpSession session = request.getSession();
 			session.setAttribute("user_email", paramMap.get("email"));
 			session.setAttribute("user_nickname", nickname);
-		}else {
+		}else if(result == -1) {
+			retVal.put("code", "notAuth");
+		} else {
 			retVal.put("code", "fail");
 		}
 		retVal.put("data", paramMap.get("email"));
@@ -105,15 +108,25 @@ public class UserController {
 	
 	//회원가입
 	@RequestMapping(value = "/join/join", method = RequestMethod.POST)
-	public String userJoin(@RequestParam Map<String, Object> paramMap, Model model) {
+	public String userJoin(@RequestParam Map<String, Object> paramMap, Model model, HttpServletRequest request) {
 		
+		String auth_key = RandomStringUtils.randomAlphanumeric(12);
+		paramMap.put("auth_key", auth_key);
 		int result = userService.setUser(paramMap);
+		userService.mailSendAuthKey(paramMap, request);
 		
 		if(result > 0) {
 			return "redirect:/login";
 		} else {
 			return "redirect:/join";
 		}
+	}
+	
+	@RequestMapping(value="/mail/auth", method = RequestMethod.GET)
+	public void mailAuth(@RequestParam Map<String, Object> paramMap, Model model, HttpServletResponse response) throws Exception {
+		
+		userService.updateUserAuthKey(paramMap, response);
+		
 	}
 	
 	//마이페이지

@@ -1,5 +1,21 @@
 @charset "UTF-8";
 
+::selection {
+	background: #4d5482;
+	color: #FFF;
+	text-shadow: none;
+}
+::-moz-selection {
+	background: #4d5482;
+	color: #FFF;
+	text-shadow: none;
+}
+::-webkit-selection {
+	background: #4d5482;
+	color: #FFF;
+	text-shadow: none;
+}
+
 /****** 헤더 부분 ******/
 header {
 	background-color: #202020;

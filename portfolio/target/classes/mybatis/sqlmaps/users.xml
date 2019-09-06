@@ -6,13 +6,33 @@
 		INSERT INTO user(
 			email,
 			nickname,
-			password
+			password,
+			auth_key
 		) VALUES (
 			#{email},
 			#{nickname},
-			#{password}
+			#{password},
+			#{auth_key}
 		)
 	</insert>
+	
+	<update id="updateUserAuthKey" parameterType="java.util.HashMap">
+		UPDATE
+			user
+		SET
+			auth_key = 'Y'
+		WHERE
+			email = #{email} AND auth_key = #{auth_key}
+	</update>
+	
+	<select id="checkAuthKey" parameterType="java.util.HashMap" resultType="String">
+		SELECT
+			auth_key
+		FROM
+			user
+		WHERE
+			email = #{email} AND password = #{password}
+	</select>
 	
 	<select id="checkUser" parameterType="java.util.HashMap" resultType="int">
 		SELECT EXISTS(

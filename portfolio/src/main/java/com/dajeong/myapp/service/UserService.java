@@ -2,6 +2,7 @@ package com.dajeong.myapp.service;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dajeong.myapp.dto.User;
@@ -9,6 +10,12 @@ import com.dajeong.myapp.dto.User;
 public interface UserService {
 	//회원가입
 	int setUser(Map<String, Object> paramMap);
+	
+	//회원가입 메일 인증
+	void mailSendAuthKey(Map<String, Object> paramMap, HttpServletRequest request);
+	
+	//인증키 변경
+	void updateUserAuthKey(Map<String, Object> paramMap, HttpServletResponse response) throws Exception;
 	
 	//로그인
 	int checkUser(Map<String, Object> paramMap);
