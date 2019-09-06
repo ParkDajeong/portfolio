@@ -38,9 +38,9 @@ public class UserController {
 
 		Map <String, Object> retVal = new HashMap<String, Object>();
 		int result = userService.checkUser(paramMap);
-		String nickname = userService.getUserData(paramMap.get("email").toString()).getNickname();
 		
 		if(result > 0) {
+			String nickname = userService.getUserData(paramMap.get("email").toString()).getNickname();
 			retVal.put("code", "success");
 			HttpSession session = request.getSession();
 			session.setAttribute("user_email", paramMap.get("email"));

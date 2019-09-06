@@ -4,7 +4,7 @@ $(document).ready(function () {
 	var nickChk, emailChk, confirmChk, pwChk = false;
 	
 	/* 닉네임 중복 체크 */
-	$("#nickname").change(function () {
+	$("#nickname").on("propertychange change keyup paste input", function () {
 		var objParam = {
 				nickname	: $("#nickname").val()
 		}
@@ -32,7 +32,7 @@ $(document).ready(function () {
 	});
 	
 	/* 이메일 유효성 체크 */
-	$("#email").change(function () {
+	$("#email").on("propertychange change keyup paste input", function () {
 		var str = $("#email").val();
 		var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
@@ -74,25 +74,25 @@ $(document).ready(function () {
 	});
 
 	/* 이메일 같은지 체크 */
-	$("#confirmEmail").change(function () {
+	$("#confirmEmail").on("propertychange change keyup paste input", function () {
 		var email = $("#email").val();
 		var check = $("#confirmEmail").val();
 
 		if (email == check) {
 			$(".confirm").css("display", "none");
-			$("#email").css("border", "");
+			$("#confirmEmail").css("border", "");
 			confirmChk = true;
 			return true;
 		} else {
 			$(".confirm").css("display", "inherit");
-			$("#email").css("border", "1px solid #ff6e6e");
+			$("#confirmEmail").css("border", "1px solid #ff6e6e");
 			confirmChk = false;
 			return false;
 		}
 	});
 
 	/* 비밀번호 유효성 체크 */
-	$("#password").change(function () {
+	$("#password").on("propertychange change keyup paste input", function () {
 		var pwd = $("#password").val();
 		var chk_num = pwd.search(/[0-9]/g);
 		var chk_eng = pwd.search(/[a-z]/ig);
@@ -130,7 +130,7 @@ $(document).ready(function () {
 		}
 	});
 	
-	$("#joinForm input").change(function() {
+	$("#joinForm input").on("propertychange change keyup paste input", function () {
 		if(nickChk == true && emailChk == true && confirmChk == true && pwChk == true) {
 			$(".join").attr("disabled", false);
 		} else {

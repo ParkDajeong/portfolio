@@ -44,29 +44,54 @@
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script>
 		$(document).ready(function() {
+			$(".wrapper > input").keydown(function(key) {
+                if (key.keyCode == 13) {
+                	if(!$("#email").val())
+                    	alert("이메일을 입력해주세요.");
+                	else if(!$("#password").val())
+                		alert("비밀번호를 입력해주세요.");
+                	else
+                		$(".continue").click();
+                }
+            });
+			
 			$(".continue").click(function() {
-				var objParam = {
-						email 		: $("#email").val(),
-						password	: $("#password").val()
-				}
+				var email = $("#email").val();
+				var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+				if (regExp.test(email)) {
+					$(".error").css("display", "none");
 				
-				$.ajax({
-					url			: "/login/login",
-					datatype	: "json",
-					data		: objParam,
-					type		: "POST",
-					success		: function(retVal) {
-						if(retVal.code == "success") {
-							location.href = "/";
-						} else{
-							$("#password").val("");
-							$(".error").css("display", "block");
-						}
-					},
-					error		: function(request, status, error){
-	        			console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-	       			}
-				});
+					var objParam = {
+							email 		: email,
+							password	: $("#password").val()
+					}
+					
+					$.ajax({
+						url			: "/login/login",
+						datatype	: "json",
+						data		: objParam,
+						type		: "POST",
+						success		: function(retVal) {
+							if(retVal.code == "success") {
+								location.href = "/";
+							} else{
+								$("#password").val("");
+								$("#password").focus();
+								$(".error").css("display", "block");
+							}
+						},
+						error		: function(request, status, error){
+		        			console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+		       			}
+					});
+				} else {
+					$(".error > span").text("잘못된 이메일 형식입니다. 이메일을 다시 확인해주세요.");
+					$(".error").css("display", "inherit");
+					$("#password").val("");
+					$("#email").focus();
+					return false;
+				}
 			});
 		});
 	</script>

@@ -62,8 +62,8 @@ header, footer {
 
 .error {
 	display: none;
-	color : #ff6e6e;
-	font-size : 13.2px;
+	color : #ff6e6e !important;
+	font-size : 13.2px !important;
 	text-align: left;
 	padding: 5px 10px;
 	line-height: 1.4;
