@@ -1,6 +1,5 @@
 package com.dajeong.myapp.serviceImpl;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 
@@ -42,19 +41,13 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public void mailSendAuthKey(Map<String, Object> paramMap, HttpServletRequest request) {
+	public void sendMailAuthKey(Map<String, Object> paramMap, String subject, String content) {
 		String email = paramMap.get("email").toString();
-		String nickname = paramMap.get("nickname").toString();
-		String auth_key = paramMap.get("auth_key").toString();
-		System.out.println(email);
 		MimeMessage mail = mailSender.createMimeMessage();
-		String msgHtml = "<div style='border:1px solid black;text-align:center;'>" + 
-				"<b>" + nickname + "</b> 님 가입을 환영합니다.<br>" + 
-				"하단의 인증 버튼을 클릭하셔야 가입이 정상적으로 완료됩니다.<br><br>" + 
-				"<a href='http://localhost:8888/mail/auth?email=" + email + "&auth_key=" + auth_key + "'>메일인증</a></div>";
+		
 		try {
-			mail.setSubject("[해포 커뮤니티] 가입 인증 메일입니다.", "UTF-8");
-			mail.setContent(msgHtml, "text/html; charset=utf-8");
+			mail.setSubject(subject, "UTF-8");
+			mail.setContent(content, "text/html; charset=utf-8");
 			mail.setRecipient(RecipientType.TO, new InternetAddress(email));
 			mailSender.send(mail);
 		} catch (MessagingException e) {
@@ -158,5 +151,13 @@ public class UserServiceImpl implements UserService {
 			paramMap.put("password", pw);
 		
 		return userDao.deleteUser(paramMap);
+	}
+
+	@Override
+	public int changeToTempPassword(Map<String, Object> paramMap) {
+		String encPassword = passwordEncoder.encode(paramMap.get("tempPW").toString());
+		paramMap.put("tempPW", encPassword);
+		
+		return userDao.changeToTempPassword(paramMap);
 	}
 }

@@ -11,8 +11,8 @@ public interface UserService {
 	//회원가입
 	int setUser(Map<String, Object> paramMap);
 	
-	//회원가입 메일 인증
-	void mailSendAuthKey(Map<String, Object> paramMap, HttpServletRequest request);
+	//메일 전송
+	void sendMailAuthKey(Map<String, Object> paramMap, String subject, String content);
 	
 	//인증키 변경
 	void updateUserAuthKey(Map<String, Object> paramMap, HttpServletResponse response) throws Exception;
@@ -43,4 +43,7 @@ public interface UserService {
 
 	//회원 탈퇴
 	int deleteUser(Map<String, Object> paramMap);
+
+	//임시 비밀번호로 변경
+	int changeToTempPassword(Map<String, Object> paramMap);
 }

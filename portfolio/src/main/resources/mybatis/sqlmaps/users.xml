@@ -109,4 +109,13 @@
 		WHERE
 			email = #{email} AND password = #{password}
 	</delete>
+	
+	<update id="updateToTempPassword" parameterType="java.util.HashMap">
+		UPDATE
+			user
+		SET
+			password = #{tempPW}
+		WHERE
+			email = #{email}
+	</update>
 </mapper>

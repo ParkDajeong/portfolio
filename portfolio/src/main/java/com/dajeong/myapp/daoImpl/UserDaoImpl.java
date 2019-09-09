@@ -70,4 +70,9 @@ public class UserDaoImpl implements UserDao {
 	public int deleteUser(Map<String, Object> paramMap) {
 		return sqlSession.delete("deleteUser", paramMap);
 	}
+
+	@Override
+	public int changeToTempPassword(Map<String, Object> paramMap) {
+		return sqlSession.update("updateToTempPassword", paramMap);
+	}
 }

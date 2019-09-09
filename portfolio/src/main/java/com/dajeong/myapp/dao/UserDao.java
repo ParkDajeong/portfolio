@@ -27,4 +27,6 @@ public interface UserDao {
 	int updateUserPassword(Map<String, Object> paramMap);
 
 	int deleteUser(Map<String, Object> paramMap);
+
+	int changeToTempPassword(Map<String, Object> paramMap);
 }

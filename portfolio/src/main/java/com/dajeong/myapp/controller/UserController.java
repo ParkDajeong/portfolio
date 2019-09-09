@@ -57,6 +57,38 @@ public class UserController {
 		return retVal;
 	}
 	
+	//비밀번호 찾기 페이지
+	@RequestMapping(value = "/forgot-password", method = RequestMethod.GET)
+	public String moveForgotPswd() {
+		
+		return "forgot-password";
+	}
+	
+	//비번 찾기 - 임시 비번 메일 전송
+	@ResponseBody
+	@RequestMapping(value = "/forgot-password/mail", method = RequestMethod.POST)
+	public Object passwordSendMail(@RequestParam Map<String, Object> paramMap, Model model, HttpServletRequest request) {
+		
+		Map<String, Object> retVal = new HashMap<String, Object>();
+		String tempPW = RandomStringUtils.randomAlphanumeric(10);
+		paramMap.put("tempPW", tempPW);
+		String subject = "[해포 커뮤니티] 임시 비밀번호입니다.";
+		String content = "<div style='border:1px solid black;text-align:center;'>" + 
+				"임시 비밀번호입니다. 로그인 후, 비밀번호를 변경하세요.<br><br>" + 
+				"임시 비밀번호 : "+ tempPW + "</div>";
+		
+		int result = userService.changeToTempPassword(paramMap);
+		
+		if(result > 0) {
+			userService.sendMailAuthKey(paramMap, subject, content);
+			retVal.put("code", "OK");
+		}else {
+			retVal.put("code", "fail");
+		}
+		
+		return retVal;
+	}
+
 	//로그아웃
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public void logout(HttpSession session, HttpServletResponse response) throws Exception {
@@ -112,8 +144,16 @@ public class UserController {
 		
 		String auth_key = RandomStringUtils.randomAlphanumeric(12);
 		paramMap.put("auth_key", auth_key);
+		String email = paramMap.get("email").toString();
+		String nickname = paramMap.get("nickname").toString();
+		String subject = "[해포 커뮤니티] 가입 인증 메일입니다.";
+		String content = "<div style='border:1px solid black;text-align:center;'>" + 
+				"<b>" + nickname + "</b> 님 가입을 환영합니다.<br>" + 
+				"하단의 인증 버튼을 클릭하셔야 가입이 정상적으로 완료됩니다.<br><br>" + 
+				"<a href='http://localhost:8888/mail/auth?email=" + email + "&auth_key=" + auth_key + "'>메일인증</a></div>";
+		
 		int result = userService.setUser(paramMap);
-		userService.mailSendAuthKey(paramMap, request);
+		userService.sendMailAuthKey(paramMap, subject, content);
 		
 		if(result > 0) {
 			return "redirect:/login";
@@ -122,6 +162,7 @@ public class UserController {
 		}
 	}
 	
+	//메일 인증
 	@RequestMapping(value="/mail/auth", method = RequestMethod.GET)
 	public void mailAuth(@RequestParam Map<String, Object> paramMap, Model model, HttpServletResponse response) throws Exception {
 		

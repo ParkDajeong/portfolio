@@ -44,6 +44,10 @@
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script>
 		$(document).ready(function() {
+			$(".findPwd").click(function() {
+				location.href = "/forgot-password";
+			});
+			
 			$(".wrapper > input").keydown(function(key) {
                 if (key.keyCode == 13) {
                 	if(!$("#email").val())
