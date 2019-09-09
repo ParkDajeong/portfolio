@@ -29,12 +29,11 @@
 				<li>
 					<a href="/"><span>커뮤니티</span></a>
 				</li>
-				<li>
-					<a href="#"><span>갤러리</span></a>
-				</li>
-				<li>
-					<a href="#"><span>버그리포트?</span></a>
-				</li>
+				<c:if test="${sessionScope.user_email == 'sobeast980@gmail.com'}">
+					<li>
+						<a href="/admin/user"><span>회원 관리</span></a>
+					</li>
+				</c:if>
 			</ul>
 		</div>
 	</nav>

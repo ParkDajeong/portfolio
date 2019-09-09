@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page session="true" %>
 <html>
 	<head>
@@ -18,6 +20,13 @@
 					<div class="editor_wrapper">
 						<h2>New Post</h2>
 						<div id="post_title">
+							<c:if test="${sessionScope.user_email == 'sobeast980@gmail.com'}">
+								<select name="type">
+									<option value="" selected>-- 선택 --</option>
+									<option value="normal">일반</option>
+									<option value="notice">공지</option>
+								</select>
+							</c:if>
 							<input type="text" id="subject" name="subject" placeholder="제목" value="${boardEdit.subject}" autocomplete=off>
 						</div>
 						<textarea name="content" id="content">${boardEdit.content}</textarea>

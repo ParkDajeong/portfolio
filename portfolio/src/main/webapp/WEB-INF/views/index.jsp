@@ -12,11 +12,23 @@
 			.writeComment {
 				margin: 10px 0;
 			}
-			.write {
+			.write, .delete {
 				float: right;
 				font-size: 14px;
 				margin-bottom: 7px;
 				margin-right: 5px;
+				padding: 5px 15px;
+			}
+			.delete {
+				background-color: #ca3d3d;
+				/*border-color: #c33c49;*/
+			}
+			.fix {
+				font-size: 14px;
+				padding: 3px 11px;
+			}
+			.table td {
+				vertical-align: middle;
 			}
 		</style>
 		<script>
@@ -51,27 +63,42 @@
 		<div id="main">
 			<section>
 				<!-- 게시판 -->
+				<c:if test="${sessionScope.user_email == 'sobeast980@gmail.com'}">
+					<button type="button" class="btn btn-danger delete">삭제</button>
+				</c:if>
 				<c:if test="${sessionScope.user_nickname != null}">
 					<button type="button" class="btn btn-outline-secondary write">글쓰기</button>
 				</c:if>
 				<table class="table table-hover community">
 					<thead>
 						<tr>
+							<c:if test="${sessionScope.user_email == 'sobeast980@gmail.com'}">
+								<th><input type="checkbox" name="allCheck"></th>
+							</c:if>
 							<th>번호</th>
 							<th width="55%">제목</th>
 							<th>작성자</th>
 							<th>작성일</th>
 							<th>조회</th>
+							<c:if test="${sessionScope.user_email == 'sobeast980@gmail.com'}">
+								<th>고정글</th>
+							</c:if>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="boardList" items="${boardList}">
 							<tr>
+								<c:if test="${sessionScope.user_email == 'sobeast980@gmail.com'}">
+									<td><input type="checkbox" name="boardChk" class="boardChk"></td>
+								</c:if>
 								<td>${boardList.id}</td>
 								<td class="title" content_id="${boardList.id}" style="cursor: pointer;"><a data-toggle="modal">${boardList.subject} &#40;${boardList.reply_count}&#41;</a></td>
 								<td>${boardList.writer_nickname}</td>
 								<td>${boardList.register_datetime}</td>
 								<td>${boardList.read_count}</td>
+								<c:if test="${sessionScope.user_email == 'sobeast980@gmail.com'}">
+									<td><button type="button" class="btn btn-outline-primary fix">고정</button></td>
+								</c:if>
 							</tr>
 						</c:forEach>
 					</tbody>

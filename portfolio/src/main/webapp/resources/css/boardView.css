@@ -119,7 +119,7 @@ section {
 	font-size: 16.5px;
 }
 
-.post_owner {
+.post_owner, .admin {
 	position: relative;
     top: -1.5px;
 	display: inline-block;

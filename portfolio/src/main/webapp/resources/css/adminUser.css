@@ -5,8 +5,6 @@ html, body {
 }
 
 /****** 메인 ******/
-#main {
-}
 
 section {
 	width: 70%;
@@ -14,21 +12,9 @@ section {
 	margin-top: 70px;
 }
 
-.community {
+.userTable {
 	text-align: center;
 	font-size: 15px;
-}
-
-input[type=checkbox] {
-	-ms-transform: scale(1.25); /* IE */
-	-moz-transform: scale(1.25); /* FF */
-	-webkit-transform: scale(1.25); /* Safari and Chrome */
-	-o-transform: scale(1.25); /* Opera */
-	padding: 5px;
-}
-
-.title {
-	text-align: left;
 }
 
 /****** 검색 ******/

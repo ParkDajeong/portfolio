@@ -19,7 +19,7 @@
 					<c:set var="post_writer" value="${boardView.writer_email}"></c:set>
 					<div class="board-title">
 						<h3>${boardView.subject}</h3>
-						<c:if test="${sessionScope.user_email == boardView.writer_email}">
+						<c:if test="${sessionScope.user_email == boardView.writer_email || sessionScope.user_email == 'sobeast980@gmail.com'}">
 							<span>
 								<a style="color: red;" class="modify">수정</a>
 								<a style="color: blue;" class="delete">삭제</a>
@@ -57,7 +57,7 @@
 											&nbsp;&nbsp;<span class="reply_date">${replyView.regDate}</span>
 											<span class="replyWriterBtn">
 												<span><a style="color: green;" class="reply_comment r_edit">답글</a></span>
-												<c:if test="${sessionScope.user_email == replyView.reply_writer}">
+												<c:if test="${sessionScope.user_email == replyView.reply_writer || sessionScope.user_email == 'sobeast980@gmail.com'}">
 													<a style="color: red;" class="reply_modify r_edit">수정</a>
 													<a style="color: blue;" class="reply_delete r_edit">삭제</a>
 												</c:if>
@@ -81,7 +81,7 @@
 											</c:if>
 											&nbsp;&nbsp;<span class="reply_date">${replyView.regDate}</span>
 											<span class="replyWriterBtn">
-												<c:if test="${sessionScope.user_email == replyView.reply_writer}">
+												<c:if test="${sessionScope.user_email == replyView.reply_writer || sessionScope.user_email == 'sobeast980@gmail.com'}">
 													<a style="color: red;" class="reply_modify r_edit">수정</a>
 													<a style="color: blue;" class="reply_delete r_edit">삭제</a>
 												</c:if>
