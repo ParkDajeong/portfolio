@@ -20,11 +20,12 @@
 					<div class="editor_wrapper">
 						<h2>New Post</h2>
 						<div id="post_title">
+							<input type="hidden" name="postType" value="${boardEdit.type}" />
 							<c:if test="${sessionScope.user_email == 'sobeast980@gmail.com'}">
-								<select name="type">
-									<option value="" selected>-- 선택 --</option>
-									<option value="normal">일반</option>
-									<option value="notice">공지</option>
+								<select name="type" id="type">
+									<option value="0">공지</option>
+									<option value="1">고정</option>
+									<option value="2">일반</option>
 								</select>
 							</c:if>
 							<input type="text" id="subject" name="subject" placeholder="제목" value="${boardEdit.subject}" autocomplete=off>
@@ -56,6 +57,12 @@
 				}
 			});
 			
+			var type = $("input[name=postType]").val();
+			if(type == "")
+				$("#type option:eq(0)").prop("selected", true);
+			else
+				$("#type").val(type).prop("selected", true);
+			
 			function sendFile(file, el) {
 				var form_data = new FormData();
 		      	form_data.append('file', file);
@@ -85,6 +92,7 @@
 		       	
 		       	var objParams = {
 		       		board_id		: $("#board_id").val(),
+		       		type			: $("#type").val(),
 		       		subject			: $("#subject").val(),
 		       		content			: $("#content").val(),
 		       		writer_email	: $("#writer_email").val(),

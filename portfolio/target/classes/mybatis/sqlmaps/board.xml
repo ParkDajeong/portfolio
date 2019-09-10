@@ -4,11 +4,13 @@
 <mapper namespace="com.dajeong.myapp.dao.BoardDao">
 	<insert id="insertBoardContent" parameterType="java.util.HashMap">
 		INSERT INTO board(
+			type,
 			subject,
 			content,
 			writer_nickname,
 			writer_email
 		) VALUES (
+			#{type},
 			#{subject},
 			#{content},
 			#{writer_nickname},
@@ -46,7 +48,7 @@
 		GROUP BY
 			b.id
 		ORDER BY
-			register_datetime desc
+			type, register_datetime desc
 		LIMIT
 			#{startContent}, #{contentViewCnt}
 	</select>
@@ -198,4 +200,44 @@
 		WHERE
 			reply_id = #{reply_id}
 	</delete>
+	
+	<!-- 관리자 - 게시글 삭제 -->
+	<delete id="deleteAdminPost" parameterType="java.util.List">
+		DELETE
+			b, br
+		FROM
+			board as b
+		JOIN
+			board_reply as br
+		ON
+			b.id IN <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
+			AND br.board_id IN <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
+	</delete>
+	
+	<update id="updateToPostTypeNotice" parameterType="int">
+		UPDATE
+			board
+		SET
+			type = 0
+		WHERE
+			id = #{board_id}
+	</update>
+	
+	<update id="updateToPostTypeFix" parameterType="int">
+		UPDATE
+			board
+		SET
+			type = 1
+		WHERE
+			id = #{board_id}
+	</update>	
+	
+	<update id="updateToPostTypeNormal" parameterType="int">
+		UPDATE
+			board
+		SET
+			type = 2
+		WHERE
+			id = #{board_id}
+	</update>
 </mapper>

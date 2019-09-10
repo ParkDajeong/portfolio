@@ -87,17 +87,34 @@
 					</thead>
 					<tbody>
 						<c:forEach var="boardList" items="${boardList}">
-							<tr>
+							<c:choose>
+								<c:when test="${boardList.type != 2}"><tr style="background-color: #f9faff;"></c:when>
+								<c:otherwise><tr></c:otherwise>
+							</c:choose>
 								<c:if test="${sessionScope.user_email == 'sobeast980@gmail.com'}">
-									<td><input type="checkbox" name="boardChk" class="boardChk"></td>
+									<td><input type="checkbox" name="boardChk" class="boardChk" value="${boardList.id}"></td>
 								</c:if>
-								<td>${boardList.id}</td>
+								<c:choose>
+									<c:when test="${boardList.type == 0}"><td style="font-weight:bold;">공지</td></c:when>
+									<c:when test="${boardList.type == 1}"><td style="font-weight:bold;">고정</td></c:when>
+									<c:otherwise><td>${boardList.id}</td></c:otherwise>
+								</c:choose>
 								<td class="title" content_id="${boardList.id}" style="cursor: pointer;"><a data-toggle="modal">${boardList.subject} &#40;${boardList.reply_count}&#41;</a></td>
 								<td>${boardList.writer_nickname}</td>
 								<td>${boardList.register_datetime}</td>
 								<td>${boardList.read_count}</td>
 								<c:if test="${sessionScope.user_email == 'sobeast980@gmail.com'}">
-									<td><button type="button" class="btn btn-outline-primary fix">고정</button></td>
+									<c:choose>
+										<c:when test="${boardList.type == 2}">
+											<td><button type="button" class="btn btn-outline-primary fix" data-type="${boardList.type}">고정</button></td>
+										</c:when>
+										<c:when test="${boardList.type == 1}">
+											<td><button type="button" class="btn btn-primary fix" data-type="${boardList.type}">해제</button></td>
+										</c:when>
+										<c:otherwise>
+											<td></td>
+										</c:otherwise>
+									</c:choose>
 								</c:if>
 							</tr>
 						</c:forEach>
@@ -165,6 +182,68 @@
 					$(location).attr("href", "/");
 				else
 					$(location).attr("href", "/board/search?type=" + type + "&data=" + data);
+			});
+			
+			//관리자 - 게시글 전체 선택
+			$("input[name='allCheck']").click(function() {
+				if($("input[name=allCheck]").prop("checked")) {
+					$("input[name=boardChk]").prop("checked", true);
+				} else {
+					$("input[name=boardChk]").prop("checked", false);
+				}
+			});
+			
+			//관리자 - 게시글 삭제
+			$(".delete").click(function() {
+				var boardChkArr = [];
+				$("input[name=boardChk]:checked").each(function() {
+						boardChkArr.push($(this).val());
+				});
+				
+				if(boardChkArr.length == 0) {
+					alert("삭제할 게시글을 선택해주세요.");
+					return;
+				}else {
+					if(confirm("정말 삭제하시겠습니까?") == true){
+						$.ajax({
+							url			: "/admin/board/delete",
+							data		: {"drop" : boardChkArr},
+							type		: "POST",
+							success		: function(retVal){
+								if(retVal.code == "success") {
+									alert("게시글을 삭제하였습니다.");
+									location.href = "/";
+									boardChkArr = new Array();
+								} else{
+									alert("삭제에 실패하였습니다.");
+								}
+							},
+							error		: function(request, status, error){
+			        			console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+			       			}
+						});
+					}
+				}
+			});
+			
+			//관리자 - 게시글 고정
+			$(".fix").click(function() {
+				
+				$.ajax({
+					url			: "/admin/board/fix",
+					data		: {board_id : $(this).parent().siblings(".title").attr("content_id"),type : $(this).data("type")},
+					type		: "POST",
+					success		: function(retVal) {
+						if(retVal.code == "success") {
+							location.href = "/";
+						} else{
+							alert("고정에 실패하였습니다.");
+						}
+					},
+					error		: function(request, status, error){
+	        			console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+	       			}
+				});
 			});
 		});
 	</script>

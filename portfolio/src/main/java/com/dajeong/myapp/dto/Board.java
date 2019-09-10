@@ -2,6 +2,7 @@ package com.dajeong.myapp.dto;
 
 public class Board {
 	private int id;
+	private int type;
 	private String subject;
 	private String content;
 	private String writer_nickname;
@@ -15,6 +16,12 @@ public class Board {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
 	}
 	public String getSubject() {
 		return subject;
@@ -58,5 +65,4 @@ public class Board {
 	public void setReply_count(int reply_count) {
 		this.reply_count = reply_count;
 	}
-	
 }
