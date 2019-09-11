@@ -8,8 +8,8 @@ public class Reply {
 	private int parent_id;
 	private int order_no;
 	private String reply_content;
-	private String reply_writer;
-	private String nickname;
+	private String reply_writer_email;
+	private String reply_writer_nickname;
 	private String regDate;
 	private String repyl_cnt;
 	
@@ -55,17 +55,17 @@ public class Reply {
 	public void setReply_content(String reply_content) {
 		this.reply_content = reply_content;
 	}
-	public String getReply_writer() {
-		return reply_writer;
+	public String getReply_writer_email() {
+		return reply_writer_email;
 	}
-	public void setReply_writer(String reply_writer) {
-		this.reply_writer = reply_writer;
+	public void setReply_writer_email(String reply_writer_email) {
+		this.reply_writer_email = reply_writer_email;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getReply_writer_nickname() {
+		return reply_writer_nickname;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setReply_writer_nickname(String reply_writer_nickname) {
+		this.reply_writer_nickname = reply_writer_nickname;
 	}
 	public String getRegDate() {
 		return regDate;

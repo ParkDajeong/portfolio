@@ -174,6 +174,12 @@
 				location.href = "/board/view?board_id=" + id;
 			});
 			
+			//검색 엔터 이벤트
+			$("#searchData").keydown(function(key) {
+                if (key.keyCode == 13)
+                	$("#searchBtn").click();
+            });
+			
 			//검색
 			$("#searchBtn").click(function() {
 				var type = $("#searchType option:selected").val();

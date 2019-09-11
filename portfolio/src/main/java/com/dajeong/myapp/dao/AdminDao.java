@@ -25,4 +25,12 @@ public interface AdminDao {
 	int adminUpdateUserPassword(Map<String, Object> paramMap);
 
 	int adminUpdateUserAuth(String email);
+
+	int getSearchEmailCnt(Map<String, Object> paramMap);
+
+	int getSearchNicknameCnt(Map<String, Object> paramMap);
+
+	List<User> getSearchEmailList(Map<String, Object> paramMap);
+
+	List<User> getSearchNicknameList(Map<String, Object> paramMap);
 }

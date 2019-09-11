@@ -138,4 +138,24 @@ public class AdminController {
 		
 		return retVal;
 	}
+	
+	//관리자 - 이메일 검색
+	@RequestMapping(value = "/admin/user/search", method = RequestMethod.GET)
+	public String boardSearch(@RequestParam(required = false, defaultValue = "1") int page, 
+			@RequestParam(required = false, defaultValue = "1") int pageRange,
+			@RequestParam Map<String, Object> paramMap, Model model) {
+		
+		int searchCnt = adminService.getSearchUserDataCnt(paramMap);
+		
+		Pagination pagination = new Pagination();
+		pagination.pageInfo(searchCnt, page, pageRange);
+		paramMap.put("startContent", pagination.getStartContent());
+		paramMap.put("contentViewCnt", pagination.getContentViewCnt());
+		
+		model.addAttribute("allUserCnt", searchCnt);
+		model.addAttribute("pagination", pagination);
+		model.addAttribute("userList", adminService.getSearchUserDataList(paramMap));
+		
+		return "adminUserList";
+	}
 }

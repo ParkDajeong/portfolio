@@ -28,5 +28,10 @@ public interface AdminService {
 
 	//유저 인증 상태 변경
 	int adminUpdateUserAuth(String email);
+
+	//검색한 유저 데이터 개수
+	int getSearchUserDataCnt(Map<String, Object> paramMap);
+
+	List<User> getSearchUserDataList(Map<String, Object> paramMap);
 	
 }

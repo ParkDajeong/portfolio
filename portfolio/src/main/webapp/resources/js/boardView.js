@@ -36,11 +36,12 @@ $(document).ready(function () {
 			var nickname = $("#user_nickname").val();
 			var reply_content = $(".c_inputBox").val();
 			var objParams = {
-					board_id		: $("#board_id").val(),
-					parent_id		: 0,
-					depth			: 0,
-					reply_content	: reply_content,
-					reply_writer	: writer
+					board_id				: $("#board_id").val(),
+					parent_id				: 0,
+					depth					: 0,
+					reply_content			: reply_content,
+					reply_writer_email		: writer,
+					reply_writer_nickname	: nickname
 			}
 			$.ajax({
 				url			: "/board/reply/save",
@@ -174,13 +175,13 @@ $(document).ready(function () {
 			var parent_id = $(this).parent().parent().siblings(".MaincommetWrap").find("#reply_id").val();
 			var inputBox = $(this).parent().parent();
 			var parent = $(this).parent().parent().parent();
-			
 			var objParams = {
-					board_id		: $("#board_id").val(),
-					parent_id		: parent_id,
-					depth			: 1,
-					reply_content	: reply_content,
-					reply_writer	: writer
+					board_id				: $("#board_id").val(),
+					parent_id				: parent_id,
+					depth					: 1,
+					reply_content			: reply_content,
+					reply_writer_email		: writer,
+					reply_writer_nickname	: nickname
 			}
 			
 			$.ajax({

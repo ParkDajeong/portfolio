@@ -61,4 +61,24 @@ public class AdminDaoImpl implements AdminDao {
 	public int adminUpdateUserAuth(String email) {
 		return sqlSession.update("adminUpdateUserAuthKey", email);
 	}
+
+	@Override
+	public int getSearchEmailCnt(Map<String, Object> paramMap) {
+		return sqlSession.selectOne("selectUserSearchEmailCnt", paramMap);
+	}
+
+	@Override
+	public int getSearchNicknameCnt(Map<String, Object> paramMap) {
+		return sqlSession.selectOne("selectUserSearchNicknameCnt", paramMap);
+	}
+
+	@Override
+	public List<User> getSearchEmailList(Map<String, Object> paramMap) {
+		return sqlSession.selectList("selectUserSearchEmailList", paramMap);
+	}
+
+	@Override
+	public List<User> getSearchNicknameList(Map<String, Object> paramMap) {
+		return sqlSession.selectList("selectUserSearchNicknameList", paramMap);
+	}
 }

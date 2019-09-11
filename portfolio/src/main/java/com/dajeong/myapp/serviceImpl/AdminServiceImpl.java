@@ -64,4 +64,22 @@ public class AdminServiceImpl implements AdminService {
 	public int adminUpdateUserAuth(String email) {
 		return adminDao.adminUpdateUserAuth(email);
 	}
+
+	@Override
+	public int getSearchUserDataCnt(Map<String, Object> paramMap) {
+		String type = paramMap.get("type").toString();
+		if(type.equals("email"))
+			return adminDao.getSearchEmailCnt(paramMap);
+		else
+			return adminDao.getSearchNicknameCnt(paramMap);
+	}
+
+	@Override
+	public List<User> getSearchUserDataList(Map<String, Object> paramMap) {
+		String type = paramMap.get("type").toString();
+		if(type.equals("email"))
+			return adminDao.getSearchEmailList(paramMap);
+		else
+			return adminDao.getSearchNicknameList(paramMap);
+	}
 }

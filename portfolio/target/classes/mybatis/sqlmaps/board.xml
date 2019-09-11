@@ -136,26 +136,25 @@
 			parent_id,
 			depth,
 			reply_content,
-			reply_writer
+			reply_writer_nickname,
+			reply_writer_email
 		) VALUES (
 			#{board_id},
 			#{parent_id},
 			#{depth},
 			#{reply_content},
-			#{reply_writer}
+			#{reply_writer_nickname},
+			#{reply_writer_email}
 		)
 	</insert>
 	
 	<select id="selectReplyList" parameterType="String" resultType="com.dajeong.myapp.dto.Reply">
 		SELECT
-			br.*,
-			u.nickname
+			*
 		FROM
-			board_reply AS br
-		JOIN
-			user AS u
-		ON
-			board_id = #{board_id} AND u.email = br.reply_writer
+			board_reply
+		WHERE
+			board_id = #{board_id}
 		ORDER BY
 			regDate asc
 	</select>
@@ -201,7 +200,7 @@
 			reply_id = #{reply_id}
 	</delete>
 	
-	<!-- 관리자 - 게시글 삭제 -->
+	<!-- 관리자 -->
 	<delete id="adminDeletePost" parameterType="java.util.List">
 		DELETE
 			b, br

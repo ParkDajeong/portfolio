@@ -162,4 +162,49 @@
 		WHERE
 			email = #{email}
 	</update>
+	
+	<!-- 관리자 - 검색 -->
+	<select id="selectUserSearchEmailCnt" parameterType="java.util.HashMap" resultType="int">
+		SELECT
+			count(email)
+		FROM
+			user
+		WHERE
+			email like CONCAT('%', #{data}, '%')
+	</select>
+	
+	<select id="selectUserSearchNicknameCnt" parameterType="java.util.HashMap" resultType="int">
+		SELECT
+			count(email)
+		FROM
+			user
+		WHERE
+			nickname like CONCAT('%', #{data}, '%')
+	</select>
+	
+	<select id="selectUserSearchEmailList" resultType="com.dajeong.myapp.dto.User">
+		SELECT
+			*
+		FROM
+			user
+		WHERE
+			email like CONCAT('%', #{data}, '%')
+		ORDER BY
+			join_datetime desc
+		LIMIT
+			#{startContent}, #{contentViewCnt}
+	</select>
+	
+	<select id="selectUserSearchNicknameList" resultType="com.dajeong.myapp.dto.User">
+		SELECT
+			*
+		FROM
+			user
+		WHERE
+			nickname like CONCAT('%', #{data}, '%')
+		ORDER BY
+			join_datetime desc
+		LIMIT
+			#{startContent}, #{contentViewCnt}
+	</select>
 </mapper>

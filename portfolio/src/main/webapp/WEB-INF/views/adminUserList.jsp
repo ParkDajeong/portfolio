@@ -128,7 +128,6 @@
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script>
 		$(document).ready(function () {
-			//글쓰기
 			$(".userDel").click(function() {
 				var returnValue = confirm("해당 유저를 탈퇴시키겠습니까?");
 				
@@ -152,11 +151,17 @@
 				}
 			});
 			
-			//글 상세보기
+			//회원 정보 수정 페이지
 			$(".userModify").click(function() {
 				var email = $(this).parent().data("email");
 				location.href = "/admin/user/view?user_email=" + email;
 			});
+			
+			//검색 엔터 이벤트
+			$("#searchData").keydown(function(key) {
+                if (key.keyCode == 13)
+                	$("#searchBtn").click();
+            });
 			
 			//검색
 			$("#searchBtn").click(function() {

@@ -50,14 +50,17 @@
 									<div class="MaincommetWrap">
 										<div class="comment-header">
 											<input type="hidden" id="reply_id" name="reply_id" value="${replyView.reply_id}" />
-											<span class="reply_user">${replyView.nickname}</span>
-											<c:if test="${replyView.reply_writer == post_writer}">
+											<c:if test="${replyView.reply_writer_email == post_writer && replyView.reply_writer_email != 'sobeast980@gmail.com'}">
+												<span class="reply_user">${replyView.reply_writer_nickname}</span>
 												<span class="post_owner">글쓴이</span>
+											</c:if>
+											<c:if test="${replyView.reply_writer_email == 'sobeast980@gmail.com'}">
+												<span class="reply_user" style="color:#4f5ba7;">${replyView.reply_writer_nickname}</span>
 											</c:if>
 											&nbsp;&nbsp;<span class="reply_date">${replyView.regDate}</span>
 											<span class="replyWriterBtn">
 												<span><a style="color: green;" class="reply_comment r_edit">답글</a></span>
-												<c:if test="${sessionScope.user_email == replyView.reply_writer || sessionScope.user_email == 'sobeast980@gmail.com'}">
+												<c:if test="${sessionScope.user_email == replyView.reply_writer_email || sessionScope.user_email == 'sobeast980@gmail.com'}">
 													<a style="color: red;" class="reply_modify r_edit">수정</a>
 													<a style="color: blue;" class="reply_delete r_edit">삭제</a>
 												</c:if>
@@ -75,13 +78,17 @@
 									<div class="SubcommetWrap">
 										<div class="comment-header">
 											<input type="hidden" id="reply_id" name="reply_id" value="${replyView.reply_id}" />
-											<span class="reply_user">${replyView.nickname}</span>
-											<c:if test="${replyView.reply_writer == post_writer}">
+											
+											<c:if test="${replyView.reply_writer_email == post_writer && replyView.reply_writer_email != 'sobeast980@gmail.com'}">
+													<span class="reply_user">${replyView.reply_writer_nickname}</span>
 												<span class="post_owner">글쓴이</span>
+											</c:if>
+											<c:if test="${replyView.reply_writer_email == 'sobeast980@gmail.com'}">
+												<span class="reply_user" style="color:#4f5ba7;">${replyView.reply_writer_nickname}</span>
 											</c:if>
 											&nbsp;&nbsp;<span class="reply_date">${replyView.regDate}</span>
 											<span class="replyWriterBtn">
-												<c:if test="${sessionScope.user_email == replyView.reply_writer || sessionScope.user_email == 'sobeast980@gmail.com'}">
+												<c:if test="${sessionScope.user_email == replyView.reply_writer_email || sessionScope.user_email == 'sobeast980@gmail.com'}">
 													<a style="color: red;" class="reply_modify r_edit">수정</a>
 													<a style="color: blue;" class="reply_delete r_edit">삭제</a>
 												</c:if>
