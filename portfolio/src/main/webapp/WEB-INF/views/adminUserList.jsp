@@ -9,16 +9,10 @@
 		<link href="/resources/css/boardView.css" type="text/css" rel="stylesheet">
 		<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 		<style>
-			.userDel {
-				float: right;
+			.userDel, .userModify {
 				font-size: 14px;
-				margin-bottom: 7px;
 				margin-right: 5px;
 				padding: 5px 15px;
-			}
-			.userDel {
-				background-color: #ca3d3d;
-				/*border-color: #c33c49;*/
 			}
 			.table td {
 				vertical-align: middle;
@@ -68,17 +62,24 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="boardList" items="${boardList}">
+						<c:forEach var="userList" items="${userList}" varStatus="status">
 							<tr>
-								<td></td>
-								<td></td>
-								<td>${boardList.id}</td>
-								<td content_id="${boardList.id}" style="cursor: pointer;"><a data-toggle="modal">${boardList.subject} &#40;${boardList.reply_count}&#41;</a></td>
-								<td>${boardList.writer_nickname}</td>
-								<td>${boardList.register_datetime}</td>
-								<td>
-									<button type="button" class="btn btn-secondary userDel">수정</button>
-									<button type="button" class="btn btn-danger userDel">탈퇴</button>
+								<td>${(allUserCnt - status.index) - ((pagination.page - 1) * 10)}</td>
+								<c:choose>
+									<c:when test="${userList.auth_key != 'Y'}">
+										<td style="color:red;">미완료</td>
+									</c:when>
+									<c:otherwise>
+										<td>완료</td>
+									</c:otherwise>
+								</c:choose>
+								<td>${userList.email}</td>
+								<td>${userList.nickname}</td>
+								<td>${userList.house}</td>
+								<td>${userList.join_datetime}</td>
+								<td data-email = "${userList.email}">
+									<button type="button" class="btn btn-outline-secondary userModify">수정</button>
+									<button type="button" class="btn btn-outline-danger userDel">탈퇴</button>
 								</td>
 							</tr>
 						</c:forEach>
@@ -128,14 +129,33 @@
 	<script>
 		$(document).ready(function () {
 			//글쓰기
-			$(".write").click(function() {
-				$(location).attr("href", "/board/edit");
+			$(".userDel").click(function() {
+				var returnValue = confirm("해당 유저를 탈퇴시키겠습니까?");
+				
+				if(returnValue) {
+					$.ajax({
+						url			: "/admin/user/delete",
+						data		: {eamil : $(this).parent().data("email")},
+						type		: "POST",
+						success		: function(retVal) {
+							if(retVal.code == "success"){
+				    			alert("해당 회원의 탈퇴가 완료되었습니다.");
+				    			location.href = "/admin/user/list";
+				    		} else{
+				    			alert("탈퇴가 정상적으로 이뤄지지 않았습니다. 다시 시도해주세요.");
+				    		}
+						},
+						error		: function(request, status, error){
+				    		console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+						}
+					});
+				}
 			});
 			
 			//글 상세보기
-			$(".title").click(function() {
-				var id = $(this).attr("content_id");
-				location.href = "/board/view?board_id=" + id;
+			$(".userModify").click(function() {
+				var email = $(this).parent().data("email");
+				location.href = "/admin/user/view?user_email=" + email;
 			});
 			
 			//검색
@@ -143,9 +163,9 @@
 				var type = $("#searchType option:selected").val();
 				var data = $("#searchData").val();
 				if(data == "")
-					$(location).attr("href", "/");
+					$(location).attr("href", "/admin/user/list");
 				else
-					$(location).attr("href", "/board/search?type=" + type + "&data=" + data);
+					$(location).attr("href", "/admin/user/search?type=" + type + "&data=" + data);
 			});
 		});
 	</script>

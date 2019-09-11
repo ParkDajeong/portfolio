@@ -6,6 +6,8 @@ public class User {
 	private String password;
 	private int check;
 	private String house;
+	private String join_datetime;
+	private String auth_key;
 	
 	public String getNickname() {
 		return nickname;
@@ -36,5 +38,17 @@ public class User {
 	}
 	public void setHouse(String house) {
 		this.house = house;
+	}
+	public String getJoin_datetime() {
+		return join_datetime;
+	}
+	public void setJoin_datetime(String join_datetime) {
+		this.join_datetime = join_datetime;
+	}
+	public String getAuth_key() {
+		return auth_key;
+	}
+	public void setAuth_key(String auth_key) {
+		this.auth_key = auth_key;
 	}
 }

@@ -31,7 +31,7 @@
 				</li>
 				<c:if test="${sessionScope.user_email == 'sobeast980@gmail.com'}">
 					<li>
-						<a href="/admin/user"><span>회원 관리</span></a>
+						<a href="/admin/user/list"><span>회원 관리</span></a>
 					</li>
 				</c:if>
 			</ul>

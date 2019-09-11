@@ -118,4 +118,48 @@
 		WHERE
 			email = #{email}
 	</update>
+	
+	<!-- 관리자 -->
+	<select id="selectAllUserCnt" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			user
+	</select>
+	
+	<select id="selectUserList" resultType="com.dajeong.myapp.dto.User">
+		SELECT
+			*
+		FROM
+			user
+		ORDER BY
+			join_datetime desc
+		LIMIT
+			#{startContent}, #{contentViewCnt}
+	</select>
+	
+	<delete id="adminDeleteUser" parameterType="String">
+		DELETE FROM
+			user
+		WHERE
+			email = #{email}
+	</delete>
+	
+	<update id="adminUpdateUserPassword" parameterType="java.util.HashMap">
+		UPDATE
+			user
+		SET
+			password = #{new_pwd}
+		WHERE
+			email = #{email}
+	</update>
+	
+	<update id="adminUpdateUserAuthKey" parameterType="String">
+		UPDATE
+			user
+		SET
+			auth_key = 'Y'
+		WHERE
+			email = #{email}
+	</update>
 </mapper>

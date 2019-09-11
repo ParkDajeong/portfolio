@@ -99,7 +99,7 @@
 									<c:when test="${boardList.type == 1}"><td style="font-weight:bold;">고정</td></c:when>
 									<c:otherwise><td>${boardList.id}</td></c:otherwise>
 								</c:choose>
-								<td class="title" content_id="${boardList.id}" style="cursor: pointer;"><a data-toggle="modal">${boardList.subject} &#40;${boardList.reply_count}&#41;</a></td>
+								<td class="title" content_id="${boardList.id}" style="cursor: pointer;"><a>${boardList.subject} &#40;${boardList.reply_count}&#41;</a></td>
 								<td>${boardList.writer_nickname}</td>
 								<td>${boardList.register_datetime}</td>
 								<td>${boardList.read_count}</td>
@@ -230,7 +230,7 @@
 			$(".fix").click(function() {
 				
 				$.ajax({
-					url			: "/admin/board/fix",
+					url			: "/admin/board/type",
 					data		: {board_id : $(this).parent().siblings(".title").attr("content_id"),type : $(this).data("type")},
 					type		: "POST",
 					success		: function(retVal) {

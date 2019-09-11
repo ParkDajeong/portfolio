@@ -3,6 +3,9 @@ package com.dajeong.myapp.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.dajeong.myapp.dto.Pagination;
+import com.dajeong.myapp.dto.User;
+
 public interface AdminDao {
 
 	int deleteAdminPost(List<String> dropList);
@@ -12,4 +15,14 @@ public interface AdminDao {
 	int updateToPostTypeFix(int board_id);
 
 	int updateToPostTypeNormal(int board_id);
+
+	int getAllUserCnt();
+
+	List<User> getUserList(Pagination pagination);
+
+	int adminDeleteUser(String email);
+
+	int adminUpdateUserPassword(Map<String, Object> paramMap);
+
+	int adminUpdateUserAuth(String email);
 }
