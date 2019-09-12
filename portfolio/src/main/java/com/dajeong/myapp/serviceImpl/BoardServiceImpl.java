@@ -83,7 +83,19 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int deleteContent(Map<String, Object> paramMap) {
-		return boardDao.deleteContent(paramMap);
+		int r1, r2 = 0;
+		
+		if(boardDao.getContentReply(paramMap) > 0) {
+			r1 = boardDao.deleteContent(paramMap);
+			r2 = boardDao.deleteContentReply(paramMap);
+		} else {
+			r1 = boardDao.deleteContent(paramMap);
+			r2 = 1;
+		}
+		if(r1 > 0 && r2 > 0)
+			return 1;
+		else
+			return 0;
 	}
 	
 	@Override

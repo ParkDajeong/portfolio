@@ -10,8 +10,26 @@ section {
 	height: auto;
 }
 
-header, footer {
-	height: 120px;
+header {
+	position: relative;
+	height: 140px;
+}
+
+footer {
+	height: 100px;
+}
+
+.close {
+	display: inline-block;
+	position: absolute;
+	top: 40px;
+    right: 45px;
+	width: 20px;
+	cursor: pointer;
+}
+
+.close > img {
+	width: 100%;
 }
 
 #loginBox {
@@ -26,6 +44,12 @@ header, footer {
 
 .banner {
 	width: 100%;
+}
+
+.banner > a {
+	display: inline-block;
+	width: 228px;
+	height: auto;
 }
 
 .banner img {
@@ -47,6 +71,7 @@ header, footer {
 	color: white;
 	text-align: left;
 	font-size: 16px;
+	padding-left: 5px;
 }
 
 .wrapper > input {
@@ -70,7 +95,7 @@ header, footer {
 }
 
 .findBtnWrap {
-	padding: 20px;
+    padding: 15px 0 10px;
 }
 
 .btns {
@@ -90,14 +115,16 @@ header, footer {
 }
 
 .continue {
-	width: 100%;
-	background-color: #cec094;
+	width: 98%;
+	background-color: #decfa1;
 	padding: 16px 31px;
 	border-radius: 30px;
 	font-weight: bold;
 }
 
 #loginBox > span {
+	display: inline-block;
+	margin-top: 5px;
 	color: white;
 	font-size: 14.5px;
 }

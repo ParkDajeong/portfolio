@@ -25,10 +25,6 @@
             font-family: inherit;
         }
 
-        section {
-            margin-top: 0;
-        }
-
         .column-group {
             border: none;
         }
@@ -44,19 +40,6 @@
         section {
             background-color: white;
         }
-
-        section .column {
-            width: 70%;
-            margin: 0 15%;
-        }
-
-        @media only screen and (max-width: 629px) {
-            section .column {
-                float: none;
-                width: 100%;
-                margin: 0;
-            }
-        }
     </style>
 </head>
 <body>
@@ -65,8 +48,7 @@
         <div class="column">
             <div class="column-group group1">
                 <div class="column-header">
-                    <h2>연락처 수정</h2>
-                    <p class="contxt">pPtizen의 대표 프로필과 별명을 수정 하실 수 있습니다.</p>
+                    <h2>회원 정보</h2>
                 </div>
                 <form>
                     <table border="0">
@@ -74,7 +56,7 @@
                         	<tr>
                                 <th scope="row">닉네임</th>
                                 <td>
-                                	<br><span style="color:#555555; font-size: 12px; margin-top: 5px;">변경을 원한다면 입력해주세요.</span><br>
+                                	<br><span class="info">변경을 원한다면 입력해주세요.</span><br>
                                     <input type="text" id="user_nickname" name="user_nickname" value="${userData.nickname}" />
                                     <a id="checkNicknamel" name="checkNicknamel" class="bttn-bordered bttn-sm bttn-primary">조회</a>
                                     <a class="bttn-bordered bttn-sm bttn-primary" id="nickname_change" name="nickname_change">수정</a>
@@ -84,15 +66,15 @@
                             <tr>
                                 <th scope="row">이메일</th>
                                 <td>
-                                    <span style="color:#555555; font-size: 12px; margin-top: 5px;">현재 ${sessionScope.user_nickname} 님의 이메일 주소입니다.</span><br>
-                                    <span style="color:#555555; font-size: 12px; margin-top: 5px;">이메일은 변경할 수 없습니다.</span><br>	
+                                    <span class="info">현재 ${sessionScope.user_nickname} 님의 이메일 주소입니다.</span><br>
+                                    <span class="info">이메일은 변경할 수 없습니다.</span><br>	
                                     <input type="text" id="user_email" name="user_email"  value="${sessionScope.user_email}" readonly/>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">비밀번호 변경</th>
-                                <td style="padding: 20px 15px;">
-                                    <span style="color:#555555; font-size: 12px; margin-top: 5px;">비밀번호 변경을 원한다면 입력해주세요.</span><br>
+                                <td class="pwd_change" style="padding: 20px 15px;">
+                                    <span class="info">비밀번호 변경을 원한다면 입력해주세요.</span><br>
                                     <input type="password" id="current_pwd" name="current_pwd" class="pwd" placeholder="현재 비밀번호를 입력하세요." /><br>
                                     <p class="pwdWarn currentChk" style="color:red">현재 비밀번호와 다릅니다.</p>
                                     <input type="password" id="new_pwd" name="new_pwd" class="pwd" placeholder="새 비밀번호를 입력하세요." /><br>
@@ -106,7 +88,7 @@
                                 <th scope="row">기숙사</th>
                                 <td style="padding-bottom: 25px;">
                                 	<input type="hidden" id="user_house" value="${userData.house}">
-                                	<br><span style="color:#555555; font-size: 12px; margin-top: 5px;">원하는 기숙사를 선택해주세요.</span><br><br>
+                                	<span class="info" style="margin-top: 10px;">원하는 기숙사를 선택해주세요.</span><br><br>
                                 	<label class="radio-img">
                                 		<input type="radio" name="house" value="gryffindor" />
                                 		<img src="/resources/img/Gryffindor.png">
@@ -129,7 +111,7 @@
                             <tr>
                                 <th scope="row">회원 탈퇴</th>
                                 <td style="padding: 20px 15px;">
-                                    <span style="color:#555555; font-size: 12px; margin-top: 5px;">탈퇴를 원하신다면 비밀번호를 입력해주세요.</span><br>
+                                    <span class="info">탈퇴를 원하신다면 비밀번호를 입력해주세요.</span><br>
                                     <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요." />
                                     <a class="bttn-bordered bttn-sm bttn-primary" id="delete_user" name="delete_user">탈퇴하기</a>
                                 </td>
@@ -140,6 +122,7 @@
             </div>
         </div>
     </section>
+    <footer></footer>
 </body>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/resources/js/mypage.js" type="text/javascript"></script>

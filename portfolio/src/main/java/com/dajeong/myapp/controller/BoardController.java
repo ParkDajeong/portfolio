@@ -144,7 +144,6 @@ public class BoardController {
 		
 		Map<String, Object> retVal = new HashMap<String, Object>();
 		int result = boardService.deleteContent(paramMap);
-		
 		if(result > 0) {
 			retVal.put("code", "success");
 		} else {

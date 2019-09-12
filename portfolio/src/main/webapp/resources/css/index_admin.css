@@ -9,41 +9,16 @@ footer {
 }
 
 /****** 반응형 ******/
-@media (max-width:869px) {
+@media (max-width:1199px) {
 	section {
 		width: 95%;
 	}
 	.community {
-		display: none;
+		
 	}
-	.pc_write {
-		display: none !important;
-	}
-	.inputWrap > select {
-		width: 110px;
-	}
-	.inputWrap > input {
-		width: 300px;
-	}
-}
-@media (min-width:870px) and (max-width:899px) {
-	section {
-		width: 95%;
-	}
-	.m-community {
-		display: none;
-	}
-	.inputWrap > select {
-		width: 150px;
-	}
-	.inputWrap > input {
-		width: 500px;
-	}
-}
-
-@media (min-width:900px) and (max-width:1199px) {
-	section {
-		width: 90%;
+	
+	.board-title {
+		width: 38% !important;
 	}
 	.m-community {
 		display: none;
@@ -58,7 +33,7 @@ footer {
 
 @media (min-width:1200px) and (max-width:1599px) {
 	section {
-		width: 80%;
+		width: 90%;
 	}
 	.m-community {
 		display: none;
@@ -111,6 +86,10 @@ input[type=checkbox] {
 .title {
 	cursor: pointer;
 	text-align: left;
+}
+
+.board-title {
+	width: 55%;
 }
 
 /****** 모바일용 ******/

@@ -7,10 +7,14 @@
 	</head>
 	<body>
 		<section>
-			<header></header>
+			<header>
+				<a class="close">
+					<img src="/resources/img/close.png">
+				</a>
+			</header>
 			<div id="loginBox">
 				<div class="banner">
-					<img src="/resources/img/top/hogwarts-3476786_1920.png">
+					<a href="/"><img src="/resources/img/menu/logo3_fix.png"></a>
 				</div>
 				<h1>LOGIN</h1>
 				<div class="wrapper idBox">
@@ -46,6 +50,10 @@
 		$(document).ready(function() {
 			$(".findPwd").click(function() {
 				location.href = "/forgot-password";
+			});
+			
+			$(".close").click(function() {
+				history.go(-1);
 			});
 			
 			$(".wrapper > input").keydown(function(key) {

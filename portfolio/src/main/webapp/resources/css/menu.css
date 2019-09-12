@@ -46,19 +46,21 @@ header {
 	text-align: center;
 }
 
-.bannerWrap > img {
-	width: 15%;
-	/* width: 136px;
-	height: 136px; */
+.bannerWrap > a {
+	display: inline-block;
+	width: 228px;
+	height: auto;
+}
+
+.bannerWrap > a > img {
+	width: 100%;
 }
 
 nav {
-	/* background-color: burlywood; */
 	text-align: center;
 }
 
 .menuWrap ul {
-	/* background-color: aliceblue; */
 	width: 50%;
 	list-style: none;
 	display: inline-block;

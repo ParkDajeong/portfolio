@@ -23,6 +23,10 @@ public interface BoardDao {
 	
 	int deleteContent(Map<String, Object> paramMap);
 	
+	int getContentReply(Map<String, Object> paramMap);
+	
+	int deleteContentReply(Map<String, Object> paramMap);
+	
 	int updateBoardViewCnt(String board_id);
 	
 	int getSearchContentsCnt(Map<String, Object> paramMap);

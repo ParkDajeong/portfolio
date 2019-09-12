@@ -6,7 +6,7 @@
 		<link href="/resources/css/login.css" type="text/css" rel="stylesheet">
 		<style>
 			header {
-				height: 130px;
+				height: 180px;
 			}
 			.submitWrap {
 				margin-top: 15px;
@@ -20,10 +20,14 @@
 	</head>
 	<body>
 		<section>
-			<header></header>
+			<header>
+				<a class="close">
+					<img src="/resources/img/close.png">
+				</a>
+			</header>
 			<div id="loginBox">
 				<div class="banner">
-					<img src="/resources/img/top/hogwarts-3476786_1920.png">
+					<a href="/"><img src="/resources/img/menu/logo3_fix.png"></a>
 				</div>
 				<h1>비밀번호 변경</h1>
 				<div class="info">회원 가입 시, 사용하신 이메일 주소를 입력하시면<br>임시 비밀번호를 보내드립니다.</div>
@@ -45,7 +49,11 @@
 	</body>
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script>
-		$(document).ready(function() {			
+		$(document).ready(function() {
+			$(".close").click(function() {
+				history.go(-1);
+			});
+			
 			$(".continue").click(function() {
 				var email = $("#email").val();
 				var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;

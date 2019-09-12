@@ -1,6 +1,5 @@
 package com.dajeong.myapp.controller;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.dajeong.myapp.dto.User;
 import com.dajeong.myapp.service.UserService;
 
 @Controller

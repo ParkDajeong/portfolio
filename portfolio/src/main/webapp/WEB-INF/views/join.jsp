@@ -7,7 +7,11 @@
 	</head>
 	<body>
 		<section>
-			<header></header>
+			<header>
+				<a class="close">
+					<img src="/resources/img/close.png">
+				</a>
+			</header>
 			<div id="loginBox">
 				<h1>JOIN US</h1>
 				<form name="join" id="joinForm" action="/join/join" method="post">

@@ -1,28 +1,29 @@
 @charset "UTF-8";
 
-/***************************
- *  반응형 CSS
- ***************************/
-@media (max-width:649px) {
+/********* 반응형 *********/
+@media (max-width:799px) {
     .editor_wrapper {
         width: 96%;
+        padding: 30px 35px 50px;
     }
     .btnWrapper {
     	margin-top : 3%;
 		margin-right: 3%;
 	}
 }
-@media (min-width:650px) and (max-width:1469px) {
+@media (min-width:800px) and (max-width:1469px) {
     .editor_wrapper {
-        width: 80%;
+        width: 85%;
+        padding: 30px 50px 50px;
     }
     .btnWrapper {
-		margin-right: 10.5%;
+		margin-right: 7.8%;
 	}
 }
 @media (min-width:1470px) and (max-width:1799px) {
     .editor_wrapper {
         width: 70%;
+        padding: 30px 50px 50px;
     }
     .btnWrapper {
 		margin-right: 15.5%;
@@ -31,13 +32,12 @@
 @media (min-width:1800px) {
     .editor_wrapper {
         width: 65%;
+        padding: 30px 50px 50px;
     }
     .btnWrapper {
 		margin-right: 18%;
 	}
 }
-
-
 
 body {
 	background-color: rgb(244, 244, 244);
@@ -56,8 +56,7 @@ body {
 .editor_wrapper {
 	background-color: white;
 	margin: 0 auto;
-	margin-bottom: 2%;
-	padding: 30px 50px 50px;
+	margin-bottom: 20px;
 	height: auto;
 	box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
 	border-radius: 10px;
@@ -100,8 +99,4 @@ body {
 /********** save 버튼 **********/
 .btnWrapper {
 	text-align: right;
-}
-
-.btn_postSave {
-	display: inline-block;
 }

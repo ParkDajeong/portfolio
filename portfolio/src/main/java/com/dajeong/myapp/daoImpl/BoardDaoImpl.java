@@ -49,6 +49,16 @@ public class BoardDaoImpl implements BoardDao {
 	}
 	
 	@Override
+	public int getContentReply(Map<String, Object> paramMap) {
+		return sqlSession.selectOne("selectBoardContentReply", paramMap);
+	}
+	
+	@Override
+	public int deleteContentReply(Map<String, Object> paramMap) {
+		return sqlSession.delete("deleteBoardContentReply", paramMap);
+	}
+	
+	@Override
 	public int updateBoardViewCnt(String board_id) {
 		return sqlSession.update("updateBoardViewCnt",board_id);
 	}

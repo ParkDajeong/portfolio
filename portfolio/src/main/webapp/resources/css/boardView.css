@@ -4,12 +4,41 @@ body {
 }
 
 section {
-	width: 70%;
-	margin: 50px auto;
+	margin: 70px auto 50px;
 }
 
 #contentWrapper {
 	margin-top: 40px;
+}
+
+/********* 반응형 *********/
+@media (max-width:810px) {
+	section {
+		width: 95%;
+	}
+}
+@media (min-width:810px) and (max-width:899px) {
+	section {
+		width: 95%;
+	}
+}
+
+@media (min-width:900px) and (max-width:1199px) {
+	section {
+		width: 90%;
+	}
+}
+
+@media (min-width:1200px) and (max-width:1599px) {
+	section {
+		width: 80%;
+	}
+}
+
+@media (min-width:1600px) {
+	section {
+		width: 70%;
+	}
 }
 
 /********* 게시글 header *********/

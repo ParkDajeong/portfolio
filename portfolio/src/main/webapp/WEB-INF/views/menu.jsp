@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page session="true" %>
 <head>
-	<link href="/resources/css/top.css" type="text/css" rel="stylesheet">
+	<link href="/resources/css/menu.css" type="text/css" rel="stylesheet">
 </head>
 <header>
 	<div class="loginBar">
@@ -21,15 +21,15 @@
 		</span>
 	</div>
 	<div class="bannerWrap">
-		<img src="/resources/img/top/hogwarts-3476786_1920.png">
+		<a href="/"><img src="/resources/img/menu/logo3.png"></a>
 	</div>
 	<nav>
 		<div class="menuWrap">
 			<ul>
-				<li>
-					<a href="/"><span>커뮤니티</span></a>
-				</li>
 				<c:if test="${sessionScope.user_email == 'sobeast980@gmail.com'}">
+					<li>
+						<a href="/"><span>게시판</span></a>
+					</li>
 					<li>
 						<a href="/admin/user/list"><span>회원 관리</span></a>
 					</li>

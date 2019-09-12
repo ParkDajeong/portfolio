@@ -5,9 +5,15 @@
 <html>
 	<head>
 		<title>포폴 index</title>
-		<link href="/resources/css/index.css" type="text/css" rel="stylesheet">
-		<link href="/resources/css/boardView.css" type="text/css" rel="stylesheet">
 		<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+		<c:choose>
+			<c:when test="${sessionScope.user_email == 'sobeast980@gmail.com'}">
+				<link href="/resources/css/index_admin.css" type="text/css" rel="stylesheet">
+			</c:when>
+			<c:otherwise>
+				<link href="/resources/css/index.css" type="text/css" rel="stylesheet">
+			</c:otherwise>
+		</c:choose>
 		<style>
 			.writeComment {
 				margin: 10px 0;
@@ -29,6 +35,9 @@
 			}
 			.table td {
 				vertical-align: middle;
+			}
+			.m_write {
+				margin: 0;
 			}
 		</style>
 		<script>
@@ -67,7 +76,7 @@
 					<button type="button" class="btn btn-danger delete">삭제</button>
 				</c:if>
 				<c:if test="${sessionScope.user_nickname != null}">
-					<button type="button" class="btn btn-outline-secondary write">글쓰기</button>
+					<button type="button" class="btn btn-outline-secondary write pc_write">글쓰기</button>
 				</c:if>
 				<table class="table table-hover community">
 					<thead>
@@ -76,7 +85,7 @@
 								<th><input type="checkbox" name="allCheck"></th>
 							</c:if>
 							<th>번호</th>
-							<th width="55%">제목</th>
+							<th class="board-title">제목</th>
 							<th>작성자</th>
 							<th>작성일</th>
 							<th>조회</th>
@@ -99,7 +108,7 @@
 									<c:when test="${boardList.type == 1}"><td style="font-weight:bold;">고정</td></c:when>
 									<c:otherwise><td>${boardList.id}</td></c:otherwise>
 								</c:choose>
-								<td class="title" content_id="${boardList.id}" style="cursor: pointer;"><a>${boardList.subject} &#40;${boardList.reply_count}&#41;</a></td>
+								<td class="title" content_id="${boardList.id}"><a>${boardList.subject} &#40;${boardList.reply_count}&#41;</a></td>
 								<td>${boardList.writer_nickname}</td>
 								<td>${boardList.register_datetime}</td>
 								<td>${boardList.read_count}</td>
@@ -116,6 +125,38 @@
 										</c:otherwise>
 									</c:choose>
 								</c:if>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				<!-- 모바일용 -->
+				<table class="table table-hover m-community">
+					<thead>
+						<tr>
+							<th>
+								<span>커뮤니티</span>
+								<c:if test="${sessionScope.user_nickname != null}">
+									<button type="button" class="btn btn-outline-secondary write m_write">글쓰기</button>
+								</c:if>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="boardList" items="${boardList}">
+							<tr>
+								<td class="title m_title" content_id="${boardList.id}">
+									<div class="m_post-head">
+										<span class="m_subject">${boardList.subject}</span>
+										<c:if test="${boardList.reply_count > 0}">
+											<span class="m_replyCnt">${boardList.reply_count}</span>
+										</c:if>
+									</div>
+									<div class="m_post-info">
+										<span class="m_writer">${boardList.writer_nickname}</span>
+										<span class="m_date">${boardList.register_datetime}</span>
+										<span class="m_readCnt">${boardList.read_count}</span>
+									</div>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -154,10 +195,11 @@
 						</select>
 						<input type="text" name="search" id="searchData">
 					</div>
-					<button type="button" id="searchBtn"><img src="/resources/img/search_black.png"></button>
+					<button type="button" id="searchBtn"><img src="/resources/img/search_white.png"></button>
 				</div>
 			</section>
 		</div>
+		<footer></footer>
 	</body>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>

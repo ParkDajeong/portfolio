@@ -146,7 +146,7 @@ $(document).ready(function () {
 		
 		//댓글 수정 취소
 		$(document).on("click", ".cancel", function(){ 
-			var div = $(this).parent().siblings(".commentContent");
+			var div = $(this).parent().parent().siblings(".commentContent");
 			$(this).text("수정");
 			$(this).attr("class","reply_modify r_edit");
 			div.empty();

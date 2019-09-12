@@ -3,11 +3,60 @@ body {
 }
 
 section {
-    float: left;
     width: 92%;
-    margin: 25px 4% 25px 4%;
+    margin: 50px auto 20px;
 	line-height: 1.4;
 }
+
+footer {
+	height: 100px;
+}
+
+section .column {
+	margin: 0 auto;
+}
+
+h2 {
+	padding-left: 10px;
+}
+
+/********* 반응형 *********/
+@media (max-width:899px) {
+	section .column {
+		width: 100%;
+	}
+	.column-group table th {
+		width: 25%;
+	}
+}
+
+@media (min-width:900px) and (max-width:1199px) {
+	section .column {
+		width: 85%;
+	}
+	.column-group table th {
+		width: 22%;
+	}
+}
+
+@media (min-width:1200px) and (max-width:1599px) {
+	section .column {
+		width: 80%;
+	}
+	.column-group table th {
+		width: 20%;
+	}
+}
+
+@media (min-width:1600px) {
+	section .column {
+		width: 70%;
+	}
+	.column-group table th {
+		width: 18%;
+	}
+}
+
 
 .column-group table{
      border-collapse : collapse
@@ -23,7 +72,6 @@ section {
 }
 
 .column-group table th {
-    width: 18%;
     background-color: rgb(241, 241, 241);
     font-weight: bold;
     text-align:center;
@@ -76,7 +124,22 @@ section {
     margin-right: 35px;
 }
 
+.info {
+	display: inline-block;
+	color:#555555;
+	font-size: 13px;
+	margin-top: 5px;
+}
+
 /********* 비밀번호 변경 *********/
+.pwd_change input, #password {
+	margin: 15px 0 !important;
+}
+
+.pwd_change p {
+	margin: 5px 0 !important;
+}
+
 .pwdWarn:not(.newChk) {
 	display: none;
 }

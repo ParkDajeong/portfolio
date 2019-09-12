@@ -7,6 +7,16 @@
 		<link href="/resources/css/boardEdit.css" type="text/css" rel="stylesheet">
 		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 		<link rel="stylesheet" href="/resources/summer_note/summernote.css">
+		<style>
+			#save{
+				font-size: 15px;
+				margin-bottom: 7px;
+				margin-right: 5px;
+				padding: 6px 16px;
+				background-color: #50586d;
+				color: white;
+			}
+		</style>
 	</head>
 	<body>
 		<jsp:include page="menu.jsp"/>
@@ -33,7 +43,7 @@
 						<textarea name="content" id="content">${boardEdit.content}</textarea>
 					</div>
 					<div class="btnWrapper">
-						<button id="save" type="button" class="btn_postSave bttn-jelly bttn-md bttn-primary" name="save">저장</button>
+						<button id="save" type="button" class="btn btn-outline-primary btn_postSave" name="save">저장</button>
 					</div>
 					</div>
 				</form>
@@ -90,9 +100,13 @@
                    	return false;
 				}
 		       	
+		       	var type = $("#type").val();
+		       	if(typeof type == "undefined")
+		       		type = 2;
+		       	
 		       	var objParams = {
 		       		board_id		: $("#board_id").val(),
-		       		type			: $("#type").val(),
+		       		type			: type,
 		       		subject			: $("#subject").val(),
 		       		content			: $("#content").val(),
 		       		writer_email	: $("#writer_email").val(),

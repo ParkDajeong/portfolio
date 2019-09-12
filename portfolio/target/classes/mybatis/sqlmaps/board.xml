@@ -20,7 +20,7 @@
 	
 	<update id="updateBoardContent" parameterType="java.util.HashMap">
 		UPDATE
-			board"C:/Users/SoBea/OneDrive/바탕 화면/bootstrap-4.1.3-dist"
+			board
 		SET
 			subject = #{subject},
 			content = #{content}
@@ -63,14 +63,26 @@
 	</select>
 	
 	<delete id="deleteBoardContent">
-		DELETE
-			b, br
+		DELETE FROM
+			board
+		WHERE
+			id = #{board_id}
+	</delete>
+	
+	<select id="selectBoardContentReply" resultType="int">
+		SELECT
+			count(*)
 		FROM
-			board as b
-		JOIN
-			board_reply as br
-		ON
-			b.id = #{board_id} AND b.id = br.board_id
+			board_reply
+		WHERE
+			board_id = #{board_id}
+	</select>
+	
+	<delete id="deleteBoardContentReply">
+		DELETE FROM
+			board_reply
+		WHERE
+			board_id = #{board_id}
 	</delete>
 	
 	<!-- 조회수 -->

@@ -3,6 +3,15 @@ $(document).ready(function () {
 	$(".join").attr("disabled", true);
 	var nickChk, emailChk, confirmChk, pwChk = false;
 	
+	$(".close").click(function() {
+		var refer =  document.referrer;
+		if(refer == "http://localhost:8888/login"){
+			history.go(-2);
+		} else {
+			history.go(-1);
+		}
+	});
+	
 	/* 닉네임 중복 체크 */
 	$("#nickname").on("propertychange change keyup paste input", function () {
 		var objParam = {
