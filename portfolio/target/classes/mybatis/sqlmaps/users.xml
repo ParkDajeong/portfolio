@@ -129,7 +129,11 @@
 	
 	<select id="selectUserList" resultType="com.dajeong.myapp.dto.User">
 		SELECT
-			*
+			email,
+			nickname,
+			house,
+			date_format(join_datetime, '%Y-%m-%d')as join_datetime,
+			auth_key
 		FROM
 			user
 		ORDER BY
@@ -184,7 +188,11 @@
 	
 	<select id="selectUserSearchEmailList" resultType="com.dajeong.myapp.dto.User">
 		SELECT
-			*
+			email,
+			nickname,
+			house,
+			date_format(join_datetime, '%Y-%m-%d')as join_datetime,
+			auth_key
 		FROM
 			user
 		WHERE
@@ -197,7 +205,11 @@
 	
 	<select id="selectUserSearchNicknameList" resultType="com.dajeong.myapp.dto.User">
 		SELECT
-			*
+			email,
+			nickname,
+			house,
+			date_format(join_datetime, '%Y-%m-%d')as join_datetime,
+			auth_key
 		FROM
 			user
 		WHERE

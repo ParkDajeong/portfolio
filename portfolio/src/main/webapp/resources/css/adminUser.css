@@ -9,20 +9,13 @@ footer {
 }
 
 /****** 반응형 ******/
-@media (max-width:869px) {
+@media (max-width:899px) {
+	html, body {
+		width: 852px;
+		overflow: auto;
+	}
 	section {
-		width: 95%;
-	}
-	.inputWrap > select {
-		width: 110px;
-	}
-	.inputWrap > input {
-		width: 300px;
-	}
-}
-@media (min-width:870px) and (max-width:899px) {
-	section {
-		width: 95%;
+		width: 852px;
 	}
 	.inputWrap > select {
 		width: 150px;
@@ -34,7 +27,7 @@ footer {
 
 @media (min-width:900px) and (max-width:1199px) {
 	section {
-		width: 90%;
+		width: 95%;
 	}
 	.inputWrap > select {
 		width: 150px;
@@ -46,7 +39,7 @@ footer {
 
 @media (min-width:1200px) and (max-width:1599px) {
 	section {
-		width: 80%;
+		width: 90%;
 	}
 	.inputWrap > select {
 		width: 150px;

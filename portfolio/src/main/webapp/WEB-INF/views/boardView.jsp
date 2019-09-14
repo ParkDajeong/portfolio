@@ -49,16 +49,18 @@
 									<div class="MaincommetWrap">
 										<div class="comment-header">
 											<input type="hidden" id="reply_id" name="reply_id" value="${replyView.reply_id}" />
-											<span class="reply_user">${replyView.reply_writer_nickname}</span>
+											<span class="reply_user" data-writer="${replyView.reply_writer_email}">${replyView.reply_writer_nickname}</span>
 											<c:if test="${replyView.reply_writer_email == post_writer && replyView.reply_writer_email != 'sobeast980@gmail.com'}">
 												<span class="post_owner">글쓴이</span>
 											</c:if>
 											<c:if test="${replyView.reply_writer_email == 'sobeast980@gmail.com'}">
-												<script>$(".reply_user").css("color", "#4f5ba7")</script>
+												<script>$("[data-writer='sobeast980@gmail.com']").css("color", "#4f5ba7")</script>
 											</c:if>
 											<span class="reply_date">${replyView.regDate}</span>
 											<span class="replyWriterBtn">
-												<span><a class="reply_comment r_edit">답글</a></span>
+												<c:if test="${sessionScope.user_email != null}">
+													<span><a class="reply_comment r_edit">답글</a></span>
+												</c:if>
 												<c:if test="${sessionScope.user_email == replyView.reply_writer_email || sessionScope.user_email == 'sobeast980@gmail.com'}">
 													<a class="reply_modify r_edit">수정</a>
 													<a class="reply_delete r_edit">삭제</a>
@@ -77,12 +79,12 @@
 									<div class="SubcommetWrap">
 										<div class="comment-header">
 											<input type="hidden" id="reply_id" name="reply_id" value="${replyView.reply_id}" />
-											<span class="reply_user">${replyView.reply_writer_nickname}</span>
+											<span class="reply_user" data-writer="${replyView.reply_writer_email}">${replyView.reply_writer_nickname}</span>
 											<c:if test="${replyView.reply_writer_email == post_writer && replyView.reply_writer_email != 'sobeast980@gmail.com'}">
 												<span class="post_owner">글쓴이</span>
 											</c:if>
 											<c:if test="${replyView.reply_writer_email == 'sobeast980@gmail.com'}">
-												<script>$(".reply_user").css("color", "#4f5ba7")</script>
+												<script>$("[data-writer='sobeast980@gmail.com']").css("color", "#4f5ba7")</script>
 											</c:if>
 											<span class="reply_date">${replyView.regDate}</span>
 											<span class="replyWriterBtn">

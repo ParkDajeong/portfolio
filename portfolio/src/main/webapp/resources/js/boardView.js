@@ -60,23 +60,23 @@ $(document).ready(function () {
 					if(retVal.code == "success") {
 						$(".c_inputBox").val("");
 						$(".content-footer").append(
-								"<div class='replyWrapper'>" + 
+								"<div class='replyWrapper rv"+ retVal.reply_id + "'>" + 
 								"<div class='MaincommetWrap'>" +
 								"<div class='comment-header'>" + 
 								"<input type='hidden' id='reply_id' name='reply_id' value='"+ retVal.reply_id +"' />" +
-								"<span class='reply_user'>" + nickname +"</span>&nbsp;" +
+								"<span class='reply_user rr_user'>" + nickname +"</span>&nbsp;" +
 								"<span class='reply_date'>" + retVal.regDate + "</span>" + 
 								"<span class='replyWriterBtn'>" + 
 								"<span><a class='reply_comment r_edit'>답글 </a></span>" +
 								"<a class='reply_modify r_edit'>수정 </a>" +
-								"<a class='reply_delete r_edit'>삭제</a></span><div>" +
-								"<div class='commentContent'>"+ reply_content +"</div></div>"
+								"<a class='reply_delete r_edit'>삭제</a></span></div>" +
+								"<div class='commentContent'>"+ reply_content +"</div></div></div>"
 							);
 						if(writer == 'sobeast980@gmail.com') {
-							$(".reply_user:last").addClass("reply_admin");
+							$(".rr_user").addClass("reply_admin");
 						} else {
 							if(writer == $(".writer").data("email")) {
-								$(".reply_user:last").after("<span style='margin-left:4.5px;' class='post_owner'>글쓴이</span>");
+								$(".rr_user").after("<span style='margin-left:4.5px;' class='post_owner'>글쓴이</span>");
 							}
 						}
 					} else{
@@ -149,7 +149,7 @@ $(document).ready(function () {
 				success		: function(retVal) {
 					if(retVal.code == "success") {
 						contentDiv.html(reply_content);
-						$(".cancel").text("수정");
+						$(".cancel").text("수정 ");
 						$(".cancel").attr("class","reply_modify r_edit");
 					} else{
 						alert("댓글 수정에 실패하였습니다.");
@@ -236,7 +236,7 @@ $(document).ready(function () {
 								"<div class='commentContent'>"+ reply_content +"</div></div></div>"
 							);
 						if(writer == 'sobeast980@gmail.com') {
-							$(".reply_user:last").addClass("reply_admin");
+							$(".r_user").addClass("reply_admin");
 						} else {
 							if(writer == $(".writer").data("email")) {
 								$(".r_user").after("<span style='margin-left:4.5px;' class='post_owner'>글쓴이</span>");
