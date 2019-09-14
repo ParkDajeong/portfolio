@@ -25,10 +25,6 @@
             font-family: inherit;
         }
 
-        section {
-            margin-top: 0;
-        }
-
         .column-group {
             border: none;
         }
@@ -43,19 +39,6 @@
 
         section {
             background-color: white;
-        }
-
-        section .column {
-            width: 70%;
-            margin: 0 15%;
-        }
-
-        @media only screen and (max-width: 629px) {
-            section .column {
-                float: none;
-                width: 100%;
-                margin: 0;
-            }
         }
         
         #mail_auth {
@@ -81,7 +64,7 @@
                                     <input type="text" id="user_nickname" name="user_nickname" value="${userData.nickname}" />
                                     <a id="checkNicknamel" name="checkNicknamel" class="bttn-bordered bttn-sm bttn-primary">조회</a>
                                     <a class="bttn-bordered bttn-sm bttn-primary" id="nickname_change" name="nickname_change">수정</a>
-                                    <p class="contxt nameResult" style="color:blue">중복 조회는 필수입니다.</p>
+                                    <p class="contxt nameResult" style="color:blue;margin-bottom: 15px;">중복 조회는 필수입니다.</p>
                                 </td>
                             </tr>
                             <tr>
@@ -97,7 +80,7 @@
                                     <span style="color:#555555; font-size: 12px; margin-top: 5px;">비밀번호 변경을 원한다면 입력해주세요.</span><br>
                                     <input type="password" id="new_pwd" name="new_pwd" class="pwd" placeholder="새 비밀번호를 입력하세요." />
                                     <a class="bttn-bordered bttn-sm bttn-primary" id="change_pw" name="change_pwd">변경</a><br>
-                                    <p class="pwdWarn newChk">비밀번호는 영문+숫자 조합의 8자 이상이어야 합니다.</p>
+                                    <p class="pwdWarn newChk" style="margin-bottom:0;">비밀번호는 영문+숫자 조합의 8자 이상이어야 합니다.</p>
                                 </td>
                             </tr>
                             <tr>
@@ -144,6 +127,7 @@
             </div>
         </div>
     </section>
+    <footer></footer>
 </body>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/resources/js/mypage.js" type="text/javascript"></script>

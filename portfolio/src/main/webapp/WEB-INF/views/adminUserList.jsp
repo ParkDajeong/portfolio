@@ -6,7 +6,6 @@
 	<head>
 		<title>포폴 index</title>
 		<link href="/resources/css/adminUser.css" type="text/css" rel="stylesheet">
-		<link href="/resources/css/boardView.css" type="text/css" rel="stylesheet">
 		<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 		<style>
 			.userDel, .userModify {
@@ -119,10 +118,11 @@
 						</select>
 						<input type="text" name="search" id="searchData">
 					</div>
-					<button type="button" id="searchBtn"><img src="/resources/img/search_black.png"></button>
+					<button type="button" id="searchBtn"><img src="/resources/img/search_white.png"></button>
 				</div>
 			</section>
 		</div>
+		<footer></footer>
 	</body>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="/resources/js/bootstrap.min.js"></script>

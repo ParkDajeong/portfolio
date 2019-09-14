@@ -30,11 +30,19 @@ $(document).ready(function () {
 			});
 		});
 		
+		$(".c_inputBox").click(function() {
+			if($("#user_email").val() == "") {
+				alert("로그인 후, 작성 가능합니다.");
+				$(this).blur();
+			}
+		});
+		
 		//댓글 등록
 		$(".insert").click(function() {
 			var writer = $("#user_email").val();
 			var nickname = $("#user_nickname").val();
 			var reply_content = $(".c_inputBox").val();
+			reply_content = reply_content.replace(/(?:\r\n|\r|\n)/g, "<br>");
 			var objParams = {
 					board_id				: $("#board_id").val(),
 					parent_id				: 0,
@@ -56,14 +64,21 @@ $(document).ready(function () {
 								"<div class='MaincommetWrap'>" +
 								"<div class='comment-header'>" + 
 								"<input type='hidden' id='reply_id' name='reply_id' value='"+ retVal.reply_id +"' />" +
-								"<span class='reply_user'>" + nickname +"</span>&nbsp;&nbsp;" +
+								"<span class='reply_user'>" + nickname +"</span>&nbsp;" +
 								"<span class='reply_date'>" + retVal.regDate + "</span>" + 
 								"<span class='replyWriterBtn'>" + 
-								"<span><a style='color: green;' class='reply_comment r_edit'>답글</a></span>" +
-								"<a style='color: red;' class='reply_modify'>수정 </a>" +
-								"<a style='color: blue;' class='reply_delete'>삭제</a></span><div>" +
+								"<span><a class='reply_comment r_edit'>답글 </a></span>" +
+								"<a class='reply_modify r_edit'>수정 </a>" +
+								"<a class='reply_delete r_edit'>삭제</a></span><div>" +
 								"<div class='commentContent'>"+ reply_content +"</div></div>"
 							);
+						if(writer == 'sobeast980@gmail.com') {
+							$(".reply_user:last").addClass("reply_admin");
+						} else {
+							if(writer == $(".writer").data("email")) {
+								$(".reply_user:last").after("<span style='margin-left:4.5px;' class='post_owner'>글쓴이</span>");
+							}
+						}
 					} else{
 						alert(retVal.message);
 					}
@@ -104,7 +119,8 @@ $(document).ready(function () {
 		//댓글 수정
 		$(document).on("click", ".reply_modify", function(){
 			var contentDiv = $(this).parent().parent().siblings(".commentContent");
-			content = contentDiv.text();
+			content = contentDiv.html();
+			content = content.replace(/<br>/g, "\n");
 			$(this).text("취소");
 			$(this).attr("class","cancel r_edit");
 			
@@ -118,6 +134,7 @@ $(document).ready(function () {
 		$(document).on("click", ".reply_modifySave", function(){
 			var contentDiv  = $(this).parent();
 			var reply_content = $(".modifyBox").val();
+			reply_content = reply_content.replace(/(?:\r\n|\r|\n)/g, "<br>");
 			var reply_id = $(this).parent().siblings(".comment-header").find("#reply_id").val();
 			var objParams = {
 					reply_id		: reply_id,
@@ -150,21 +167,32 @@ $(document).ready(function () {
 			$(this).text("수정");
 			$(this).attr("class","reply_modify r_edit");
 			div.empty();
-			div.text(content);
+			content = content.replace(/(?:\r\n|\r|\n)/g, "<br>");
+			div.html(content);
 		});
 		
 		//답글 버튼 클릭
 		$(document).on("click", ".reply_comment", function(){
 			var parent = $(this).parent().parent().parent().parent();
-			parent.find(".commentWrap").remove();
+			parent.siblings(".r_comment_input").remove();
 			parent.after(
-					"<div class='commentWrap'>" +
+					"<div class='commentWrap r_comment_input'>" +
 					"<div class='arrow'><img src='/resources/img/commnet_Arrow.png'></div>&nbsp;" +
 					"<div class='writeComment'>" +
 					"<div class='c_writer'>" + $("#user_nickname").val() + "</div>" + 
 					"<textarea class='c_inputBox' placeholder='내용을 입력해주세요:)' cols='20'></textarea>" +
 					"<input type='button' class='btn btn-outline-secondary commentInsert' value='등록'></div></div>"
 				);
+			$(this).text("취소");
+			$(this).attr("class","r_cancel r_edit");
+		});
+		
+		//답글 등록 취소
+		$(document).on("click", ".r_cancel", function(){ 
+			var parent = $(this).parent().parent().parent().parent().parent();
+			$(this).text("답글");
+			$(this).attr("class","reply_comment r_edit");
+			parent.find(".r_comment_input").remove();
 		});
 		
 		//답글 등록
@@ -172,6 +200,7 @@ $(document).ready(function () {
 			var writer = $("#user_email").val();
 			var nickname = $("#user_nickname").val();
 			var reply_content = $(this).siblings(".c_inputBox").val();
+			reply_content = reply_content.replace(/(?:\r\n|\r|\n)/g, "<br>");
 			var parent_id = $(this).parent().parent().siblings(".MaincommetWrap").find("#reply_id").val();
 			var inputBox = $(this).parent().parent();
 			var parent = $(this).parent().parent().parent();
@@ -199,14 +228,22 @@ $(document).ready(function () {
 								"<div class='SubcommetWrap'>" +
 								"<div class='comment-header'>" + 
 								"<input type='hidden' id='reply_id' name='reply_id' value='"+ retVal.reply_id +"' />" +
-								"<span class='reply_user'>" + nickname +"</span>&nbsp;&nbsp;" +
+								"<span class='reply_user r_user'>" + nickname +"</span>&nbsp;" +
 								"<span class='reply_date'>" + retVal.regDate + "</span>" +
 								"<span class='replyWriterBtn'>" + 
-								"<a style='color: red;' class='reply_modify r_edit'>수정</a>" +
-								"<a style='color: blue;' class='reply_delete r_edit'>삭제</a></span></div>" +
+								"<a class='reply_modify r_edit'>수정 </a>" +
+								"<a class='reply_delete r_edit'>삭제</a></span></div>" +
 								"<div class='commentContent'>"+ reply_content +"</div></div></div>"
 							);
-							
+						if(writer == 'sobeast980@gmail.com') {
+							$(".reply_user:last").addClass("reply_admin");
+						} else {
+							if(writer == $(".writer").data("email")) {
+								$(".r_user").after("<span style='margin-left:4.5px;' class='post_owner'>글쓴이</span>");
+							}
+						}
+						$(".r_cancel").text("답글");
+						$(".r_cancel").attr("class","reply_comment r_edit");
 					} else{
 						alert(retVal.message);
 					}

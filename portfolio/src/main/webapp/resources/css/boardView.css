@@ -52,6 +52,7 @@ section {
 .board-title > h3 {
 	display: inline-block;
 	margin: 0;
+	font-size: 21px !important;
 }
 
 .board-title > span {
@@ -67,6 +68,18 @@ section {
 
 .info {
 	float : right;
+}
+
+.modify, .delete {
+	cursor: pointer;
+}
+
+.modify, .reply_modify, .cancel {
+	color: blue !important;
+}
+
+.delete, .reply_delete {
+	color: red !important;
 }
 
 /********* 게시글 body *********/
@@ -141,6 +154,7 @@ section {
 
 .r_edit {
 	font-size: 16px;
+	cursor: pointer;
 }
 
 .reply_user {
@@ -152,21 +166,21 @@ section {
 	position: relative;
     top: -1.5px;
 	display: inline-block;
-	font-size: 13.5px;
+	font-size: 12.5px;
 	color: #0075c8;
-    margin-left: 8px;
+    /* margin-left: 8px; */
     padding: 1.5px 7px;
 	border: 1px solid #0075c8;
     border-radius: 30px;
-	vertical-align: middle;
+	/* vertical-align: middle; */
     cursor: default;
 	user-select: none;
 }
 
 .reply_date {
-	font-size: 10pt;
+	font-size: 13px;
 	color: gray;
-	vertical-align: middle;
+	padding-left: 4px;
 }
 
 .commentContent {
@@ -183,6 +197,10 @@ section {
 
 .replyWriterBtn {
 	float: right;
+}
+
+.reply_comment, .r_cancel {
+	color: green !important;
 }
 
 .commentWrap {
@@ -208,4 +226,8 @@ section {
 
 .sub {
 	padding-left: 28px;
+}
+
+.reply_admin {
+	color: #4f5ba7;
 }

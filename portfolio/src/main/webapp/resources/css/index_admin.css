@@ -9,14 +9,32 @@ footer {
 }
 
 /****** 반응형 ******/
-@media (max-width:1199px) {
+@media (max-width:899px) {
+	html, body {
+		width: 838px;
+		overflow: auto;
+	}
+	section {
+		width: 838px;
+	}
+	.board-title {
+		width: 38% !important;
+	}
+	.m-community {
+		display: none;
+	}
+	.inputWrap > select {
+		width: 150px;
+	}
+	.inputWrap > input {
+		width: 500px;
+	}
+}
+
+@media (min-width:900px) and (max-width:1199px) {
 	section {
 		width: 95%;
 	}
-	.community {
-		
-	}
-	
 	.board-title {
 		width: 38% !important;
 	}
@@ -67,7 +85,11 @@ footer {
 
 section {
 	margin: auto;
-	margin-top: 70px;
+	margin-top: 30px;
+}
+
+.tableWrap {
+	clear: both;
 }
 
 .community {

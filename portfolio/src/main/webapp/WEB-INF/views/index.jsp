@@ -70,74 +70,73 @@
 	<body>
 		<jsp:include page="menu.jsp"/>
 		<div id="main">
+			<input type="hidden" name="session" value="${sessionScope.user_nickname}">
 			<section>
 				<!-- 게시판 -->
 				<c:if test="${sessionScope.user_email == 'sobeast980@gmail.com'}">
 					<button type="button" class="btn btn-danger delete">삭제</button>
 				</c:if>
-				<c:if test="${sessionScope.user_nickname != null}">
-					<button type="button" class="btn btn-outline-secondary write pc_write">글쓰기</button>
-				</c:if>
-				<table class="table table-hover community">
-					<thead>
-						<tr>
-							<c:if test="${sessionScope.user_email == 'sobeast980@gmail.com'}">
-								<th><input type="checkbox" name="allCheck"></th>
-							</c:if>
-							<th>번호</th>
-							<th class="board-title">제목</th>
-							<th>작성자</th>
-							<th>작성일</th>
-							<th>조회</th>
-							<c:if test="${sessionScope.user_email == 'sobeast980@gmail.com'}">
-								<th>고정글</th>
-							</c:if>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="boardList" items="${boardList}">
-							<c:choose>
-								<c:when test="${boardList.type != 2}"><tr style="background-color: #f9faff;"></c:when>
-								<c:otherwise><tr></c:otherwise>
-							</c:choose>
+				<button type="button" class="btn btn-outline-secondary write pc_write">글쓰기</button>
+				<div class="tableWrap">
+					<table class="table table-hover community">
+						<thead>
+							<tr>
 								<c:if test="${sessionScope.user_email == 'sobeast980@gmail.com'}">
-									<td><input type="checkbox" name="boardChk" class="boardChk" value="${boardList.id}"></td>
+									<th><input type="checkbox" name="allCheck"></th>
 								</c:if>
-								<c:choose>
-									<c:when test="${boardList.type == 0}"><td style="font-weight:bold;">공지</td></c:when>
-									<c:when test="${boardList.type == 1}"><td style="font-weight:bold;">고정</td></c:when>
-									<c:otherwise><td>${boardList.id}</td></c:otherwise>
-								</c:choose>
-								<td class="title" content_id="${boardList.id}"><a>${boardList.subject} &#40;${boardList.reply_count}&#41;</a></td>
-								<td>${boardList.writer_nickname}</td>
-								<td>${boardList.register_datetime}</td>
-								<td>${boardList.read_count}</td>
+								<th>번호</th>
+								<th class="board-title">제목</th>
+								<th>작성자</th>
+								<th>작성일</th>
+								<th>조회</th>
 								<c:if test="${sessionScope.user_email == 'sobeast980@gmail.com'}">
-									<c:choose>
-										<c:when test="${boardList.type == 2}">
-											<td><button type="button" class="btn btn-outline-primary fix" data-type="${boardList.type}">고정</button></td>
-										</c:when>
-										<c:when test="${boardList.type == 1}">
-											<td><button type="button" class="btn btn-primary fix" data-type="${boardList.type}">해제</button></td>
-										</c:when>
-										<c:otherwise>
-											<td></td>
-										</c:otherwise>
-									</c:choose>
+									<th>고정글</th>
 								</c:if>
 							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+						</thead>
+						<tbody>
+							<c:forEach var="boardList" items="${boardList}">
+								<c:choose>
+									<c:when test="${boardList.type != 2}"><tr style="background-color: #f9faff;"></c:when>
+									<c:otherwise><tr></c:otherwise>
+								</c:choose>
+									<c:if test="${sessionScope.user_email == 'sobeast980@gmail.com'}">
+										<td><input type="checkbox" name="boardChk" class="boardChk" value="${boardList.id}"></td>
+									</c:if>
+									<c:choose>
+										<c:when test="${boardList.type == 0}"><td style="font-weight:bold;">공지</td></c:when>
+										<c:when test="${boardList.type == 1}"><td style="font-weight:bold;">고정</td></c:when>
+										<c:otherwise><td>${boardList.id}</td></c:otherwise>
+									</c:choose>
+									<td class="title" content_id="${boardList.id}"><a>${boardList.subject} &#40;${boardList.reply_count}&#41;</a></td>
+									<td>${boardList.writer_nickname}</td>
+									<td>${boardList.register_datetime}</td>
+									<td>${boardList.read_count}</td>
+									<c:if test="${sessionScope.user_email == 'sobeast980@gmail.com'}">
+										<c:choose>
+											<c:when test="${boardList.type == 2}">
+												<td><button type="button" class="btn btn-outline-primary fix" data-type="${boardList.type}">고정</button></td>
+											</c:when>
+											<c:when test="${boardList.type == 1}">
+												<td><button type="button" class="btn btn-primary fix" data-type="${boardList.type}">해제</button></td>
+											</c:when>
+											<c:otherwise>
+												<td></td>
+											</c:otherwise>
+										</c:choose>
+									</c:if>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
 				<!-- 모바일용 -->
 				<table class="table table-hover m-community">
 					<thead>
 						<tr>
 							<th>
 								<span>커뮤니티</span>
-								<c:if test="${sessionScope.user_nickname != null}">
-									<button type="button" class="btn btn-outline-secondary write m_write">글쓰기</button>
-								</c:if>
+								<button type="button" class="btn btn-outline-secondary write m_write">글쓰기</button>
 							</th>
 						</tr>
 					</thead>
@@ -205,9 +204,14 @@
 	<script src="/resources/js/bootstrap.min.js"></script>
 	<script>
 		$(document).ready(function () {
+			var session = $("input[name=session]").val();
 			//글쓰기
 			$(".write").click(function() {
-				$(location).attr("href", "/board/edit");
+				if(session == "") {
+					alert("로그인 후, 작성 가능합니다.");
+				} else {
+					$(location).attr("href", "/board/edit");
+				}
 			});
 			
 			//글 상세보기

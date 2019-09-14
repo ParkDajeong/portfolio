@@ -4,10 +4,72 @@ html, body {
 	margin: 0;
 }
 
-/****** 메인 ******/
+footer {
+	height: 100px;
+}
 
+/****** 반응형 ******/
+@media (max-width:869px) {
+	section {
+		width: 95%;
+	}
+	.inputWrap > select {
+		width: 110px;
+	}
+	.inputWrap > input {
+		width: 300px;
+	}
+}
+@media (min-width:870px) and (max-width:899px) {
+	section {
+		width: 95%;
+	}
+	.inputWrap > select {
+		width: 150px;
+	}
+	.inputWrap > input {
+		width: 500px;
+	}
+}
+
+@media (min-width:900px) and (max-width:1199px) {
+	section {
+		width: 90%;
+	}
+	.inputWrap > select {
+		width: 150px;
+	}
+	.inputWrap > input {
+		width: 500px;
+	}
+}
+
+@media (min-width:1200px) and (max-width:1599px) {
+	section {
+		width: 80%;
+	}
+	.inputWrap > select {
+		width: 150px;
+	}
+	.inputWrap > input {
+		width: 500px;
+	}
+}
+
+@media (min-width:1600px) {
+	section {
+		width: 70%;
+	}
+	.inputWrap > select {
+		width: 150px;
+	}
+	.inputWrap > input {
+		width: 500px;
+	}
+}
+
+/****** 메인 ******/
 section {
-	width: 70%;
 	margin: auto;
 	margin-top: 70px;
 }
@@ -19,17 +81,18 @@ section {
 
 /****** 검색 ******/
 .searchWrap {
-	margin: auto;
-	width: 700px;
+	display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .inputWrap {
 	display: inline-block;
 	vertical-align: middle;
+	margin-right: 5px;
 }
 
 .inputWrap > select {
-	width: 150px;
 	height: 30px;
 	padding: 5px 10px;
     font-size: 13px;
@@ -38,7 +101,6 @@ section {
 }
 
 .inputWrap > input {
-	width: 500px;
 	height: 31px;
     padding: 5px 10px;
     font-size: 14px;
@@ -49,7 +111,7 @@ section {
 
 #searchBtn {
 	background: none;
-	background-color: #fdcfcf;
+	background-color: #4d6082;
 	border: none;
 	cursor: pointer;
 	padding: 8px;

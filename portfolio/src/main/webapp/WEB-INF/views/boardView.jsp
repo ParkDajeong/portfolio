@@ -5,6 +5,7 @@
 <html>
 	<head>
 		<title>포폴</title>
+		<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 		<link href="/resources/css/boardView.css" type="text/css" rel="stylesheet">
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	</head>
@@ -21,13 +22,13 @@
 						<h3>${boardView.subject}</h3>
 						<c:if test="${sessionScope.user_email == boardView.writer_email || sessionScope.user_email == 'sobeast980@gmail.com'}">
 							<span>
-								<a style="color: red;" class="modify">수정</a>
-								<a style="color: blue;" class="delete">삭제</a>
+								<a class="modify">수정</a>
+								<a class="delete">삭제</a>
 							</span>
 						</c:if>
 					</div>
 					<div class="contentInfo">
-						<span class="writer">${boardView.writer_nickname}</span>
+						<span class="writer" data-email="${boardView.writer_email}">${boardView.writer_nickname}</span>
 						<span class="info">${boardView.register_datetime} <span class="view">조회 ${boardView.read_count}</span></span>
 					</div>
 				</div>
@@ -37,13 +38,11 @@
 				<!-- 댓글 -->
 				<div class="content-footer">
 					<span class="commentCnt">Comment <span>${replyCnt}</span>개</span>
-					<c:if test="${sessionScope.user_nickname != null}">
-						<div class="writeComment">
-							<div class="c_writer">${sessionScope.user_nickname}</div>
-							<textarea class="c_inputBox" placeholder="댓글을 달아주세요:)" cols="20"></textarea>
-							<button class="btn btn-outline-secondary insert">등록</button>
-						</div>
-					</c:if>
+					<div class="writeComment">
+						<div class="c_writer">${sessionScope.user_nickname}</div>
+						<textarea class="c_inputBox" placeholder="댓글을 달아주세요:)" cols="20"></textarea>
+						<button class="btn btn-outline-secondary insert">등록</button>
+					</div>
 					<c:forEach var="replyView" items="${replyView}">
 							<c:if test="${replyView.depth == 0}">
 								<div class="replyWrapper rv${replyView.reply_id}">
@@ -57,12 +56,12 @@
 											<c:if test="${replyView.reply_writer_email == 'sobeast980@gmail.com'}">
 												<script>$(".reply_user").css("color", "#4f5ba7")</script>
 											</c:if>
-											&nbsp;&nbsp;<span class="reply_date">${replyView.regDate}</span>
+											<span class="reply_date">${replyView.regDate}</span>
 											<span class="replyWriterBtn">
-												<span><a style="color: green;" class="reply_comment r_edit">답글</a></span>
+												<span><a class="reply_comment r_edit">답글</a></span>
 												<c:if test="${sessionScope.user_email == replyView.reply_writer_email || sessionScope.user_email == 'sobeast980@gmail.com'}">
-													<a style="color: red;" class="reply_modify r_edit">수정</a>
-													<a style="color: blue;" class="reply_delete r_edit">삭제</a>
+													<a class="reply_modify r_edit">수정</a>
+													<a class="reply_delete r_edit">삭제</a>
 												</c:if>
 											</span>
 										</div>
@@ -85,11 +84,11 @@
 											<c:if test="${replyView.reply_writer_email == 'sobeast980@gmail.com'}">
 												<script>$(".reply_user").css("color", "#4f5ba7")</script>
 											</c:if>
-											&nbsp;&nbsp;<span class="reply_date">${replyView.regDate}</span>
+											<span class="reply_date">${replyView.regDate}</span>
 											<span class="replyWriterBtn">
 												<c:if test="${sessionScope.user_email == replyView.reply_writer_email || sessionScope.user_email == 'sobeast980@gmail.com'}">
-													<a style="color: red;" class="reply_modify r_edit">수정</a>
-													<a style="color: blue;" class="reply_delete r_edit">삭제</a>
+													<a class="reply_modify r_edit">수정</a>
+													<a class="reply_delete r_edit">삭제</a>
 												</c:if>
 											</span>
 										</div>
