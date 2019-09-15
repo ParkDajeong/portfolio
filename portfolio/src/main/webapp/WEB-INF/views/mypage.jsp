@@ -6,8 +6,9 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>HAPO-Community</title>
 	<link rel="stylesheet" href="/resources/css/mypage.css">
 	<link rel="stylesheet" href="/resources/css/bttn.css">
     <style>

@@ -40,7 +40,8 @@ public class BoardServiceImpl implements BoardService {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		// 업로드할 폴더 경로
-		String realFolder = request.getSession().getServletContext().getRealPath("\\resources\\upload\\board");
+		String root = request.getSession().getServletContext().getRealPath("/");
+		String realFolder = root + "/../upload/board/";
 		UUID uuid = UUID.randomUUID();
 
 		// 업로드할 파일 이름
@@ -50,7 +51,7 @@ public class BoardServiceImpl implements BoardService {
 		System.out.println("원본 파일명 : " + org_filename);
 		System.out.println("저장할 파일명 : " + filename);
 
-		String filepath = realFolder + "\\" + filename;
+		String filepath = realFolder + filename;
 		System.out.println("파일경로 : " + filepath);
 
 		File f = new File(filepath);
@@ -58,7 +59,7 @@ public class BoardServiceImpl implements BoardService {
 			f.mkdirs();
 		}
 		
-		String fileUrl = "http://localhost:8888/board-upload/" + filename;
+		String fileUrl = "http://won980125.cafe24.com/board-upload/" + filename;
         System.out.println("fileUrl :" + fileUrl);
 		
 		upload.transferTo(f);

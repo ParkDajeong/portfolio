@@ -4,7 +4,10 @@
 <%@ page session="true" %>
 <html>
 	<head>
-		<title>포폴 index</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>HAPO-Community</title>
 		<link href="/resources/css/adminUser.css" type="text/css" rel="stylesheet">
 		<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 		<style>

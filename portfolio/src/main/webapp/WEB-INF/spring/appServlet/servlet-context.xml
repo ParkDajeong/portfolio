@@ -14,7 +14,7 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
-	<resources mapping="/board-upload/**" location="/resources/upload/board/" />
+	<!-- <resources mapping="/board-upload/**" location="/resources/upload/board/" /> -->
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -35,7 +35,7 @@
     	<beans:property name="host" value="smtp.gmail.com"/>
     	<beans:property name="port" value="587" />
     	<beans:property name="username" value="sobeast980@gmail.com" />
-    	<beans:property name="password" value="dnjsejr125*/" />
+    	<beans:property name="password" value="dnjsejr125!@" />
     	<beans:property name="defaultEncoding" value="UTF-8" />
     	<beans:property name="javaMailProperties">
     		<beans:props>
