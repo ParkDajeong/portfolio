@@ -16,6 +16,10 @@ public interface BoardDao {
 	int modifyContent(Map<String, Object> paramMap);
 	
 	int getAllContentCnt();
+	
+	int getBoardNoticeCnt();
+	
+	List<Board> getBoardNoticeList();
 
 	List<Board> getContentList(Pagination pagination);
 

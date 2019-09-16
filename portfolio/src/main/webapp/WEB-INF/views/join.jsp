@@ -6,8 +6,10 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>HAPO-Community</title>
+		<title>HAPO Community</title>
+		<link rel="icon" sizes="16x16" href="/resources/img/lightning.ico">
 		<link href="/resources/css/join.css" type="text/css" rel="stylesheet">
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css">
 	</head>
 	<body>
 		<section>

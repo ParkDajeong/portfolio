@@ -23,7 +23,7 @@ function next(page, pageRange, pageRangeSize) {
 	location.href = "/?page=" + page + "&pageRange=" + pageRange;
 }
 
-$(document).ready(function () {
+$(document).ready(function () {	
 	var session = $("input[name=session]").val();
 	//글쓰기
 	$(".write").click(function() {
@@ -38,6 +38,11 @@ $(document).ready(function () {
 	$(".title").click(function() {
 		var id = $(this).attr("content_id");
 		location.href = "/board/view?board_id=" + id;
+	});
+	
+	$(".page-link").click(function() {
+		$(".page-link").parent().removeClass("active");
+		$(this).parent().addClass("active");	
 	});
 	
 	//검색 엔터 이벤트

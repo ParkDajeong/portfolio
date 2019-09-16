@@ -23,7 +23,7 @@ public interface BoardService {
 	int getAllContentCnt();
 	
 	//게시글 목록
-	List<Board> getContnetList(Pagination pagination);
+	List<Board> getContentList(Pagination pagination);
 
 	//게시글 상세보기
 	Board getContent(String board_id);

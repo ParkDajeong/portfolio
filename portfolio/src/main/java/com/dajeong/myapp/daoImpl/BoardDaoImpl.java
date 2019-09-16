@@ -32,6 +32,16 @@ public class BoardDaoImpl implements BoardDao {
 	public int getAllContentCnt() {
 		return sqlSession.selectOne("selectBoardContentCnt");
 	}
+	
+	@Override
+	public int getBoardNoticeCnt() {
+		return sqlSession.selectOne("selectBoardNoticeCnt");
+	}
+	
+	@Override
+	public List<Board> getBoardNoticeList() {
+		return sqlSession.selectList("selectBoardNoticeList");
+	}
 
 	@Override
 	public List<Board> getContentList(Pagination pagination) {

@@ -35,12 +35,47 @@
 			board
 	</select>
 	
+	<select id="selectBoardNoticeCnt" resultType="int">
+		SELECT
+			count(id) as upCnt
+		FROM
+			board
+		WHERE
+			type &lt; 2
+	</select>
+	
+	<select id="selectBoardNoticeList" resultType="com.dajeong.myapp.dto.Board">
+		SELECT
+			b.*,
+			count(br.board_id) as reply_count
+		FROM(
+			SELECT
+				*
+			FROM
+				board
+			WHERE
+				type &lt; 2) as b
+		LEFT JOIN
+			board_reply as br
+		on
+			b.id = br.board_id
+		GROUP BY
+			b.id
+		ORDER BY
+			type, register_datetime desc
+	</select>
+	
 	<select id="selectBoardContentList" resultType="com.dajeong.myapp.dto.Board">
 		SELECT
 			b.*,
 			count(br.board_id) as reply_count
-		FROM
-			board as b
+		FROM(
+			SELECT
+				*
+			FROM
+				board
+			WHERE
+				type = 2) as b
 		LEFT JOIN
 			board_reply as br
 		ON
@@ -48,7 +83,7 @@
 		GROUP BY
 			b.id
 		ORDER BY
-			type, register_datetime desc
+			register_datetime desc
 		LIMIT
 			#{startContent}, #{contentViewCnt}
 	</select>

@@ -47,12 +47,7 @@ public class BoardServiceImpl implements BoardService {
 		// 업로드할 파일 이름
 		String org_filename = upload.getOriginalFilename();
 		String filename = uuid.toString() + org_filename;
-
-		System.out.println("원본 파일명 : " + org_filename);
-		System.out.println("저장할 파일명 : " + filename);
-
 		String filepath = realFolder + filename;
-		System.out.println("파일경로 : " + filepath);
 
 		File f = new File(filepath);
 		if (!f.exists()) {
@@ -60,7 +55,6 @@ public class BoardServiceImpl implements BoardService {
 		}
 		
 		String fileUrl = "http://won980125.cafe24.com/board-upload/" + filename;
-        System.out.println("fileUrl :" + fileUrl);
 		
 		upload.transferTo(f);
 		out.println(fileUrl);
@@ -73,8 +67,18 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<Board> getContnetList(Pagination pagination) {
-		return boardDao.getContentList(pagination);
+	public List<Board> getContentList(Pagination pagination) {
+		int upCnt = boardDao.getBoardNoticeCnt();
+		List<Board> newBoardList = boardDao.getBoardNoticeList();
+		
+		pagination.setContentViewCnt(pagination.getContentViewCnt() - upCnt);
+		if(pagination.getStartContent() != 0) {
+			pagination.setStartContent(pagination.getStartContent() - upCnt);
+		}
+		
+		newBoardList.addAll(boardDao.getContentList(pagination));
+		
+		return newBoardList;
 	}
 
 	@Override

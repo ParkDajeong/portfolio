@@ -7,7 +7,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>HAPO-Community</title>
+		<title>HAPO Community</title>
+		<link rel="icon" sizes="16x16" href="/resources/img/lightning.ico">
 		<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 		<link href="/resources/css/boardView.css" type="text/css" rel="stylesheet">
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>

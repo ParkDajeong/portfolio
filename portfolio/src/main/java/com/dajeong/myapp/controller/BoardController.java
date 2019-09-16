@@ -44,7 +44,7 @@ public class BoardController {
 		pagination.pageInfo(contentCnt, page, pageRange);
 		
 		model.addAttribute("pagination", pagination);
-		model.addAttribute("boardList", boardService.getContnetList(pagination));
+		model.addAttribute("boardList", boardService.getContentList(pagination));
 		
 		return "index";
 	}

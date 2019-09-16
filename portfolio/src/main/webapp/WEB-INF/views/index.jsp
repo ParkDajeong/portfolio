@@ -7,7 +7,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>HAPO-Community</title>
+		<title>HAPO Community</title>
+		<link rel="icon" sizes="16x16" href="/resources/img/lightning.ico">
 		<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 		<c:choose>
 			<c:when test="${sessionScope.user_email == 'sobeast980@gmail.com'}">
@@ -41,6 +42,13 @@
 			}
 			.m_write {
 				margin: 0;
+			}
+			.page-link {
+				color: #4d6082;
+			}
+			.page-item.active .page-link {
+			    background-color: #4d6082;
+			    border-color: #565f88;
 			}
 		</style>
 	</head>
@@ -169,7 +177,9 @@
 						    </li>
 						</c:if>
 					    <c:forEach var="index" begin="${pagination.startPage}" end="${pagination.endPage}">
-					    	<li class="page-item" ><a class="page-link" href="#" onClick="movePage('${index}', '${pagination.pageRange}')">${index}</a></li>
+					    	<li class="page-item <c:out value="${pagination.page == index ? 'active' : ''}"/> ">
+					    		<a class="page-link" href="#" onClick="movePage('${index}', '${pagination.pageRange}')">${index}</a>
+					    	</li>
 					    </c:forEach>
 					    <c:if test="${pagination.next}">
 					    	<li class="page-item">
