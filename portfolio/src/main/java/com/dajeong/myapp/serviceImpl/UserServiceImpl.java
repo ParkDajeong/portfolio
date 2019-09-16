@@ -100,7 +100,9 @@ public class UserServiceImpl implements UserService {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
-		out.println("if(document.referrer == 'http://localhost:8888/mypage'){");
+		out.println("if(document.referrer == 'http://localhost:8888/mypage' && "
+				+ "document.referrer == 'http://localhost:8888/board/edit' && "
+				+ "document.referrer.indexOf('admin') != -1){");
 		out.println("location.href = '/';} else {");
 		out.println("location.href = document.referrer;}");
 		out.println("</script>");

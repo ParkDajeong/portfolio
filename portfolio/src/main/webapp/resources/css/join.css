@@ -16,8 +16,16 @@ header {
 }
 
 footer {
-	height: 100px;
+	height: 140px;
 }
+
+/********* 반응형 *********/
+@media (max-width: 500px) {
+	header, footer {
+		height: 110px;
+	}
+}
+
 
 .close {
 	display: inline-block;
@@ -119,8 +127,40 @@ footer {
 
 .join {
 	width: 100%;
-	background-color: #cec094;
+	background-color: #f3e1a8;
 	padding: 14px 31px;
 	border-radius: 30px;
 	font-weight: bold;
-}	
+	display: inline-block;
+    position: relative;
+}
+
+.join:focus, .circle:focus {
+	outline: none;
+}
+
+.color-change {
+	color: #f3e1a8;
+}
+
+.display-none {
+	display: none;
+}
+
+.circle {
+	width: 23px;
+	height: 23px;
+	border: 5px solid rgba(255,255,255,.3);
+	border-radius: 50%;
+	border-top-color: #43435d;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%) rotate(0deg);
+	animation: spin 1s infinite;
+}
+@keyframes spin {
+	100% { 
+		transform: translate(-50%, -50%) rotate(360deg); 
+	}
+}

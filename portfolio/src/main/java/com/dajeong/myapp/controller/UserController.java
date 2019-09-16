@@ -137,9 +137,11 @@ public class UserController {
 	}
 	
 	//회원가입
+	@ResponseBody
 	@RequestMapping(value = "/join/join", method = RequestMethod.POST)
-	public String userJoin(@RequestParam Map<String, Object> paramMap, Model model, HttpServletRequest request) {
-		
+	public Object userJoin(@RequestParam Map<String, Object> paramMap, Model model, HttpServletRequest request) {
+
+		Map<String, Object> retVal = new HashMap<String, Object>();
 		String auth_key = RandomStringUtils.randomAlphanumeric(12);
 		paramMap.put("auth_key", auth_key);
 		String email = paramMap.get("email").toString();
@@ -151,13 +153,15 @@ public class UserController {
 				"<a href='http://won980125.cafe24.com/mail/auth?email=" + email + "&auth_key=" + auth_key + "'>메일인증</a></div>";
 		
 		int result = userService.setUser(paramMap);
-		userService.sendMailAuthKey(paramMap, subject, content);
 		
 		if(result > 0) {
-			return "redirect:/login";
+			userService.sendMailAuthKey(paramMap, subject, content);
+			retVal.put("result", "success");
 		} else {
-			return "redirect:/join";
+			retVal.put("result", "fail");
 		}
+		
+		return retVal;
 	}
 	
 	//메일 인증

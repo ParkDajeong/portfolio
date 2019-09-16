@@ -146,4 +146,37 @@ $(document).ready(function () {
 			$(".join").attr("disabled", true);
 		}
 	});
+	
+	$(".join").click(function() {
+		var objParam = {
+				nickname 		: $("#nickname").val(),
+				email			: $("#email").val(),
+				confirmEmail	: $("#confirmEmail").val(),
+				password		: $("#password").val()
+		}
+		
+		 $.ajax({
+			 url		: "/join/join",
+			 datatype	: "json",
+			 data		: objParam,
+			 type		: "POST",
+			 beforeSend	: function() {
+				 $(".join > span").attr("class", "color-change");
+				 $(".circle").removeClass("display-none");
+			 },
+			 success	: function(retVal) {
+				 if(retVal.result == "success") {
+					 alert("인증 메일이 발송되었습니다. 메일함을 확인해 주세요.");
+					 location.href = "/login";
+				 } else {
+					 alert("가입에 실패하였습니다. 조금 뒤, 다시 시도해주세요.");
+				 }
+				 $(".circle").addClass("display-none");
+				 $(".join > span").removeClass("color-change");
+			 },
+			 error		: function(request, status, error){
+				 console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+			 }
+		 });
+	});
 });

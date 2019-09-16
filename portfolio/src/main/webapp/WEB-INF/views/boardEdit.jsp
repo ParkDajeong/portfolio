@@ -61,7 +61,27 @@
 	<script>
 		$(document).ready(function () {
 			$("#content").summernote({
+				placeholder: "내용을 입력해주세요:)",
 				height: 500,
+				lang: 'ko-KR',
+				toolbar: [
+					['style', ['bold', 'italic', 'underline']],
+					['font', ['strikethrough']],
+					['fontsize', ['fontsize']],
+					['color', ['color']],
+					['para', ['ul', 'ol', 'paragraph']],
+					['height', ['height']],
+					['Insert', ['picture']],
+					['Insert', ['link']],
+					['Misc', ['fullscreen']]
+				],
+				popover: {
+					image: [
+						['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+					    ['float', ['floatLeft', 'floatRight', 'floatNone']],
+					    ['remove', ['removeMedia']]
+					]
+				},
 				minHeight: null,
 				maxHeight: null,
 				callbacks: {

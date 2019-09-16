@@ -8,6 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>HAPO-Community</title>
 	<link href="/resources/css/menu.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css">
 </head>
 <header>
 	<div class="loginBar">

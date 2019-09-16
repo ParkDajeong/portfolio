@@ -73,10 +73,10 @@ $(document).ready(function () {
 								"<div class='commentContent'>"+ reply_content +"</div></div></div>"
 							);
 						if(writer == 'sobeast980@gmail.com') {
-							$(".rr_user").addClass("reply_admin");
+							$(".rr_user:last").addClass("reply_admin");
 						} else {
 							if(writer == $(".writer").data("email")) {
-								$(".rr_user").after("<span style='margin-left:4.5px;' class='post_owner'>글쓴이</span>");
+								$(".rr_user:last").after("<span style='margin-left:4.5px;' class='post_owner'>글쓴이</span>");
 							}
 						}
 					} else{
@@ -236,10 +236,10 @@ $(document).ready(function () {
 								"<div class='commentContent'>"+ reply_content +"</div></div></div>"
 							);
 						if(writer == 'sobeast980@gmail.com') {
-							$(".r_user").addClass("reply_admin");
+							$(".r_user:last").addClass("reply_admin");
 						} else {
 							if(writer == $(".writer").data("email")) {
-								$(".r_user").after("<span style='margin-left:4.5px;' class='post_owner'>글쓴이</span>");
+								$(".r_user:last").after("<span style='margin-left:4.5px;' class='post_owner'>글쓴이</span>");
 							}
 						}
 						$(".r_cancel").text("답글");

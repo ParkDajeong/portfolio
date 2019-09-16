@@ -16,7 +16,14 @@ header {
 }
 
 footer {
-	height: 100px;
+	height: 140px;
+}
+
+/********* 반응형 *********/
+@media (max-width: 500px) {
+	header, footer {
+		height: 100px;
+	}
 }
 
 .close {
@@ -116,10 +123,13 @@ footer {
 
 .continue {
 	width: 98%;
-	background-color: #decfa1;
+	background-color: #f3e1a8;
 	padding: 16px 31px;
 	border-radius: 30px;
 	font-weight: bold;
+}
+.continue:focus {
+	outline: none;
 }
 
 #loginBox > span {

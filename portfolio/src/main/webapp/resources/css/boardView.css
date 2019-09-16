@@ -52,7 +52,9 @@ section {
 .board-title > h3 {
 	display: inline-block;
 	margin: 0;
+	padding-left: 5px;
 	font-size: 21px !important;
+	font-weight: bold;
 }
 
 .board-title > span {
@@ -180,13 +182,12 @@ section {
 .reply_date {
 	font-size: 13px;
 	color: gray;
-	padding-left: 4px;
 }
 
 .commentContent {
 	display: block;
 	clear: both;
-	padding: 5px 3px;
+	padding: 5px 3px 8px;
 }
 
 .commentContent:after {

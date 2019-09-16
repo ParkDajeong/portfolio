@@ -64,27 +64,36 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="userList" items="${userList}" varStatus="status">
-							<tr>
-								<td>${(allUserCnt - status.index) - ((pagination.page - 1) * 10)}</td>
-								<c:choose>
-									<c:when test="${userList.auth_key != 'Y'}">
-										<td style="color:red;">미완료</td>
-									</c:when>
-									<c:otherwise>
-										<td>완료</td>
-									</c:otherwise>
-								</c:choose>
-								<td>${userList.email}</td>
-								<td>${userList.nickname}</td>
-								<td>${userList.house}</td>
-								<td>${userList.join_datetime}</td>
-								<td data-email = "${userList.email}">
-									<button type="button" class="btn btn-outline-secondary userModify">수정</button>
-									<button type="button" class="btn btn-outline-danger userDel">탈퇴</button>
-								</td>
-							</tr>
-						</c:forEach>
+						<c:choose>
+							<c:when test="${fn:length(userList) == 0}">
+								<tr>
+									<td colspan = 7>조회 결과가 없습니다.</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="userList" items="${userList}" varStatus="status">
+									<tr>
+										<td>${(allUserCnt - status.index) - ((pagination.page - 1) * 10)}</td>
+										<c:choose>
+											<c:when test="${userList.auth_key != 'Y'}">
+												<td style="color:red;">미완료</td>
+											</c:when>
+											<c:otherwise>
+												<td>완료</td>
+											</c:otherwise>
+										</c:choose>
+										<td>${userList.email}</td>
+										<td>${userList.nickname}</td>
+										<td>${userList.house}</td>
+										<td>${userList.join_datetime}</td>
+										<td data-email = "${userList.email}">
+											<button type="button" class="btn btn-outline-secondary userModify">수정</button>
+											<button type="button" class="btn btn-outline-danger userDel">탈퇴</button>
+										</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 					</tbody>
 				</table>
 				<br>

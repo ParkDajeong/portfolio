@@ -18,7 +18,7 @@
 			</header>
 			<div id="loginBox">
 				<h1>JOIN US</h1>
-				<form name="join" id="joinForm" action="/join/join" method="post">
+				<div id="joinForm">
 					<div class="wrapper nicknameBox">
 						<span>닉네임</span>
 						<input type="text" name="nickname" id="nickname">
@@ -43,9 +43,9 @@
 						<img class="mixChk" src="/resources/img/check.png" width="16px"><span class="must mixNumAlphabet">숫자와 영문자 혼용</span>
 					</div>
 					<div class="submitWrap">
-						<button class="btns join">JOIN</button>
+						<button class="btns join"><span>JOIN</span><div class="circle display-none"></div></button>
 					</div>
-				</form>
+				</div>
 			</div>
 		</section>
 		<footer></footer>

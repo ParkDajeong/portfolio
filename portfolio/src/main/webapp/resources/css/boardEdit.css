@@ -4,7 +4,10 @@
 @media (max-width:799px) {
     .editor_wrapper {
         width: 96%;
-        padding: 30px 35px 50px;
+        padding: 30px 25px 50px;
+    }
+    .note-editable {
+    	height: 400px !important;
     }
     .btnWrapper {
     	margin-top : 3%;

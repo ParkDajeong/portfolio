@@ -63,8 +63,8 @@
                                 <th scope="row">닉네임</th>
                                 <td>
                                     <input type="text" id="user_nickname" name="user_nickname" value="${userData.nickname}" />
-                                    <a id="checkNicknamel" name="checkNicknamel" class="bttn-bordered bttn-sm bttn-primary">조회</a>
-                                    <a class="bttn-bordered bttn-sm bttn-primary" id="nickname_change" name="nickname_change">수정</a>
+                                    <button type="button" id="checkNicknamel" name="checkNicknamel" class="bttn-bordered bttn-sm bttn-primary">조회</button>
+                                    <button type="button" class="bttn-bordered bttn-sm bttn-primary" id="nickname_change" name="nickname_change">수정</button>
                                     <p class="contxt nameResult" style="color:blue;margin-bottom: 15px;">중복 조회는 필수입니다.</p>
                                 </td>
                             </tr>
@@ -80,7 +80,7 @@
                                 <td style="padding: 20px 15px;">
                                     <span style="color:#555555; font-size: 12px; margin-top: 5px;">비밀번호 변경을 원한다면 입력해주세요.</span><br>
                                     <input type="password" id="new_pwd" name="new_pwd" class="pwd" placeholder="새 비밀번호를 입력하세요." />
-                                    <a class="bttn-bordered bttn-sm bttn-primary" id="change_pw" name="change_pwd">변경</a><br>
+                                    <button type="button" class="bttn-bordered bttn-sm bttn-primary" id="change_pw" name="change_pwd">변경</button><br>
                                     <p class="pwdWarn newChk" style="margin-bottom:0;">비밀번호는 영문+숫자 조합의 8자 이상이어야 합니다.</p>
                                 </td>
                             </tr>
@@ -105,7 +105,7 @@
                                 		<input type="radio" name="house" value="hufflepuff" />
                                 		<img src="/resources/img/Hufflepuff.png">
                                 	</label>
-                                	<a class="bttn-bordered bttn-sm bttn-primary" id="choice_house" name="choice_house">등록</a>
+                                	<button type="button" class="bttn-bordered bttn-sm bttn-primary" id="choice_house" name="choice_house">등록</button>
                                 </td>
                             </tr>
                             <tr>
@@ -117,7 +117,7 @@
 										</c:when>
 										<c:otherwise>
 											<span style="color:#555555; font-size: 12px; margin-top: 5px;">현재 회원의 메일 인증 상태는 <b style="color:red;">인증 미완료</b> 입니다.</span><br>
-											<a class="bttn-bordered bttn-sm bttn-primary" id="mail_auth" name="mail_auth">인증 하기</a>
+											<button type="button" class="bttn-bordered bttn-sm bttn-primary" id="mail_auth" name="mail_auth">인증 하기</button>
 										</c:otherwise>
 									</c:choose>
                                 </td>

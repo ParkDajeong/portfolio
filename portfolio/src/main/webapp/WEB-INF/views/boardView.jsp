@@ -59,7 +59,6 @@
 											<c:if test="${replyView.reply_writer_email == 'sobeast980@gmail.com'}">
 												<script>$("[data-writer='sobeast980@gmail.com']").css("color", "#4f5ba7")</script>
 											</c:if>
-											<span class="reply_date">${replyView.regDate}</span>
 											<span class="replyWriterBtn">
 												<c:if test="${sessionScope.user_email != null}">
 													<span><a class="reply_comment r_edit">답글</a></span>
@@ -71,6 +70,7 @@
 											</span>
 										</div>
 										<div class="commentContent">${replyView.reply_content}</div>
+										<span class="reply_date">${replyView.regDate}</span>
 									</div>
 								</div>
 							</c:if>
@@ -89,7 +89,6 @@
 											<c:if test="${replyView.reply_writer_email == 'sobeast980@gmail.com'}">
 												<script>$("[data-writer='sobeast980@gmail.com']").css("color", "#4f5ba7")</script>
 											</c:if>
-											<span class="reply_date">${replyView.regDate}</span>
 											<span class="replyWriterBtn">
 												<c:if test="${sessionScope.user_email == replyView.reply_writer_email || sessionScope.user_email == 'sobeast980@gmail.com'}">
 													<a class="reply_modify r_edit">수정</a>
@@ -98,6 +97,7 @@
 											</span>
 										</div>
 										<div class="commentContent">${replyView.reply_content}</div>
+										<span class="reply_date">${replyView.regDate}</span>
 									</div>
 									<script>$(".rv" + ${replyView.parent_id}).append($(".commentWrap:last"));</script>
 								</div>

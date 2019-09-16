@@ -16,6 +16,10 @@
 	text-shadow: none;
 }
 
+body {
+	font-family: "Nanum Barun Gothic";
+}
+
 /****** 헤더 부분 ******/
 header {
 	background-color: #202020;
@@ -87,7 +91,7 @@ nav {
 
 .menuWrap span {
 	display: inline-block;
-	width: 100px;
+	width: 66px;
 	height: 60px;
 	line-height: 60px;
 }

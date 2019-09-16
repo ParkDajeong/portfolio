@@ -20,6 +20,12 @@
 				color: white;
 				font-size: 16px;
 			}
+			/********* 반응형 *********/
+			@media (max-width: 500px) {
+				header, footer {
+					height: 110px;
+				}
+			}
 		</style>
 	</head>
 	<body>
