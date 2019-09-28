@@ -25,7 +25,7 @@
 				<h1>LOGIN</h1>
 				<div class="wrapper idBox">
 					<span>이메일 주소</span>
-					<input type="text" name="email" id="email">
+					<input type="text" name="email" id="email" value="${rememberId}">
 				</div>
 				<div class="wrapper pwBox">
 					<span>비밀번호</span>
@@ -36,6 +36,10 @@
 						이메일 또는 비밀번호를 다시 확인하세요.<br>
 						등록되지 않았거나, 이메일 또는 비밀번호를 잘못 입력하셨습니다.
 					</span>
+				</div>
+				<div class="optionBox">
+					<label for="rememberId"><input type="checkbox" id="rememberId" name="rememberId" value="rememberId">이메일 기억하기</label>
+					<label for="saveIdPw"><input type="checkbox" id="saveIdPw" name="saveIdPw" value="saveIdPw">자동 로그인</label>
 				</div>
 				<div class="findBtnWrap">
 					<button class="btns findPwd">비밀번호를 잊으셨나요?</button>
@@ -52,6 +56,7 @@
 		</section>
 	</body>
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 	<script>
 		$(document).ready(function() {
 			$(".findPwd").click(function() {
@@ -73,10 +78,32 @@
                 }
             });
 			
+			if($.cookie("rememberId") != null) {
+				$("#rememberId").prop("checked", true);
+			}
+			
+			$("#saveIdPw").change(function() {
+				if($("#saveIdPw").is(":checked")) {
+					$("#rememberId").prop("checked", true);
+					$("#rememberId").prop("disabled", true);
+				} else {
+					$("#rememberId").prop("checked", false);
+					$("#rememberId").prop("disabled", false);
+				}
+			});
 			$(".continue").click(function() {
 				var email = $("#email").val();
 				var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-
+				
+				//이메일 기억하기
+				if($("#rememberId").is(":checked")) {
+					$.cookie("rememberId", email, { expires: 30 });
+				}
+				
+				if($("#saveIdPw").is(":checked")) {
+					$.cookie("rememberId", email, { expires: 30 });
+				}
+				
 				if (regExp.test(email)) {
 					$(".error").css("display", "none");
 				

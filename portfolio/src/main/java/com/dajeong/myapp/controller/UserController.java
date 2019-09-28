@@ -3,6 +3,7 @@ package com.dajeong.myapp.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -26,15 +27,23 @@ public class UserController {
 	
 	//로그인 페이지
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String moveLogin() {
+	public String moveLogin(HttpServletRequest request, Model model) {
 		
+		Cookie[] cookies = request.getCookies();
+		
+		if(cookies != null && cookies.length > 0) {
+			for (int i=0; i < cookies.length; i++) {
+				if(cookies[i].getName().equals("rememberId"))
+					model.addAttribute("rememberId", cookies[i].getValue().replace("%40", "@"));
+			}
+		}
 		return "login";
 	}
 	
 	//로그인
 	@ResponseBody
 	@RequestMapping(value = "/login/login", method = RequestMethod.POST)
-	public Object userLogin(@RequestParam Map<String, Object> paramMap, HttpServletRequest request, Model model) {
+	public Object userLogin(@RequestParam Map<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response, Model model) {
 
 		Map <String, Object> retVal = new HashMap<String, Object>();
 		int result = userService.checkUser(paramMap);
@@ -167,6 +176,8 @@ public class UserController {
 	//메일 인증
 	@RequestMapping(value="/mail/auth", method = RequestMethod.GET)
 	public void mailAuth(@RequestParam Map<String, Object> paramMap, Model model, HttpServletResponse response) throws Exception {
+		
+		System.out.println(paramMap.get("email") + " : " + paramMap.get("auth_key"));
 		
 		userService.updateUserAuthKey(paramMap, response);
 		

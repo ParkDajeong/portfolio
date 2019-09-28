@@ -101,6 +101,28 @@ footer {
 	line-height: 1.4;
 }
 
+.optionBox {
+	color: white;
+	font-size: 16px;
+	text-align: left;
+	padding-left: 10px;
+	margin: 8px;
+	padding-bottom: 5px;
+}
+
+.optionBox > label {
+	margin-right: 8px;
+}
+
+.optionBox input {
+	vertical-align: -2px;
+	-ms-transform: scale(1.2); /* IE */
+	-moz-transform: scale(1.2); /* FF */
+	-webkit-transform: scale(1.2); /* Safari and Chrome */
+	-o-transform: scale(1.2); /* Opera */
+	margin-right: 7px;
+}
+
 .findBtnWrap {
     padding: 15px 0 10px;
 }
