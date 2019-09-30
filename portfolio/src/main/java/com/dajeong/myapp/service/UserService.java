@@ -1,8 +1,8 @@
 package com.dajeong.myapp.service;
 
+import java.util.Date;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dajeong.myapp.dto.User;
@@ -19,6 +19,12 @@ public interface UserService {
 	
 	//로그인
 	int checkUser(Map<String, Object> paramMap);
+	
+	//자동 로그인 설정
+	void updateSessionKey(String sessionKey, Date sessionLimit, String email);
+	
+	//자동 로그인 기한 확인
+	User checkSessionLimit(String sessionKey);
 	
 	//유저 데이터 가져오기
 	User getUserData(String email);

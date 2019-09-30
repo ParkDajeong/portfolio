@@ -25,7 +25,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.dajeong.myapp.dto.Pagination;
 import com.dajeong.myapp.dto.Reply;
+import com.dajeong.myapp.dto.User;
 import com.dajeong.myapp.service.BoardService;
+import com.dajeong.myapp.service.UserService;
 
 @Controller
 public class BoardController {
@@ -33,12 +35,34 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
+	@Autowired
+	UserService userService;
+	
 	//게시글 목록
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(@RequestParam(required = false, defaultValue = "1") int page, 
-			@RequestParam(required = false, defaultValue = "1") int pageRange, Model model) {
+			@RequestParam(required = false, defaultValue = "1") int pageRange, Model model, 
+			HttpServletRequest request, HttpServletResponse response) {
 		
 		int contentCnt = boardService.getAllContentCnt();
+		HttpSession session = request.getSession();
+		Object loginSession = session.getAttribute("user_email");
+		
+		if(loginSession == null) {
+			Cookie [] cookies = request.getCookies();
+			Cookie logCookie = null;
+			for(int i=0; i<cookies.length; i++) {
+				if(cookies[i].getName().equals("loginCookie"))
+					logCookie = cookies[i];
+			}
+			if(logCookie != null) {
+				User user = userService.checkSessionLimit(logCookie.getValue());
+				if(user != null) {
+					session.setAttribute("user_email", user.getEmail());
+					session.setAttribute("user_nickname", user.getNickname());
+				}
+			}
+		}
 		
 		Pagination pagination = new Pagination();
 		pagination.pageInfo(contentCnt, page, pageRange);
@@ -86,7 +110,7 @@ public class BoardController {
 		}
 		if(viewCheck == null){
 			Cookie c1 = new Cookie("viewBoard_" + board_id, board_id);
-			c1.setMaxAge(1*24*60*60);
+			c1.setMaxAge(60*60*24*1);
 			response.addCookie(c1);
 			
 			boardService.updateBoardViewCnt(board_id);

@@ -35,6 +35,16 @@ public class UserDaoImpl implements UserDao {
 	public int checkUser(Map<String, Object> paramMap) {
 		return sqlSession.selectOne("checkUser", paramMap);
 	}
+	
+	@Override
+	public void updateSessionKey(Map<String, Object> paramMap) {
+		sqlSession.update("updateSessionKey", paramMap);
+	}
+
+	@Override
+	public User checkSessionLimit(String sessionKey) {
+		return sqlSession.selectOne("checkSessionLimit", sessionKey);
+	}
 
 	@Override
 	public User getUserData(String email) {

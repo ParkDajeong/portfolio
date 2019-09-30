@@ -64,7 +64,9 @@
 			});
 			
 			$(".close").click(function() {
-				history.go(-1);
+				if(document.referrer.match("/join")){
+					history.go(-2);
+				}
 			});
 			
 			$(".wrapper > input").keydown(function(key) {
@@ -94,6 +96,7 @@
 			$(".continue").click(function() {
 				var email = $("#email").val();
 				var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+				var option = null;
 				
 				//이메일 기억하기
 				if($("#rememberId").is(":checked")) {
@@ -101,7 +104,7 @@
 				}
 				
 				if($("#saveIdPw").is(":checked")) {
-					$.cookie("rememberId", email, { expires: 30 });
+					option = $("#saveIdPw").val();
 				}
 				
 				if (regExp.test(email)) {
@@ -109,7 +112,8 @@
 				
 					var objParam = {
 							email 		: email,
-							password	: $("#password").val()
+							password	: $("#password").val(),
+							option		: option
 					}
 					
 					$.ajax({

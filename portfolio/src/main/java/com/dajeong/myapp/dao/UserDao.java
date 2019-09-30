@@ -13,6 +13,10 @@ public interface UserDao {
 	String checkAuthKey(Map<String, Object> paramMap);
 	
 	int checkUser(Map<String, Object> paramMap);
+	
+	void updateSessionKey(Map<String, Object> paramMap);
+	
+	User checkSessionLimit(String sessionKey);
 
 	User getUserData(String email);
 

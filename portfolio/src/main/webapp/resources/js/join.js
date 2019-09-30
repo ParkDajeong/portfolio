@@ -5,7 +5,7 @@ $(document).ready(function () {
 	
 	$(".close").click(function() {
 		var refer =  document.referrer;
-		if(refer == "http://localhost:8888/login"){
+		if(refer.match("/login")){
 			history.go(-2);
 		} else {
 			history.go(-1);

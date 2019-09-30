@@ -45,6 +45,26 @@
 		)
 	</select>
 	
+	<!-- 자동 로그인 -->
+	<update id="updateSessionKey" parameterType="java.util.HashMap">
+		UPDATE
+			user
+		SET
+			sessionKey = #{sessionKey},
+			sessionLimit = #{sessionLimit}
+		WHERE
+			email = #{email}
+	</update>
+	
+	<select id="checkSessionLimit" parameterType="String" resultType="com.dajeong.myapp.dto.User">
+		SELECT
+			*
+		FROM
+			user
+		WHERE
+			sessionKey = #{sessionKey} AND sessionLimit > now()
+	</select>
+	
 	<select id="selectUserData" parameterType="String" resultType="com.dajeong.myapp.dto.User">
 		SELECT
 			*
@@ -136,6 +156,8 @@
 			auth_key
 		FROM
 			user
+		WHERE
+			NOT email = 'sobeast980@gmail.com'
 		ORDER BY
 			join_datetime desc
 		LIMIT

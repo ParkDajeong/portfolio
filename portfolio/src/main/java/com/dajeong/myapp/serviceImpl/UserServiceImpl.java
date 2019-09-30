@@ -1,6 +1,8 @@
 package com.dajeong.myapp.serviceImpl;
 
 import java.io.PrintWriter;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -89,6 +91,21 @@ public class UserServiceImpl implements UserService {
 		}
 		return userDao.checkUser(paramMap);
 	}
+	
+	@Override
+	public void updateSessionKey(String sessionKey, Date sessionLimit, String email) {
+		Map <String, Object> logInfo = new HashMap<String, Object>();
+		logInfo.put("sessionKey", sessionKey);
+		logInfo.put("sessionLimit", sessionLimit);
+		logInfo.put("email", email);
+		
+		userDao.updateSessionKey(logInfo);
+	}
+
+	@Override
+	public User checkSessionLimit(String sessionKey) {
+		return userDao.checkSessionLimit(sessionKey);
+	}
 
 	@Override
 	public User getUserData(String email) {
@@ -100,8 +117,8 @@ public class UserServiceImpl implements UserService {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
-		out.println("if(document.referrer == 'http://localhost:8888/mypage' && "
-				+ "document.referrer == 'http://localhost:8888/board/edit' && "
+		out.println("if(document.referrer == 'http://localhost:8888/mypage' || "
+				+ "document.referrer == 'http://localhost:8888/board/edit' || "
 				+ "document.referrer.indexOf('admin') != -1){");
 		out.println("location.href = '/';} else {");
 		out.println("location.href = document.referrer;}");

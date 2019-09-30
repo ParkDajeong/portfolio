@@ -1,5 +1,7 @@
 package com.dajeong.myapp.controller;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,17 +45,36 @@ public class UserController {
 	//로그인
 	@ResponseBody
 	@RequestMapping(value = "/login/login", method = RequestMethod.POST)
-	public Object userLogin(@RequestParam Map<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response, Model model) {
+	public Object userLogin(@RequestParam Map<String, Object> paramMap,
+			HttpServletRequest request, HttpServletResponse response, Model model) {
 
 		Map <String, Object> retVal = new HashMap<String, Object>();
 		int result = userService.checkUser(paramMap);
+		HttpSession session = request.getSession();
+		
+		//로그인 관련 세션 있으면 삭제
+		if(session.getAttribute("user_email") != null) {
+			session.removeAttribute("user_email");
+			session.removeAttribute("user_nickname");
+		}
 		
 		if(result > 0) {
 			String nickname = userService.getUserData(paramMap.get("email").toString()).getNickname();
 			retVal.put("code", "success");
-			HttpSession session = request.getSession();
 			session.setAttribute("user_email", paramMap.get("email"));
 			session.setAttribute("user_nickname", nickname);
+			
+			if(paramMap.get("option").equals("saveIdPw")) {
+				Cookie logCookie = new Cookie("loginCookie", session.getId());
+				logCookie.setPath("/");
+				logCookie.setMaxAge(60*60*24*30);
+				response.addCookie(logCookie);
+				Calendar cal = Calendar.getInstance();
+				cal.add(Calendar.MONTH, 1);
+				Date sessionLimit = cal.getTime();
+				userService.updateSessionKey(session.getId(), sessionLimit, paramMap.get("email").toString());
+			}
+			
 		}else if(result == -1) {
 			retVal.put("code", "notAuth");
 		} else {
@@ -98,8 +119,22 @@ public class UserController {
 
 	//로그아웃
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public void logout(HttpSession session, HttpServletResponse response) throws Exception {
-        session.invalidate();
+	public void logout(HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
+        
+        Cookie [] cookies = request.getCookies();
+		Cookie logCookie = null;
+		for(int i=0; i<cookies.length; i++) {
+			if(cookies[i].getName().equals("loginCookie"))
+				logCookie = cookies[i];
+		}
+		
+		if(logCookie != null) {
+			logCookie.setPath("/");
+			logCookie.setMaxAge(0);
+			response.addCookie(logCookie);
+			userService.updateSessionKey("N", new Date(System.currentTimeMillis()), session.getAttribute("user_email").toString());
+		}
+		session.invalidate();
         userService.logOut(response);
     }
 	
