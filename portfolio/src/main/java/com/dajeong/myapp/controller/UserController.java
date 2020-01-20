@@ -194,7 +194,7 @@ public class UserController {
 		String content = "<div style='border:1px solid black;text-align:center;'>" + 
 				"<b>" + nickname + "</b> 님 가입을 환영합니다.<br>" + 
 				"하단의 인증 버튼을 클릭하셔야 가입이 정상적으로 완료됩니다.<br><br>" + 
-				"<a href='http://won980125.cafe24.com/mail/auth?email=" + email + "&auth_key=" + auth_key + "'>메일인증</a></div>";
+				"<a href=http://localhost:8888/mail/auth?email=" + email + "&auth_key=" + auth_key + ">메일인증</a></div>";
 		
 		int result = userService.setUser(paramMap);
 		

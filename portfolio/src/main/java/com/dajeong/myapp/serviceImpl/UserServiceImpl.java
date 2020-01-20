@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	JavaMailSender mailSender;
 	
+	//회원가입
 	@Override
 	public int setUser(Map<String, Object> paramMap) {
 		String encPassword = passwordEncoder.encode(paramMap.get("password").toString());
@@ -42,6 +43,7 @@ public class UserServiceImpl implements UserService {
 		return userDao.setUser(paramMap);
 	}
 	
+	//메일 전송
 	@Override
 	public void sendMailAuthKey(Map<String, Object> paramMap, String subject, String content) {
 		String email = paramMap.get("email").toString();
@@ -57,6 +59,7 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 	
+	//인증키 변경
 	@Override
 	public void updateUserAuthKey(Map<String, Object> paramMap, HttpServletResponse response) throws Exception {
 		int result = userDao.updateUserAuthKey(paramMap);
@@ -78,6 +81,7 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	//로그인
 	@Override
 	public int checkUser(Map<String, Object> paramMap) {
 		User user = userDao.getUserData(paramMap.get("email").toString());
@@ -92,6 +96,7 @@ public class UserServiceImpl implements UserService {
 		return userDao.checkUser(paramMap);
 	}
 	
+	//자동 로그인 설정
 	@Override
 	public void updateSessionKey(String sessionKey, Date sessionLimit, String email) {
 		Map <String, Object> logInfo = new HashMap<String, Object>();
@@ -102,16 +107,19 @@ public class UserServiceImpl implements UserService {
 		userDao.updateSessionKey(logInfo);
 	}
 
+	//자동 로그인 기한 확인
 	@Override
 	public User checkSessionLimit(String sessionKey) {
 		return userDao.checkSessionLimit(sessionKey);
 	}
 
+	//유저 데이터 가져오기
 	@Override
 	public User getUserData(String email) {
 		return userDao.getUserData(email);
 	}
 
+	//로그아웃
 	@Override
 	public void logOut(HttpServletResponse response) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
@@ -126,26 +134,31 @@ public class UserServiceImpl implements UserService {
 		out.close();
 	}
 
+	//닉네임 중복 체크
 	@Override
 	public int checkUserNickname(String nickname) {
 		return userDao.checkUserNickname(nickname);
 	}
 
+	//이메일 중복 체크
 	@Override
 	public int checkUserEmail(String email) {
 		return userDao.checkUserEmail(email);
 	}
 
+	//닉네임 변경
 	@Override
 	public int updateUserNickname(Map<String, Object> paramMap) {
 		return userDao.updateUserNickname(paramMap);
 	}
 
+	//기숙사 변경
 	@Override
 	public int updateUserHouse(Map<String, Object> paramMap) {
 		return userDao.updateUserHouse(paramMap);
 	}
 	
+	//비밀번호 변경
 	@Override
 	public int updateUserPassword(Map<String, Object> paramMap) {
 		User user = userDao.getUserData(paramMap.get("email").toString());
@@ -160,6 +173,7 @@ public class UserServiceImpl implements UserService {
 		return userDao.updateUserPassword(paramMap);
 	}
 
+	//회원 탈퇴
 	@Override
 	public int deleteUser(Map<String, Object> paramMap) {
 		User user = userDao.getUserData(paramMap.get("email").toString());
@@ -172,6 +186,7 @@ public class UserServiceImpl implements UserService {
 		return userDao.deleteUser(paramMap);
 	}
 
+	//임시 비밀번호로 변경
 	@Override
 	public int changeToTempPassword(Map<String, Object> paramMap) {
 		String encPassword = passwordEncoder.encode(paramMap.get("tempPW").toString());

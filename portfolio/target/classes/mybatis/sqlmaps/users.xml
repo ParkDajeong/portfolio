@@ -152,14 +152,14 @@
 			email,
 			nickname,
 			house,
-			date_format(join_datetime, '%Y-%m-%d')as join_datetime,
+			date_format(join_datet, '%Y-%m-%d')as join_date,
 			auth_key
 		FROM
 			user
 		WHERE
 			NOT email = 'sobeast980@gmail.com'
 		ORDER BY
-			join_datetime desc
+			join_date desc
 		LIMIT
 			#{startContent}, #{contentViewCnt}
 	</select>
@@ -213,14 +213,14 @@
 			email,
 			nickname,
 			house,
-			date_format(join_datetime, '%Y-%m-%d')as join_datetime,
+			date_format(join_date, '%Y-%m-%d')as join_date,
 			auth_key
 		FROM
 			user
 		WHERE
 			email like CONCAT('%', #{data}, '%')
 		ORDER BY
-			join_datetime desc
+			join_date desc
 		LIMIT
 			#{startContent}, #{contentViewCnt}
 	</select>
@@ -230,14 +230,14 @@
 			email,
 			nickname,
 			house,
-			date_format(join_datetime, '%Y-%m-%d')as join_datetime,
+			date_format(join_date, '%Y-%m-%d')as join_date,
 			auth_key
 		FROM
 			user
 		WHERE
 			nickname like CONCAT('%', #{data}, '%')
 		ORDER BY
-			join_datetime desc
+			join_date desc
 		LIMIT
 			#{startContent}, #{contentViewCnt}
 	</select>
